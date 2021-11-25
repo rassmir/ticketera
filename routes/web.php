@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RequerimentController;
+use App\Http\Controllers\AnulationController;
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/buscar-requerimiento','requeriment.index');
-Route::view('/nuevo-requerimiento','requeriment.create');
-Route::view('/buscar-anulacion','anulation.index');
-Route::view('/nueva-anulacion','anulation.create');
-Route::view('/iniciar-sesion','login');
-Route::view('/olvido-contrasena','password');
-Route::view('/buscar-usuarios','user.index');
-Route::view('/nuevo-usuario','user.create');
+Route::get('/', [UserController::class, 'login'])->name('login');
+Route::get('/recuperar-contrasena', [UserController::class, 'forget'])->name('forget');
+
+//Usuarios
+Route::get('/buscar-usuarios', [UserController::class, 'index'])->name('app.user.index');
+Route::get('/nuevo-usuario', [UserController::class, 'create'])->name('app.user.create');
+
+//Requerimientos
+Route::get('/buscar-requerimientos', [RequerimentController::class, 'index'])->name('app.requeriment.index');
+Route::get('/nuevo-requerimiento', [RequerimentController::class, 'create'])->name('app.requeriment.create');
+
+//Anulaciones
+Route::get('/buscar-anulaciones', [AnulationController::class, 'index'])->name('app.anulation.index');
+Route::get('/crear-anulacion', [AnulationController::class, 'create'])->name('app.anulation.create');
+
+

@@ -13,9 +13,9 @@
                 <input type="text" class="form-control mt-20" placeholder="Usuario">
                 <input type="password" class="form-control mt-16" placeholder="Contraseña">
                 <div class="text-right">
-                    <a href="Page-password.php" class="mt-16 d-block font-weight-bold">¿Olvidaste tu contraseña?</a>
+                    <a href="{{route('forget')}}" class="mt-16 d-block font-weight-bold">¿Olvidaste tu contraseña?</a>
                 </div>
-                <a href="page-principal.php" class="btn btn-primary bg-pri font-weight-bold mt-20 w-100">Iniciar Sesión <i class="fas fa-arrow-right ml-20"></i></a>
+                <a href="{{route('app.user.index')}}" class="btn btn-primary bg-pri font-weight-bold mt-20 w-100">Iniciar Sesión <i class="fas fa-arrow-right ml-20"></i></a>
                 <p class="mt-36 text-light font-16">BANMEDICA 2021 - Todos los derechos reservados</p>
             </div>
         </div>

@@ -81,18 +81,18 @@
             <div class="p-48 p-sm-16 bg-white font-16 d-none d-lg-block">
                 <h3>Usuarios</h3>
                 <ul class="pl-8">
-                    <li><a href="page-nuevo-requerimiento.php"><i class="fas fa-chevron-right mr-16"></i> Nuevo usuario</a></li>
-                    <li><a href="page-principal.php"><i class="fas fa-chevron-right mr-16"></i> Buscar usuarios</a></li>
+                    <li><a href="{{route('app.user.create')}}"><i class="fas fa-chevron-right mr-16"></i> Nuevo usuario</a></li>
+                    <li><a href="{{route('app.user.index')}}"><i class="fas fa-chevron-right mr-16"></i> Buscar usuarios</a></li>
                 </ul>
                 <h3>Requerimientos</h3>
                 <ul class="pl-8">
-                    <li><a href="page-nuevo-requerimiento.php"><i class="fas fa-chevron-right mr-16"></i> Nuevo requerimiento</a></li>
-                    <li><a href="page-principal.php"><i class="fas fa-chevron-right mr-16"></i> Buscar Requerimiento</a></li>
+                    <li><a href="{{route('app.requeriment.create')}}"><i class="fas fa-chevron-right mr-16"></i> Nuevo requerimiento</a></li>
+                    <li><a href="{{route('app.requeriment.index')}}"><i class="fas fa-chevron-right mr-16"></i> Buscar Requerimiento</a></li>
                 </ul>
                 <h3>Anulaciones</h3>
                 <ul class="pl-8">
-                    <li><a href="page-registro-anulacion.php"><i class="fas fa-chevron-right mr-16"></i> Ingresar anulación</a></li>
-                    <li><a href="page-listado-anulacion.php"><i class="fas fa-chevron-right mr-16"></i> Buscar anulación</a></li>
+                    <li><a href="{{route('app.anulation.create')}}"><i class="fas fa-chevron-right mr-16"></i> Nueva anulación</a></li>
+                    <li><a href="{{route('app.anulation.index')}}"><i class="fas fa-chevron-right mr-16"></i> Buscar anulación</a></li>
                 </ul>
             </div>
         </div>
