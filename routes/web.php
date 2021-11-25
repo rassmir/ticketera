@@ -19,3 +19,5 @@ Route::view('/buscar-anulacion','anulation.index');
 Route::view('/nueva-anulacion','anulation.create');
 Route::view('/iniciar-sesion','login');
 Route::view('/olvido-contrasena','password');
+Route::view('/buscar-usuarios','user.index');
+Route::view('/nuevo-usuario','user.create');
