@@ -19,12 +19,11 @@
                                 <p class="mb-0">Tipo de usuarios</p>
                             </div>
                             <div class="col-lg-7">
-                                <select class="form-control tipo_usuario">
-                                    @foreach($roles as $rol)
-                                    <option value="1">{{$rol->display_name}}</option>
-                                    @endforeach
+                                <select class="form-control">
+                                    <option value="1">Agente</option>
+                                    <option value="2">Supervisor</option>
+                                    <option value="3">Usuario Clinica</option>
                                 </select>
-
                                 <select class="form-control mt-16 listado-clinicas" style="display:none;">
                                     <option value="1">Clinica 1</option>
                                     <option value="2">Clinica 2</option>
