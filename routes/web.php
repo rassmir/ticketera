@@ -18,18 +18,32 @@ Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'i
 */
 
 Route::get('/', [UserController::class, 'login'])->name('login');
+Route::post('/autenticacion', [UserController::class, 'authenticate'])->name('app.user.auth');
 Route::get('/recuperar-contrasena', [UserController::class, 'forget'])->name('forget');
 
 //Usuarios
-Route::get('/buscar-usuarios', [UserController::class, 'index'])->name('app.user.index');
-Route::get('/nuevo-usuario', [UserController::class, 'create'])->name('app.user.create');
-
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/buscar-usuarios', [UserController::class, 'index'])->name('app.user.index');
+    Route::get('/nuevo-usuario', [UserController::class, 'create'])->name('app.user.create');
+    Route::post('/guardar-usuario', [UserController::class, 'store'])->name('app.user.save');
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 //Requerimientos
-Route::get('/buscar-requerimientos', [RequerimentController::class, 'index'])->name('app.requeriment.index');
-Route::get('/nuevo-requerimiento', [RequerimentController::class, 'create'])->name('app.requeriment.create');
+    //Sucursales
+    Route::get('/sucursales/{idclinica}', [RequerimentController::class, 'branches'])->name('app.branches');
+    //Centros Medicos
+    Route::get('/centros-medicos/{idbranch}', [RequerimentController::class, 'centers'])->name('app.centers');
+    //Unidades
+    Route::get('/unidades/{idcenter}', [RequerimentController::class, 'units'])->name('app.units');
+    //Profesionales
+    Route::get('/profesionales/{idunit}', [RequerimentController::class, 'professionals'])->name('app.professionals');
+    //Especialidades
+    Route::get('/especialidades/{idprofessional}', [RequerimentController::class, 'especialities'])->name('app.especialities');
+
+    Route::get('/buscar-requerimientos', [RequerimentController::class, 'index'])->name('app.requeriment.index');
+    Route::get('/nuevo-requerimiento', [RequerimentController::class, 'create'])->name('app.requeriment.create');
+    Route::post('/guardar-requerimiento', [RequerimentController::class, 'store'])->name('app.requeriment.store');
 
 //Anulaciones
-Route::get('/buscar-anulaciones', [AnulationController::class, 'index'])->name('app.anulation.index');
-Route::get('/crear-anulacion', [AnulationController::class, 'create'])->name('app.anulation.create');
-
-
+    Route::get('/buscar-anulaciones', [AnulationController::class, 'index'])->name('app.anulation.index');
+    Route::get('/crear-anulacion', [AnulationController::class, 'create'])->name('app.anulation.create');
+});

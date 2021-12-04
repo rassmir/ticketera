@@ -69,26 +69,26 @@
                         <th>RUT Paciente</th>
                         <th>Fecha ingreso</th>
                         <th>Estado</th>
-                        <th>Tipo solicitud</th>
                         <th>Centro médico</th>
                         <th>Médico</th>
                         <th>Acciones</th>
                     </tr>
                     <tbody>
                     <tr>
-                        <td>47854645</td>
-                        <td>85478546455</td>
-                        <td>19/11/2021</td>
-                        <td>Ingresado</td>
-                        <td>Horas Extras</td>
-                        <td>Santa maría</td>
-                        <td>Juan Pelaes</td>
+                        @foreach($requeriments as $req)
+                        <td>{{$req->id}}</td>
+                        <td>{{$req->rut}}</td>
+                        <td>{{$req->datetime_local}}</td>
+                        <td>{{$req->state}}</td>
+                        <td>{{$req->centername}}</td>
+                        <td>{{$req->profname}}</td>
                         <td>
                             <ul class="d-lg-flex">
                                 <li><a href="#" class="btn bg-tri mr-12 text-black"><i class="far fa-eye"></i></a></li>
                                 <li><a href="#" class="btn bg-tri mr-12 text-black"><i class="far fa-edit"></i></a></li>
                             </ul>
                         </td>
+                        @endforeach
                     </tr>
                     </tbody>
                 </table>

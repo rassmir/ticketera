@@ -31,12 +31,14 @@
         <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-link">
-                    <a class="dropdown-item pl-0" href="page-nuevo-requerimiento.php"><i class="fas fa-chevron-right mr-8 text-sec"></i> Nuevo requerimiento</a>
-                    <a class="dropdown-item pl-0" href="page-principal.php"><i class="fas fa-chevron-right mr-8 text-sec"></i> Buscar Requerimiento</a>
-                    <a class="dropdown-item pl-0" href="page-registro-anulacion.php"><i class="fas fa-chevron-right mr-8 text-sec"></i> Ingresar anulación</a>
-                    <a class="dropdown-item pl-0" href="page-listado-anulacion.php"><i class="fas fa-chevron-right mr-8 text-sec"></i> Buscar anulación</a>
+                    <a class="dropdown-item pl-0" href="{{route('app.user.create')}}"><i class="fas fa-chevron-right mr-8 text-sec"></i> Nuevo usuario</a>
+                    <a class="dropdown-item pl-0" href="{{route('app.user.index')}}"><i class="fas fa-chevron-right mr-8 text-sec"></i> Buscar usuarios</a>
+                    <a class="dropdown-item pl-0" href="{{route('app.requeriment.create')}}"><i class="fas fa-chevron-right mr-8 text-sec"></i> Nuevo requerimiento</a>
+                    <a class="dropdown-item pl-0" href="{{route('app.requeriment.index')}}"><i class="fas fa-chevron-right mr-8 text-sec"></i> Buscar Requerimientos</a>
+                    <a class="dropdown-item pl-0" href="{{route('app.anulation.create')}}"><i class="fas fa-chevron-right mr-8 text-sec"></i> Nueva anulación</a>
+                    <a class="dropdown-item pl-0" href="{{route('app.anulation.index')}}"><i class="fas fa-chevron-right mr-8 text-sec"></i> Buscar anulaciones</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item pl-0" href="index.php">Cerra Sesión</a>
+                    <a class="dropdown-item pl-0" href="{{ route('logout') }}">Cerra Sesión</a>
                 </li>
             </ul>
         </div>
@@ -64,12 +66,10 @@
                         <li class="nav-link">
                             <!--<a class="dropdown-item" href="#">-</a>-->
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="index.php">Cerra Sesión</a>
+                            <a class="dropdown-item" href="{{route('logout')}}">Cerra Sesión</a>
                         </li>
-
                     </ul>
                 </li>
-
             </ul>
         </div>
     </div>
@@ -104,5 +104,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/js/popper.min.js')}}"></script>
+<script src="{{asset('assets/js/sweetalert2.all.min.js')}}"></script>
+@stack('scripts')
+@include('partials.flash-message')
 </body>
 </html>

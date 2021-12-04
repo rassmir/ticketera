@@ -36,7 +36,8 @@
                 </div>
             </div>
             <div class="col-lg-1 text-center mt-8">
-                <button class="btn bg-sec border-sec text-white pl-24 pr-24 mt-sm-20 font-weight-bold" style="min-width:190px;">
+                <button class="btn bg-sec border-sec text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
+                        style="min-width:190px;">
                     <i class="fas fa-search"></i>
                     Buscar usuario
                 </button>
@@ -56,18 +57,19 @@
                             <th>Acciones</th>
                         </tr>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Supervisor</td>
-                            <td>Carmen Paz</td>
-                            <td>320-215-215-Y</td>
-                            <td>
-                                <ul class="d-lg-flex mb-0">
-                                    <li><i class="far fa-eye mr-12"></i></li>
-                                </ul>
-                            </td>
-
-                        </tr>
+                        @foreach($users as $key=> $user)
+                            <tr>
+                                <td>{{++$key}}</td>
+                                <td>Rol</td>
+                                <td>{{$user->name_complete}}</td>
+                                <td>{{$user->rut}}</td>
+                                <td>
+                                    <ul class="d-lg-flex mb-0">
+                                        <li><i class="far fa-eye mr-12"></i></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

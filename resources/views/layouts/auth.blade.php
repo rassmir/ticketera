@@ -24,4 +24,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/js/popper.min.js')}}"></script>
+<script src="{{asset('assets/js/sweetalert2.all.min.js')}}"></script>
+@include('partials.flash-message')
 </html>
