@@ -74,8 +74,8 @@
                         <th>Acciones</th>
                     </tr>
                     <tbody>
+                    @foreach($requeriments as $req)
                     <tr>
-                        @foreach($requeriments as $req)
                         <td>{{$req->id}}</td>
                         <td>{{$req->rut}}</td>
                         <td>{{$req->datetime_local}}</td>
@@ -88,8 +88,8 @@
                                 <li><a href="#" class="btn bg-tri mr-12 text-black"><i class="far fa-edit"></i></a></li>
                             </ul>
                         </td>
-                        @endforeach
                     </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

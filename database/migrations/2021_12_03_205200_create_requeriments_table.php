@@ -43,7 +43,7 @@ class CreateRequerimentsTable extends Migration
             $table->string('email');
             $table->longText('observation')->nullable();
             $table->longText('response_medic')->nullable();
-            $table->longText('name_professional');
+            $table->longText('name_professional')->nullable();;
             $table->longText('resumen')->nullable();
             $table->dateTime('date_solution')->nullable();
             $table->string('user_create');
