@@ -23,11 +23,11 @@ class RequerimentController extends Controller
      */
     public function index()
     {
-        $requeriments = Requeriment::join('clinics','clinics.id','=','requeriments.clinic_id')
-                        ->join('center_medicals','center_medicals.id','=','requeriments.center_medical_id')
-                        ->join('professionals','professionals.id','=','requeriments.professional_id')
-                        ->select(['requeriments.*','clinics.name as clinicname','center_medicals.name as centername','professionals.name as profname'])
-                        ->get();
+        $requeriments = Requeriment::join('clinics', 'clinics.id', '=', 'requeriments.clinic_id')
+            ->join('center_medicals', 'center_medicals.id', '=', 'requeriments.center_medical_id')
+            ->join('professionals', 'professionals.id', '=', 'requeriments.professional_id')
+            ->select(['requeriments.*', 'clinics.name as clinicname', 'center_medicals.name as centername', 'professionals.name as profname'])
+            ->get();
         return view('requeriment.index',
             ['requeriments' => $requeriments]);
     }
@@ -117,7 +117,7 @@ class RequerimentController extends Controller
             return Redirect::back()->with(array(
                 'success' => 'Guardado Correctamente !!'
             ));
-        }catch (Exception $ex){
+        } catch (Exception $ex) {
             Log::error($ex);
             return Redirect::back()->with(array(
                 'error' => 'Error al guardar !!'
