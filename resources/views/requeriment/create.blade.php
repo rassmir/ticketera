@@ -52,7 +52,7 @@
                                     <p class="mb-0">RUT*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" placeholder="RUT" name="rut">
+                                    <input type="text" class="form-control ob" data-type="text" data-msj="Ingrese un RUT"  placeholder="RUT" name="rut">
                                 </div>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                                     <p class="mb-0">Primer nombre*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" placeholder="Primer nombre" name="name">
+                                    <input type="text" class="form-control ob" data-type="text" data-msj="Ingrese un Nombre" placeholder="Primer nombre" name="name">
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                                     <p class="mb-0">Apellido Paterno*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" placeholder="Apellido Paterno"
+                                    <input type="text" class="form-control ob" data-type="text" data-msj="Ingrese el apellido paterno" placeholder="Apellido Paterno"
                                            name="father_name">
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                                     <p class="mb-0">Apellido Materno*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" placeholder="Apellido Materno"
+                                    <input type="text" class="form-control ob" data-type="text" data-msj="Ingrese el apellido materno" placeholder="Apellido Materno"
                                            name="mother_name">
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                                     <p class="mb-0">Fono fijo 1*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" placeholder="Fono fijo 1" name="fije1">
+                                    <input type="text" class="form-control ob" data-type="number" data-msj="Ingrese número fijo" placeholder="Fono fijo 1" name="fije1">
                                 </div>
                             </div>
                         </div>
@@ -131,10 +131,10 @@
                                     <p class="mb-0">Clinica</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="clinics" class="form-control" name="clinic_id"
+                                    <select id="clinics" class="form-control ob" data-type="select" data-msj="Seleccione una Clínica" name="clinic_id"
                                             onchange="selectBranches()">
                                         @foreach($clinics as $clinic)
-                                            <option selected disabled>Seleccione clínica</option>
+                                            <option selected disabled value="0">Seleccione clínica</option>
                                             <option value="{{$clinic->id}}">{{$clinic->name}}</option>
                                         @endforeach
                                     </select>
@@ -147,9 +147,9 @@
                                     <p class="mb-0">Sucursal</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="branches" class="form-control" name="branch_id"
+                                    <select id="branches" class="form-control ob" data-type="select" data-msj="Seleccione una Sucursal" name="branch_id"
                                             onchange="selectCenterMedic()">
-                                        <option selected disabled>Seleccione Sucursal</option>
+                                        <option value="0" selected disabled>Seleccione Sucursal</option>
                                     </select>
                                 </div>
                             </div>
@@ -161,9 +161,9 @@
                                     <p class="mb-0">Centro Médico</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="center_medics" class="form-control" name="center_medical_id"
+                                    <select id="center_medics" class="form-control ob" data-type="select" data-msj="Seleccione un Centro Médico" name="center_medical_id"
                                             onchange="selectUnits()">
-                                        <option selected disabled>Seleccione Centro Médico</option>
+                                        <option value="0" selected disabled>Seleccione Centro Médico</option>
                                     </select>
                                 </div>
                             </div>
@@ -175,9 +175,9 @@
                                     <p class="mb-0">Unidades</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="units" class="form-control" name="unit_id"
+                                    <select id="units" class="form-control ob" data-type="select" data-msj="Seleccione una Unidad" name="unit_id"
                                             onchange="selectProfessionals()">
-                                        <option selected disabled>Seleccione Unidad</option>
+                                        <option value="0" selected disabled>Seleccione Unidad</option>
                                     </select>
                                 </div>
                             </div>
@@ -189,9 +189,9 @@
                                     <p class="mb-0">Profesionales</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="professionals" class="form-control" name="professional_id"
+                                    <select id="professionals" class="form-control ob" data-type="select" data-msj="Seleccione un profesional" name="professional_id"
                                             onchange="selectEspecialities()">
-                                        <option selected disabled>Seleccione Profesional</option>
+                                        <option value="0" selected disabled>Seleccione Profesional</option>
                                     </select>
                                 </div>
                             </div>
@@ -203,8 +203,8 @@
                                     <p class="mb-0">Especialidad*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="especialities" class="form-control" name="especiality_id">
-                                        <option selected disabled>Seleccione Especialidad</option>
+                                    <select id="especialities" class="form-control ob" data-type="select" data-msj="Seleccione una Especialidad" name="especiality_id">
+                                        <option value="0" selected disabled>Seleccione Especialidad</option>
                                     </select>
                                 </div>
                             </div>
@@ -260,7 +260,7 @@
                                     <p class="mb-0">Email*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" placeholder="Ingrese un Email" name="email">
+                                    <input type="text" class="form-control ob" data-type="mail" data-msj="Ingrese un correo" placeholder="Ingrese un Email" name="email">
                                 </div>
                             </div>
                         </div>
@@ -361,7 +361,7 @@
                             <div class="row align-items-center">
                                 <div class="col-lg-12 text-left text-lg-center font-weight-bold">
                                     <hr>
-                                    <button type="submit"
+                                    <button id="btn-registrar-requerimiento" type="submit"
                                             class="btn bg-pri border-pri text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
                                             style="min-width:190px;"> Registrar
                                     </button>
@@ -477,5 +477,21 @@
                 }
             });
         }
+
+        // GUARDAR REQUERIMIENTO
+
+        $('#btn-registrar-requerimiento').on('click', function(e){
+        e.preventDefault();
+        console.log("inicio-sesion");
+
+        var validacion_datos = ValidadorAuto('.ob');
+
+        if(validacion_datos == "true"){
+            $('#frm-registro-usuario').submit();
+        }else{
+            return false;
+        }
+
+    });
     </script>
 @endpush
