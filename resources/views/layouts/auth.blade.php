@@ -25,5 +25,8 @@
 <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/js/popper.min.js')}}"></script>
 <script src="{{asset('assets/js/sweetalert2.all.min.js')}}"></script>
+<script src="{{asset('assets/js/funciones.js')}}"></script>
 @include('partials.flash-message')
+
+
 </html>

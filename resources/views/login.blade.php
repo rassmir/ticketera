@@ -29,4 +29,8 @@
     </div>
 @endsection
 
-
+@push('scripts')
+<script>
+    console.log("muestra local");
+</script>
+@endpush
