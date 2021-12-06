@@ -2,6 +2,20 @@
 @import url('../css/all.css');
 @import url('../css/fontawesome.min.css');
 
+.dt-buttons button{
+    border: 0;
+    padding: 4px 16px;
+    cursor: pointer;
+}
+
+.dt-buttons button:hover{
+    background: #dbdbdb;
+}
+
+table.dataTable thead th, table.dataTable thead td {
+    border: 0.5px solid #032f56;
+}
+
 body{
     font-family: 'Roboto Condensed', sans-serif;
     background-color: #FFF;
@@ -127,11 +141,11 @@ body{
 	width: 40px;
 	height: 40px;
 }
-
+/*
 .dropdown-item:hover, .dropdown-item:focus {
     background-color:transparent !important;
 }
-
+*/
 /* TAMAÑO DE FUENTES PARA MOVIL*/
 
 .font-8 { font-size: 8px !important;}

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title','Buscar Requerimiento')
 @section('app-content')
+
 <div class="main-content p-48 p-sm-16 bg-white mt-sm-16">
     <div class="text-left">
         <h2 class="text-pri">LISTADO DE REQUERIMIENTOS</h2>
@@ -60,11 +61,12 @@
             <button class="btn bg-sec border-sec text-white pl-24 pr-24 mt-sm-20 font-weight-bold" style="min-width:190px;"> <i class="fas fa-search"></i> Buscar</button>
         </div>
         <!-- TABLA -->
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-36">
+            <hr>
             <div class="table-responsive">
-                <table class="table table-striped table-bordered b-table mt-24">
+                <table id="table-requerimientos" class="table table-striped table-bordered b-table mt-24">
+                    <thead>
                     <tr class="bg-pri text-white">
-
                         <th># Requerimiento</th>
                         <th>RUT Paciente</th>
                         <th>Fecha ingreso</th>
@@ -73,9 +75,11 @@
                         <th>Médico</th>
                         <th>Acciones</th>
                     </tr>
+                    </thead>
                     <tbody>
-                    <tr>
+
                         @foreach($requeriments as $req)
+                        <tr>
                         <td>{{$req->id}}</td>
                         <td>{{$req->rut}}</td>
                         <td>{{$req->datetime_local}}</td>
@@ -83,13 +87,14 @@
                         <td>{{$req->centername}}</td>
                         <td>{{$req->profname}}</td>
                         <td>
-                            <ul class="d-lg-flex">
+                            <ul class="d-lg-flex mb-0">
                                 <li><a href="#" class="btn bg-tri mr-12 text-black"><i class="far fa-eye"></i></a></li>
                                 <li><a href="#" class="btn bg-tri mr-12 text-black"><i class="far fa-edit"></i></a></li>
                             </ul>
                         </td>
+                        </tr>
                         @endforeach
-                    </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -97,3 +102,43 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#table-requerimientos').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                },
+                dom: 'Bfrtip',
+                buttons: [{
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5]
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5]
+                    }
+                },
+                'print'
+                ],
+                exportOptions: {
+                    modifier: {
+                        // DataTables core
+                        order: 'index', // 'current', 'applied',
+                        //'index', 'original'
+                        page: 'all', // 'all', 'current'
+                        search: 'none' // 'none', 'applied', 'removed'
+                    },
+                    columns: [0, 1, 2, 3, 4, 5]
+                }
+
+            });
+        });
+    </script>
+@endpush

@@ -5,11 +5,34 @@
         <div class="text-left">
             <h2 class="text-pri">NUEVO REQUERIMIENTO</h2>
         </div>
-        <form method="POST" action="{{route('app.requeriment.store')}}">
+        <form id="frm-nuevo-requerimiento" method="POST" action="{{route('app.requeriment.store')}}">
             @csrf
             <div class="row mt-48 mb-36">
                 <div class="col-lg-12">
                     <div class="row">
+                    <div class="col-lg-12 mt-20">
+                            <h3 class="font-20">Datos del requerimiento</h3>
+                            <hr>
+                        </div>
+                    <div class="col-lg-4 mt-8">
+                            <div class="row align-items-center">
+                                <div class="col-lg-5 text-left font-weight-bold">
+                                    <p class="mb-0">Tipo de requerimiento</p>
+                                </div>
+                                <div class="col-lg-7">
+                                    <select class="form-control" name="state">
+                                        <option value="1">Hora Extra</option>
+                                        <option value="2">Recado Médico</option>
+                                        <option value="3">Certificado Médico</option>
+                                        <option value="4">Orden de  Exámen</option>
+                                        <option value="5">Seguro complementario</option>
+                                        <option value="6">Receta Médica</option>
+                                    </select>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-lg-8 mt-8"></div>
+
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
@@ -45,14 +68,17 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="col-lg-12 mt-20">
+                            <h3 class="font-20">Datos del paciente</h3>
+                            <hr>
+                        </div>
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
                                     <p class="mb-0">RUT*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control ob" data-type="text" data-msj="Ingrese un RUT"  placeholder="RUT" name="rut">
+                                    <input type="text" maxlength="12" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="RUT form-control ob" data-type="text" data-msj="Ingrese un RUT"  placeholder="RUT" name="rut">
                                 </div>
                             </div>
                         </div>
@@ -125,16 +151,20 @@
                             </div>
                         </div>
 
+                        <div class="col-lg-12 mt-20">
+                            <hr>
+                        </div>
+
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
                                     <p class="mb-0">Clinica</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="clinics" class="form-control ob" data-type="select" data-msj="Seleccione una Clínica" name="clinic_id"
+                                    <select id="clinics" class="form-control ob selectpicker" data-live-search="true" data-type="select" data-msj="Seleccione una Clínica" name="clinic_id"
                                             onchange="selectBranches()">
-                                        @foreach($clinics as $clinic)
                                             <option selected disabled value="0">Seleccione clínica</option>
+                                        @foreach($clinics as $clinic)
                                             <option value="{{$clinic->id}}">{{$clinic->name}}</option>
                                         @endforeach
                                     </select>
@@ -147,7 +177,7 @@
                                     <p class="mb-0">Sucursal</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="branches" class="form-control ob" data-type="select" data-msj="Seleccione una Sucursal" name="branch_id"
+                                    <select id="branches" class="form-control ob" data-live-search="true" data-type="select" data-msj="Seleccione una Sucursal" name="branch_id"
                                             onchange="selectCenterMedic()">
                                         <option value="0" selected disabled>Seleccione Sucursal</option>
                                     </select>
@@ -161,7 +191,7 @@
                                     <p class="mb-0">Centro Médico</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="center_medics" class="form-control ob" data-type="select" data-msj="Seleccione un Centro Médico" name="center_medical_id"
+                                    <select id="center_medics" class="form-control ob" data-live-search="true" data-type="select" data-msj="Seleccione un Centro Médico" name="center_medical_id"
                                             onchange="selectUnits()">
                                         <option value="0" selected disabled>Seleccione Centro Médico</option>
                                     </select>
@@ -175,7 +205,7 @@
                                     <p class="mb-0">Unidades</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="units" class="form-control ob" data-type="select" data-msj="Seleccione una Unidad" name="unit_id"
+                                    <select id="units" class="form-control ob" data-live-search="true" data-type="select" data-msj="Seleccione una Unidad" name="unit_id"
                                             onchange="selectProfessionals()">
                                         <option value="0" selected disabled>Seleccione Unidad</option>
                                     </select>
@@ -189,7 +219,7 @@
                                     <p class="mb-0">Profesionales</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="professionals" class="form-control ob" data-type="select" data-msj="Seleccione un profesional" name="professional_id"
+                                    <select id="professionals" class="form-control ob" data-live-search="true" data-type="select" data-msj="Seleccione un profesional" name="professional_id"
                                             onchange="selectEspecialities()">
                                         <option value="0" selected disabled>Seleccione Profesional</option>
                                     </select>
@@ -203,7 +233,7 @@
                                     <p class="mb-0">Especialidad*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="especialities" class="form-control ob" data-type="select" data-msj="Seleccione una Especialidad" name="especiality_id">
+                                    <select id="especialities" class="form-control ob" data-live-search="true" data-type="select" data-msj="Seleccione una Especialidad" name="especiality_id">
                                         <option value="0" selected disabled>Seleccione Especialidad</option>
                                     </select>
                                 </div>
@@ -235,7 +265,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Fecha ùltima consulta</p>
+                                    <p class="mb-0">Fecha última consulta</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <input type="date" class="form-control" name="date_last">
@@ -260,9 +290,13 @@
                                     <p class="mb-0">Email*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control ob" data-type="mail" data-msj="Ingrese un correo" placeholder="Ingrese un Email" name="email">
+                                    <input type="text" class="form-control ob" data-type="text" data-msj="Ingrese un correo" placeholder="Ingrese un Email" name="email">
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="col-lg-12 mt-20">
+                            <hr>
                         </div>
 
                         <div class="col-lg-12 mt-8">
@@ -395,6 +429,7 @@
                     for (let i = 0; i < response.length; i++) {
                         branches.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
                     }
+                    branches.selectpicker();
                 },
                 error: function (error) {
                     console.log(error);
@@ -414,6 +449,7 @@
                     for (let i = 0; i < response.length; i++) {
                         centers.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
                     }
+                    centers.selectpicker();
                 },
                 error: function (error) {
                     console.log(error);
@@ -433,6 +469,7 @@
                     for (let i = 0; i < response.length; i++) {
                         units.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
                     }
+                    units.selectpicker();
                 },
                 error: function (error) {
                     console.log(error);
@@ -452,6 +489,7 @@
                     for (let i = 0; i < response.length; i++) {
                         professionals.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
                     }
+                    professionals.selectpicker();
                 },
                 error: function (error) {
                     console.log(error);
@@ -471,6 +509,7 @@
                     for (let i = 0; i < response.length; i++) {
                         especialities.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
                     }
+                    especialities.selectpicker();
                 },
                 error: function (error) {
                     console.log(error);
@@ -487,11 +526,29 @@
         var validacion_datos = ValidadorAuto('.ob');
 
         if(validacion_datos == "true"){
-            $('#frm-registro-usuario').submit();
+            $('#frm-nuevo-requerimiento').submit();
         }else{
             return false;
         }
 
+    });
+
+
+    $('.RUT').on('keyup', function(){
+        let valor = $(this).val();
+        let longitud = $(this).val().length;
+        console.log(longitud);
+
+        if(longitud == 2){
+            $(this).val(valor + ".");
+        }else if(longitud == 6){
+            $(this).val(valor + ".");
+        }
+        else if(longitud == 10){
+            $(this).val(valor + "-");
+        }else {
+            $(this).val(valor);
+        }
     });
     </script>
 @endpush
