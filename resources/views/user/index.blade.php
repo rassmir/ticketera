@@ -42,53 +42,89 @@
                     Buscar usuario
                 </button>
             </div>
-            <!-- TABLA -->
-            <div class="col-lg-12">
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered b-table mt-24">
-                        <tr class="bg-pri text-white">
-
-                            <th>#</th>
-                            <th>Tipo de usuario</th>
-                            <th>Nombres y Apellidos</th>
-                            <th>RUT</th>
-                            <th>Acciones</th>
-                        </tr>
-                        <tbody>
-                        @foreach($users as $key=> $user)
-                            <tr>
-                                <td>{{++$key}}</td>
-                                <td>{{$user->rolname}}</td>
-                                <td>{{$user->name_complete}}</td>
-                                <td>{{$user->rut}}</td>
-                                <td>
-                                    <ul class="d-lg-flex">
-                                        <li><a href="ver-usuario/{{$user->id}}" class="btn bg-tri mr-12 text-black"><i
-                                                    class="far fa-eye"></i></a>
-                                        </li>
-                                        <li><a href="editar-usuario/{{$user->id}}"
-                                               class="btn bg-tri mr-12 text-black"><i class="far fa-edit"></i></a>
-                                        </li>
-                                        <li>
-                                            <button onclick="confirmDelete({{$user->id}})"
-                                                    class="btn bg-tri mr-12 text-black"><i class="fas fa-trash"></i>
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </td>
+                <div class="col-lg-12 mt-20">
+                    <hr>
+                    <div class="table-responsive">
+                        <table id="table-usuarios" class="table table-striped table-bordered b-table mt-24">
+                            <thead>
+                            <tr class="bg-pri text-white">
+                                <th>#</th>
+                                <th>Tipo de usuario</th>
+                                <th>Nombres y Apellidos</th>
+                                <th>RUT</th>
+                                <th>Acciones</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach($users as $key=> $user)
+                                <tr>
+                                    <td>{{++$key}}</td>
+                                    <td>{{$user->rolname}}</td>
+                                    <td>{{$user->name_complete}}</td>
+                                    <td>{{$user->rut}}</td>
+                                    <td>
+                                        <ul class="d-lg-flex">
+                                            <li><a href="ver-usuario/{{$user->id}}" class="btn bg-tri mr-12 text-black"><i
+                                                        class="far fa-eye"></i></a>
+                                            </li>
+                                            <li><a href="editar-usuario/{{$user->id}}"
+                                                   class="btn bg-tri mr-12 text-black"><i class="far fa-edit"></i></a>
+                                            </li>
+                                            <li>
+                                                <button onclick="confirmDelete({{$user->id}})"
+                                                        class="btn bg-tri mr-12 text-black"><i class="fas fa-trash"></i>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
-@push('scripts')
-    <script type="text/javascript">
-        const confirmDelete = (id) => {
-            deleteRegister(id, 'eliminar-usuario', '{{csrf_token()}}');
-        }
-    </script>
-@endpush
+        @endsection
+        @push('scripts')
+            <script type="text/javascript">
+                const confirmDelete = (id) => {
+                    deleteRegister(id, 'eliminar-usuario', '{{csrf_token()}}');
+                }
+                $(document).ready(function () {
+                    $('#table-usuarios').DataTable({
+                        "language": {
+                            "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                        },
+                        dom: 'Bfrtip',
+                        buttons: [{
+                            extend: 'excelHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5]
+                            }
+                        },
+                            {
+                                extend: 'pdfHtml5',
+                                orientation: 'landscape',
+                                pageSize: 'LEGAL',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5]
+                                }
+                            },
+                            'print'
+                        ],
+                        exportOptions: {
+                            modifier: {
+                                // DataTables core
+                                order: 'index', // 'current', 'applied',
+                                //'index', 'original'
+                                page: 'all', // 'all', 'current'
+                                search: 'none' // 'none', 'applied', 'removed'
+                            },
+                            columns: [0, 1, 2, 3, 4, 5]
+                        }
+
+                    });
+                });
+            </script>
+    @endpush

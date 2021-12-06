@@ -42,11 +42,12 @@
 
             <!-- TABLA -->
 
-            <div class="col-lg-12">
+            <div class="col-lg-12 mt-20">
+                <hr>
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered b-table mt-24">
+                    <table id="table-anulaciones" class="table table-striped table-bordered b-table mt-24">
+                        <thead>
                         <tr class="bg-pri text-white">
-
                             <th>#</th>
                             <th>Centro médico</th>
                             <th>Nombre Doctor</th>
@@ -57,6 +58,7 @@
                             <th>Estado solicitud</th>
                             <th>Acciones</th>
                         </tr>
+                        </thead>
                         <tbody>
                         <tr>
                             <td>47854645</td>
@@ -82,3 +84,42 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#table-anulaciones').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
+                },
+                dom: 'Bfrtip',
+                buttons: [{
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5]
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5]
+                    }
+                },
+                'print'
+                ],
+                exportOptions: {
+                    modifier: {
+                        // DataTables core
+                        order: 'index', // 'current', 'applied',
+                        //'index', 'original'
+                        page: 'all', // 'all', 'current'
+                        search: 'none' // 'none', 'applied', 'removed'
+                    },
+                    columns: [0, 1, 2, 3, 4, 5]
+                }
+
+            });
+        });
+    </script>
+@endpush
