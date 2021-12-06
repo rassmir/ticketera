@@ -26,6 +26,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/buscar-usuarios', [UserController::class, 'index'])->name('app.user.index');
     Route::get('/nuevo-usuario', [UserController::class, 'create'])->name('app.user.create');
     Route::post('/guardar-usuario', [UserController::class, 'store'])->name('app.user.save');
+    Route::get('/ver-usuario/{id}', [UserController::class, 'show'])->name('app.user.show');
+    Route::get('/editar-usuario/{id}', [UserController::class, 'edit'])->name('app.user.edit');
+    Route::post('/actualizar-usuario/{id}', [UserController::class, 'update'])->name('app.user.update');
+    Route::post('/eliminar-usuario/{id}', [UserController::class, 'destroy'])->name('app.user.destroy');
+
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 //Requerimientos
     //Sucursales
@@ -42,6 +47,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/buscar-requerimientos', [RequerimentController::class, 'index'])->name('app.requeriment.index');
     Route::get('/nuevo-requerimiento', [RequerimentController::class, 'create'])->name('app.requeriment.create');
     Route::post('/guardar-requerimiento', [RequerimentController::class, 'store'])->name('app.requeriment.store');
+    Route::get('/ver-requerimiento/{id}', [RequerimentController::class, 'show'])->name('app.requeriment.show');
+    Route::post('/eliminar-requerimiento/{id}', [RequerimentController::class, 'destroy'])->name('app.requeriment.destroy');
 
 //Anulaciones
     Route::get('/buscar-anulaciones', [AnulationController::class, 'index'])->name('app.anulation.index');

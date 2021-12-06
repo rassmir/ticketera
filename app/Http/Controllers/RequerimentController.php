@@ -129,11 +129,27 @@ class RequerimentController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $clinics = Clinic::orderBy('name')->get();
+        $requeriment = Requeriment::join('clinics', 'clinics.id', '=', 'requeriments.clinic_id')
+            ->join('branches', 'branches.id', '=', 'requeriments.branch_id')
+            ->join('center_medicals', 'center_medicals.id', '=', 'requeriments.center_medical_id')
+            ->join('units', 'units.id', '=', 'requeriments.unit_id')
+            ->join('professionals', 'professionals.id', '=', 'requeriments.professional_id')
+            ->join('especialities', 'especialities.id', '=', 'requeriments.especiality_id')
+            ->select(['requeriments.*', 'clinics.name as clinicname',
+                'center_medicals.name as centername', 'professionals.name as profname',
+                'branches.name as braname', 'units.name as unitname', 'especialities.name as espname'])
+            ->orderBy('created_at', 'DESC')
+            ->where('requeriments.id', '=', $id)
+            ->first();
+        return view('requeriment.show',
+            ['requeriment' => $requeriment,
+                'clinics' => $clinics
+            ]);
     }
 
     /**
@@ -163,10 +179,14 @@ class RequerimentController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        //
+        $requeriment = Requeriment::findOrFail($id);
+        $requeriment->delete($id);
+        return Redirect::back()->with(array(
+            'success' => 'Eliminado Correctamente !!'
+        ));
     }
 }

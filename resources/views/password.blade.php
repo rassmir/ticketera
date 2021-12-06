@@ -17,8 +17,8 @@
                     <p class="mb-4 mt-20 font-weight-bold">Repita su contraseña</p>
                     <input type="text" class="form-control mt-4" placeholder="Repita su contraseña">
 
-                    <a href="page-principal.php" class="btn bg-sec text-pri font-weight-bold mt-20 w-100">Enviar</a>
-                    <a href="index.php" class="btn bg-pri text-white font-weight-bold mt-20 w-100">Regresar</a>
+                    <a href="#" class="btn bg-sec text-pri font-weight-bold mt-20 w-100">Enviar</a>
+                    <a href="{{route('login')}}" class="btn bg-pri text-white font-weight-bold mt-20 w-100">Regresar</a>
                 </div>
             </div>
         </div>

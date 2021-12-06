@@ -42,9 +42,7 @@
                     Buscar usuario
                 </button>
             </div>
-
             <!-- TABLA -->
-
             <div class="col-lg-12">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered b-table mt-24">
@@ -60,12 +58,22 @@
                         @foreach($users as $key=> $user)
                             <tr>
                                 <td>{{++$key}}</td>
-                                <td>Rol</td>
+                                <td>{{$user->rolname}}</td>
                                 <td>{{$user->name_complete}}</td>
                                 <td>{{$user->rut}}</td>
                                 <td>
-                                    <ul class="d-lg-flex mb-0">
-                                        <li><i class="far fa-eye mr-12"></i></li>
+                                    <ul class="d-lg-flex">
+                                        <li><a href="ver-usuario/{{$user->id}}" class="btn bg-tri mr-12 text-black"><i
+                                                    class="far fa-eye"></i></a>
+                                        </li>
+                                        <li><a href="editar-usuario/{{$user->id}}"
+                                               class="btn bg-tri mr-12 text-black"><i class="far fa-edit"></i></a>
+                                        </li>
+                                        <li>
+                                            <button onclick="confirmDelete({{$user->id}})"
+                                                    class="btn bg-tri mr-12 text-black"><i class="fas fa-trash"></i>
+                                            </button>
+                                        </li>
                                     </ul>
                                 </td>
                             </tr>
@@ -77,3 +85,10 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script type="text/javascript">
+        const confirmDelete = (id) => {
+            deleteRegister(id, 'eliminar-usuario', '{{csrf_token()}}');
+        }
+    </script>
+@endpush

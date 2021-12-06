@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\RoleUser;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -29,7 +30,11 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::orderBy('created_at')->get();
+        $users = RoleUser::join('users', 'users.id', '=', 'role_user.user_id')
+            ->join('roles', 'roles.id', '=', 'role_user.role_id')
+            ->select(['users.*', 'roles.display_name as rolname'])
+            ->orderBy('created_at', 'DESC')
+            ->get();
         return view('user.index',
             ['users' => $users]);
     }
@@ -99,22 +104,35 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $user = RoleUser::join('users', 'users.id', '=', 'role_user.user_id')
+            ->join('roles', 'roles.id', '=', 'role_user.role_id')
+            ->select(['users.*', 'roles.display_name as rolname'])
+            ->orderBy('created_at', 'DESC')
+            ->where('users.id', '=', $id)
+            ->first();
+        return view('user.show',
+            ['user' => $user]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $roles = Role::orderBy('name')->get();
+        $user = User::findOrFail($id);
+        return view('user.edit',
+            [
+                'user' => $user,
+                'roles' => $roles
+            ]);
     }
 
     /**
@@ -122,21 +140,41 @@ class UserController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $user = User::findOrFail($id);
+            $user->name_complete = $request->input('name_complete');
+            $user->email = $request->input('email');
+            $user->rut = $request->input('rut');
+            $user->update();
+            $user->role()->detach();
+            $user->attachRole($request->input('role_id'));
+            return Redirect::back()->with(array(
+                'success' => 'Guardado Correctamente !!'
+            ));
+        } catch (Exception $ex) {
+            Log::error($ex);
+            return Redirect::back()->with(array(
+                'error' => 'Error al actualizar !!'
+            ));
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete($id);
+        return Redirect::back()->with(array(
+            'success' => 'Eliminado Correctamente !!'
+        ));
     }
 }

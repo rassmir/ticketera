@@ -57,7 +57,7 @@
         </h3>
         <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto">
-                <li><p class="text-white pr-16 font-20">Rassmir Flores</p></li>
+                <li><p class="text-white pr-16 font-20">{{Auth::user()->name_complete}}</p></li>
                 <li class="dropdown nav-item">
                     <a href="javascript:void(0)" class="dropdown-toggle nav-link p-0 pl-12 pt-4 pb-4 font-16 br-4 pl-16 pr-16  text-white" data-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-bars"></i>
@@ -102,6 +102,7 @@
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="{{asset('assets/js/funciones.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/js/popper.min.js')}}"></script>
 <script src="{{asset('assets/js/sweetalert2.all.min.js')}}"></script>

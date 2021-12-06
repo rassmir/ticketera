@@ -84,8 +84,9 @@
                         <td>{{$req->profname}}</td>
                         <td>
                             <ul class="d-lg-flex">
-                                <li><a href="#" class="btn bg-tri mr-12 text-black"><i class="far fa-eye"></i></a></li>
+                                <li><a href="ver-requerimiento/{{$req->id}}" class="btn bg-tri mr-12 text-black"><i class="far fa-eye"></i></a></li>
                                 <li><a href="#" class="btn bg-tri mr-12 text-black"><i class="far fa-edit"></i></a></li>
+                                <li><button onclick="confirmDelete({{$req->id}})" class="btn bg-tri mr-12 text-black"><i class="fas fa-trash"></i></button></li>
                             </ul>
                         </td>
                     </tr>
@@ -97,3 +98,10 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+    <script type="text/javascript">
+        const confirmDelete = (id) => {
+            deleteRegister(id, 'eliminar-requerimiento', '{{csrf_token()}}');
+        }
+    </script>
+@endpush
