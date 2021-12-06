@@ -74,9 +74,9 @@
                         <th>Acciones</th>
                     </tr>
                     <tbody>
-                    @foreach($requeriments as $req)
+                    @foreach($requeriments as $key=> $req)
                     <tr>
-                        <td>{{$req->id}}</td>
+                        <td>{{++$key}}</td>
                         <td>{{$req->rut}}</td>
                         <td>{{$req->datetime_local}}</td>
                         <td>{{$req->state}}</td>
