@@ -24,10 +24,12 @@ Route::get('/', [UserController::class, 'login'])->name('login');
 Route::post('/autenticacion', [UserController::class, 'authenticate'])->name('app.user.auth');
 Route::get('/recuperar-contrasena', [UserController::class, 'forget'])->name('forget');
 
+Route::group(['middleware' => ['role:administrador', 'auth']], function () {
+    Route::get('/nuevo-usuario', [UserController::class, 'create'])->name('app.user.create');
+});
 //Usuarios
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/buscar-usuarios', [UserController::class, 'index'])->name('app.user.index');
-    Route::get('/nuevo-usuario', [UserController::class, 'create'])->name('app.user.create');
     Route::post('/guardar-usuario', [UserController::class, 'store'])->name('app.user.save');
     Route::get('/ver-usuario/{id}', [UserController::class, 'show'])->name('app.user.show');
     Route::get('/editar-usuario/{id}', [UserController::class, 'edit'])->name('app.user.edit');
