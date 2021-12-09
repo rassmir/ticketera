@@ -409,7 +409,13 @@
 @endsection
 @push('scripts')
     <script type="text/javascript">
-        const uri = 'http://localhost:8000/';
+        let uri = '';
+        @if (env('APP_ENV')!='Production')
+            uri = 'http://localhost:8000/'
+        @else
+            uri = 'https://bandemical.herokuapp.com/'
+        @endif
+        console.log('aqui es',uri)
         const selectBranches = () => {
             let clinic_id = $("#clinics").val();
             $.ajax({
