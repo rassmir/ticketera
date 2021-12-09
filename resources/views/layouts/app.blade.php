@@ -38,10 +38,10 @@
         <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-link">
-                    @if(Auth::user()->hasRole('administrador'))
+{{--                    @if(Auth::user()->hasRole('administrador'))--}}
                         <a class="dropdown-item pl-0" href="{{route('app.user.create')}}"><i
                                 class="fas fa-chevron-right mr-8 text-sec"></i> Nuevo usuario</a>
-                    @endif
+{{--                    @endif--}}
                     <a class="dropdown-item pl-0" href="{{route('app.user.index')}}"><i
                             class="fas fa-chevron-right mr-8 text-sec"></i> Buscar usuarios</a>
                     <a class="dropdown-item pl-0" href="{{route('app.requeriment.create')}}"><i
