@@ -1,10 +1,13 @@
 <?php
 
+use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RequerimentController;
 use App\Http\Controllers\AnulationController;
-Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
+
+
+Route::get('logs', [LogViewerController::class, 'index']);
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +51,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/nuevo-requerimiento', [RequerimentController::class, 'create'])->name('app.requeriment.create');
     Route::post('/guardar-requerimiento', [RequerimentController::class, 'store'])->name('app.requeriment.store');
     Route::get('/ver-requerimiento/{id}', [RequerimentController::class, 'show'])->name('app.requeriment.show');
+    Route::get('/editar-requerimiento/{id}', [RequerimentController::class, 'edit'])->name('app.requeriment.edit');
+    Route::post('/actualizar-requerimiento/{id}', [RequerimentController::class, 'update'])->name('app.requeriment.update');
     Route::post('/eliminar-requerimiento/{id}', [RequerimentController::class, 'destroy'])->name('app.requeriment.destroy');
 
 //Anulaciones

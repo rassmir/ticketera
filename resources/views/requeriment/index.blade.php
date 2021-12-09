@@ -91,7 +91,7 @@
                                             <li><a href="ver-requerimiento/{{$req->id}}"
                                                    class="btn bg-tri mr-12 text-black"><i class="far fa-eye"></i></a>
                                             </li>
-                                                <li><a href="#" class="btn bg-tri mr-12 text-black"><i
+                                                <li><a href="editar-requerimiento/{{$req->id}}" class="btn bg-tri mr-12 text-black"><i
                                                             class="far fa-edit"></i></a></li>
                                                 <li>
                                                     <button onclick="confirmDelete({{$req->id}})"
@@ -115,7 +115,6 @@
         const confirmDelete = (id) => {
             deleteRegister(id, 'eliminar-requerimiento', '{{csrf_token()}}');
         }
-
         $(document).ready(function () {
             $('#table-requerimientos').DataTable({
                 "language": {

@@ -15,6 +15,7 @@ class CreateRequerimentsTable extends Migration
     {
         Schema::create('requeriments', function (Blueprint $table) {
             $table->id();
+            $table->string('type');
             $table->dateTime('datetime_local');
             $table->string('state');
             $table->string('rut');

@@ -153,7 +153,7 @@ class UserController extends Controller
             $user->role()->detach();
             $user->attachRole($request->input('role_id'));
             return Redirect::back()->with(array(
-                'success' => 'Guardado Correctamente !!'
+                'success' => 'Actualizado Correctamente !!'
             ));
         } catch (Exception $ex) {
             Log::error($ex);

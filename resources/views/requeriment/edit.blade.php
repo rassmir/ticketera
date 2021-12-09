@@ -1,20 +1,20 @@
 @extends('layouts.app')
-@section('title','Nuevo Requerimiento')
+@section('title','Editar Requerimiento')
 @section('app-content')
     <div class="main-content p-48 p-sm-16 bg-white mt-sm-16">
         <div class="text-left">
-            <h2 class="text-pri">NUEVO REQUERIMIENTO</h2>
+            <h2 class="text-pri">EDITAR REQUERIMIENTO</h2>
         </div>
-        <form id="frm-nuevo-requerimiento" method="POST" action="{{route('app.requeriment.store')}}">
+        <form id="frm-nuevo-requerimiento" method="POST" action="{{route('app.requeriment.update',['id'=>$requeriment->id])}}">
             @csrf
             <div class="row mb-36">
                 <div class="col-lg-12">
                     <div class="row">
-                    <div class="col-lg-12 mt-20">
+                        <div class="col-lg-12 mt-20">
                             <h3 class="font-20">Datos del requerimiento</h3>
                             <hr>
                         </div>
-                    <div class="col-lg-4 mt-8">
+                        <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
                                     <p class="mb-0">Tipo de requerimiento</p>
@@ -22,25 +22,24 @@
                                 <div class="col-lg-7">
                                     <select class="form-control" name="type">
                                         <option disabled selected>Seleccione Tipo De Requerimiento</option>
-                                        <option value="Hora Extra">Hora Extra</option>
-                                        <option value="Recado Medico">Recado Médico</option>
-                                        <option value="Certificado Medico">Certificado Médico</option>
-                                        <option value="Orden de Examen">Orden De Exámen</option>
-                                        <option value="Seguro complementario">Seguro Complementario</option>
-                                        <option value="Receta Medica">Receta Médica</option>
+                                        <option value="Hora Extra" @if($requeriment->type==="Hora Extra") selected='selected' @endif>Hora Extra</option>
+                                        <option value="Recado Medico" @if($requeriment->type==="Recado Médico") selected='selected' @endif>Recado Médico</option>
+                                        <option value="Certificado Medico" @if($requeriment->type==="Certificado Medico") selected='selected' @endif>Certificado Médico</option>
+                                        <option value="Orden de Examen" @if($requeriment->type==="Orden de Examen") selected='selected' @endif>Orden De Exámen</option>
+                                        <option value="Seguro complementario" @if($requeriment->type==="Seguro complementario") selected='selected' @endif>Seguro Complementario</option>
+                                        <option value="Receta Medica" @if($requeriment->type==="Receta Medica") selected='selected' @endif>Receta Médica</option>
                                     </select>
                                 </div>
                             </div>
-                    </div>
-                    <div class="col-lg-8 mt-8"></div>
-
+                        </div>
+                        <div class="col-lg-8 mt-8"></div>
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
                                     <p class="mb-0">Número de solicitud</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" placeholder="R-15242021" disabled>
+                                    <input type="text" class="form-control" placeholder="R-15242021" disabled value="{{$requeriment->id}}">
                                 </div>
                             </div>
                         </div>
@@ -50,8 +49,8 @@
                                     <p class="mb-0">Día y Hora</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input id="date-time" readonly type="datetime-local" class="form-control"
-                                           placeholder="Fecha" name="datetime_local">
+                                    <input id="date-time" readonly type="datetime" class="form-control"
+                                           placeholder="Fecha" name="datetime_local" value="{{$requeriment->datetime_local}}">
                                 </div>
                             </div>
                         </div>
@@ -63,8 +62,8 @@
                                 </div>
                                 <div class="col-lg-7">
                                     <select class="form-control" name="state">
-                                        <option value="Ingresado">Ingresado</option>
-                                        <option value="Ingresado">Cerrado</option>
+                                        <option value="Ingresado" @if($requeriment->state==="Ingresado") selected='selected' @endif>Ingresado</option>
+                                        <option value="Cerrado" @if($requeriment->state==="Cerrado") selected='selected' @endif>Cerrado</option>
                                     </select>
                                 </div>
                             </div>
@@ -79,7 +78,7 @@
                                     <p class="mb-0">RUT*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" maxlength="12" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="RUT form-control ob" data-type="text" data-msj="Ingrese un RUT"  placeholder="RUT" name="rut">
+                                    <input type="text" value="{{$requeriment->rut}}" maxlength="12" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="RUT form-control ob" data-type="text" data-msj="Ingrese un RUT"  placeholder="RUT" name="rut" >
                                 </div>
                             </div>
                         </div>
@@ -90,7 +89,7 @@
                                     <p class="mb-0">Primer nombre*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control ob" data-type="text" data-msj="Ingrese un nombre" placeholder="Primer nombre" name="name">
+                                    <input type="text" value="{{$requeriment->name}}"  class="form-control ob" data-type="text" data-msj="Ingrese un nombre" placeholder="Primer nombre" name="name">
                                 </div>
                             </div>
                         </div>
@@ -101,7 +100,7 @@
                                     <p class="mb-0">Apellido Paterno*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control ob" data-type="text" data-msj="Ingrese el apellido paterno" placeholder="Apellido Paterno"
+                                    <input type="text" value="{{$requeriment->father_name}}" class="form-control ob" data-type="text" data-msj="Ingrese el apellido paterno" placeholder="Apellido Paterno"
                                            name="father_name">
                                 </div>
                             </div>
@@ -113,7 +112,7 @@
                                     <p class="mb-0">Apellido Materno*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control ob" data-type="text" data-msj="Ingrese el apellido materno" placeholder="Apellido Materno"
+                                    <input type="text" value="{{$requeriment->mother_name}}" class="form-control ob" data-type="text" data-msj="Ingrese el apellido materno" placeholder="Apellido Materno"
                                            name="mother_name">
                                 </div>
                             </div>
@@ -125,7 +124,7 @@
                                     <p class="mb-0">Fono celular 1</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" placeholder="Fono celular" name="phone1">
+                                    <input type="text" value="{{$requeriment->phone1}}" class="form-control" placeholder="Fono celular" name="phone1">
                                 </div>
                             </div>
                         </div>
@@ -136,7 +135,7 @@
                                     <p class="mb-0">Fono celular 2</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" placeholder="Fono celular 2" name="phone2">
+                                    <input type="text" value="{{$requeriment->phone2}}" class="form-control" placeholder="Fono celular 2" name="phone2">
                                 </div>
                             </div>
                         </div>
@@ -147,7 +146,7 @@
                                     <p class="mb-0">Fono fijo 1*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control ob" data-type="number" data-msj="Ingrese número fijo" placeholder="Fono fijo 1" name="fije1">
+                                    <input type="text" value="{{$requeriment->fije1}}" class="form-control ob" data-type="number" data-msj="Ingrese número fijo" placeholder="Fono fijo 1" name="fije1">
                                 </div>
                             </div>
                         </div>
@@ -164,9 +163,9 @@
                                 <div class="col-lg-7">
                                     <select id="clinics" class="form-control ob selectpicker" data-live-search="true" data-type="select" data-msj="Seleccione una Clínica" name="clinic_id"
                                             onchange="selectBranches()">
-                                            <option selected disabled value="0">Seleccione clínica</option>
+                                        <option selected disabled value="0">Seleccione clínica</option>
                                         @foreach($clinics as $clinic)
-                                            <option value="{{$clinic->id}}">{{$clinic->name}}</option>
+                                            <option value="{{$clinic->id}}" @if($clinic->id==$requeriment->clinic_id) selected='selected' @endif>{{$clinic->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -247,7 +246,7 @@
                                     <p class="mb-0">Fecha Creación</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input id="date" type="date" class="form-control" readonly name="date">
+                                    <input id="date" type="date" class="form-control" readonly name="date" value="{{$requeriment->date}}">
                                 </div>
                             </div>
                         </div>
@@ -258,7 +257,7 @@
                                     <p class="mb-0">Fecha Probable H.E</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="date" class="form-control" name="date_he">
+                                    <input type="date" class="form-control" name="date_he" value="{{$requeriment->date_he}}">
                                 </div>
                             </div>
                         </div>
@@ -269,7 +268,7 @@
                                     <p class="mb-0">Fecha última consulta</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="date" class="form-control" name="date_last">
+                                    <input type="date" class="form-control" name="date_last" value="{{$requeriment->date_last}}">
                                 </div>
                             </div>
                         </div>
@@ -280,7 +279,7 @@
                                     <p class="mb-0">Fecha Probable respuesta</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="date" class="form-control" name="date_response">
+                                    <input type="date" class="form-control" name="date_response" value="{{$requeriment->date_response}}">
                                 </div>
                             </div>
                         </div>
@@ -291,7 +290,7 @@
                                     <p class="mb-0">Email*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="email" class="form-control ob" data-type="text" data-msj="Ingrese un correo" placeholder="Ingrese un Email" name="email">
+                                    <input type="email" value="{{$requeriment->email}}" class="form-control ob" data-type="text" data-msj="Ingrese un correo" placeholder="Ingrese un Email" name="email">
                                 </div>
                             </div>
                         </div>
@@ -307,7 +306,7 @@
                                 </div>
                                 <div class="col-lg-12 mt-8">
                                     <textarea class="form-control" placeholder="Ingrese una observación" rows="5"
-                                              name="observation"></textarea>
+                                              name="observation">{{$requeriment->observation}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -319,7 +318,7 @@
                                 </div>
                                 <div class="col-lg-12 mt-8">
                                     <textarea class="form-control" placeholder="Respuesta del centro médico" rows="5"
-                                              name="response_medic"></textarea>
+                                              name="response_medic">{{$requeriment->response_medic}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -330,7 +329,7 @@
                                     <p class="mb-0">Nombre del profesional</p>
                                 </div>
                                 <div class="col-lg-12 mt-8">
-                                    <input type="text" class="form-control" placeholder="Nombre del profesional"
+                                    <input type="text" value="{{$requeriment->name_professional}}" class="form-control" placeholder="Nombre del profesional"
                                            name="name_professional">
                                 </div>
                             </div>
@@ -343,18 +342,17 @@
                                 </div>
                                 <div class="col-lg-12 mt-8">
                                     <textarea class="form-control" placeholder="Respuesta del centro médico" rows="5"
-                                              name="resumen"></textarea>
+                                              name="resumen">{{$requeriment->resumen}}</textarea>
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-lg-4 mt-16">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
                                     <p class="mb-0">Fecha y hora del ticket solucionado</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="date" class="form-control" disabled name="date_solution">
+                                    <input type="datetime" class="form-control" readonly name="date_solution" value="{{$requeriment->date_solution}}">
                                 </div>
                             </div>
                         </div>
@@ -365,7 +363,7 @@
                                 </div>
                                 <div class="col-lg-7">
                                     <input type="text" class="form-control" readonly
-                                           name="user_create" value="{{Auth::user()->name_complete}}">
+                                           name="user_create" value="{{$requeriment->user_create}}">
                                 </div>
                             </div>
                         </div>
@@ -375,7 +373,7 @@
                                     <p class="mb-0">Fecha de cierre de la solicitud</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="date" class="form-control" disabled name="date_close">
+                                    <input type="date" class="form-control" readonly name="date_close" value="{{$requeriment->date_close}}">
                                 </div>
                             </div>
                         </div>
@@ -386,8 +384,8 @@
                                     <p class="mb-0">Usuario que cierra la solicitud</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" placeholder="Pedro Martinez" disabled
-                                           name="user_close">
+                                    <input type="text" class="form-control" placeholder="Pedro Martinez" readonly
+                                           name="user_close" value="{{Auth::user()->name_complete}}">
                                 </div>
                             </div>
                         </div>
@@ -398,7 +396,7 @@
                                     <hr>
                                     <button id="btn-registrar-requerimiento" type="submit"
                                             class="btn bg-pri border-pri text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
-                                            style="min-width:190px;"> Registrar
+                                            style="min-width:190px;"> Actualizar
                                     </button>
                                 </div>
                             </div>
@@ -411,24 +409,18 @@
 @endsection
 @push('scripts')
     <script type="text/javascript">
-        $(document).ready(function () {
-            let now = new Date();
-            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            $('#date-time').val(now.toISOString().slice(0, 16))
-            $('#date').val(now.toISOString().split('T')[0])
-        });
-
+        const uri = 'http://localhost:8000/';
         const selectBranches = () => {
             let clinic_id = $("#clinics").val();
             $.ajax({
                 type: "GET",
-                url: "sucursales/" + clinic_id,
+                url: uri + "sucursales/" + clinic_id,
                 success: function (response) {
                     let branches = $('#branches');
                     branches.empty();
                     branches.append('<option selected disabled>Seleccione Sucursal</option>');
                     for (let i = 0; i < response.length; i++) {
-                        branches.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
+                        branches.append('<option value="' + response[i].id + '" ' + response[i].name + '>' + response[i].name + '</option>');
                     }
                     branches.selectpicker();
                 },
@@ -437,12 +429,13 @@
                 }
             });
         }
+        selectBranches();
 
         const selectCenterMedic = () => {
             let branch_id = $("#branches").val();
             $.ajax({
                 type: "GET",
-                url: "centros-medicos/" + branch_id,
+                url: uri +"centros-medicos/" + branch_id,
                 success: function (response) {
                     let centers = $('#center_medics');
                     centers.empty();
@@ -462,7 +455,7 @@
             let center_medical_id = $("#center_medics").val();
             $.ajax({
                 type: "GET",
-                url: "unidades/" + center_medical_id,
+                url: uri +"unidades/" + center_medical_id,
                 success: function (response) {
                     let units = $('#units');
                     units.empty();
@@ -482,7 +475,7 @@
             let units = $("#units").val();
             $.ajax({
                 type: "GET",
-                url: "profesionales/" + units,
+                url: uri +"profesionales/" + units,
                 success: function (response) {
                     let professionals = $('#professionals');
                     professionals.empty();
@@ -502,7 +495,7 @@
             let professionals = $("#professionals").val();
             $.ajax({
                 type: "GET",
-                url: "especialidades/" + professionals,
+                url: uri +"especialidades/" + professionals,
                 success: function (response) {
                     let especialities = $('#especialities');
                     especialities.empty();
@@ -521,35 +514,35 @@
         // GUARDAR REQUERIMIENTO
 
         $('#btn-registrar-requerimiento').on('click', function(e){
-        e.preventDefault();
-        console.log("inicio-sesion");
+            e.preventDefault();
+            console.log("inicio-sesion");
 
-        var validacion_datos = ValidadorAuto('.ob');
+            var validacion_datos = ValidadorAuto('.ob');
 
-        if(validacion_datos == "true"){
-            $('#frm-nuevo-requerimiento').submit();
-        }else{
-            return false;
-        }
+            if(validacion_datos == "true"){
+                $('#frm-nuevo-requerimiento').submit();
+            }else{
+                return false;
+            }
 
-    });
+        });
 
 
-    $('.RUT').on('keyup', function(){
-        let valor = $(this).val();
-        let longitud = $(this).val().length;
-        console.log(longitud);
+        $('.RUT').on('keyup', function(){
+            let valor = $(this).val();
+            let longitud = $(this).val().length;
+            console.log(longitud);
 
-        if(longitud == 2){
-            $(this).val(valor + ".");
-        }else if(longitud == 6){
-            $(this).val(valor + ".");
-        }
-        else if(longitud == 10){
-            $(this).val(valor + "-");
-        }else {
-            $(this).val(valor);
-        }
-    });
+            if(longitud == 2){
+                $(this).val(valor + ".");
+            }else if(longitud == 6){
+                $(this).val(valor + ".");
+            }
+            else if(longitud == 10){
+                $(this).val(valor + "-");
+            }else {
+                $(this).val(valor);
+            }
+        });
     </script>
 @endpush

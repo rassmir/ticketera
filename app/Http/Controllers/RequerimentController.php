@@ -82,9 +82,9 @@ class RequerimentController extends Controller
      */
     public function store(Request $request)
     {
-
         try {
             $requeriments = new Requeriment();
+            $requeriments->type = $request->input('type');
             $requeriments->datetime_local = $request->input('datetime_local');
             $requeriments->state = $request->input('state');
             $requeriments->rut = $request->input('rut');
@@ -156,11 +156,17 @@ class RequerimentController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $clinics = Clinic::orderBy('name')->get();
+        $requeriment = Requeriment::findOrFail($id);
+        return view('requeriment.edit',
+            [
+                'requeriment' => $requeriment,
+                'clinics' => $clinics
+            ]);
     }
 
     /**
@@ -168,11 +174,51 @@ class RequerimentController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $requeriment = Requeriment::findOrFail($id);
+            $requeriment->type = $request->input('type');
+            $requeriment->datetime_local = $request->input('datetime_local');
+            $requeriment->state = $request->input('state');
+            $requeriment->rut = $request->input('rut');
+            $requeriment->name = $request->input('name');
+            $requeriment->father_name = $request->input('father_name');
+            $requeriment->mother_name = $request->input('mother_name');
+            $requeriment->phone1 = $request->input('phone1');
+            $requeriment->phone2 = $request->input('phone2');
+            $requeriment->fije1 = $request->input('fije1');
+            $requeriment->clinic_id = $request->input('clinic_id');
+            $requeriment->branch_id = $request->input('branch_id');
+            $requeriment->center_medical_id = $request->input('center_medical_id');
+            $requeriment->unit_id = $request->input('unit_id');
+            $requeriment->professional_id = $request->input('professional_id');
+            $requeriment->especiality_id = $request->input('especiality_id');
+            $requeriment->date = $request->input('date');
+            $requeriment->date_he = $request->input('date_he');
+            $requeriment->date_last = $request->input('date_last');
+            $requeriment->date_response = $request->input('date_response');
+            $requeriment->email = $request->input('email');
+            $requeriment->observation = $request->input('observation');
+            $requeriment->response_medic = $request->input('response_medic');
+            $requeriment->name_professional = $request->input('name_professional');
+            $requeriment->resumen = $request->input('resumen');
+            $requeriment->date_solution = $request->input('date_solution');
+            $requeriment->user_create = $request->input('user_create');
+            $requeriment->date_close = $request->input('date_close');
+            $requeriment->user_close = $request->input('user_close');
+            $requeriment->update();
+            return Redirect::back()->with(array(
+                'success' => 'Actualizado Correctamente !!'
+            ));
+        } catch (Exception $ex) {
+            Log::error($ex);
+            return Redirect::back()->with(array(
+                'error' => 'Error al actualizar !!'
+            ));
+        }
     }
 
     /**
