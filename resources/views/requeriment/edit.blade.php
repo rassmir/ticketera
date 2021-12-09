@@ -410,10 +410,10 @@
 @push('scripts')
     <script type="text/javascript">
         let uri = '';
-        @if (env('APP_ENV')!='Production')
-            uri = 'http://localhost:8000/'
-        @else
+        @if (env('APP_ENV') === 'Production')
             uri = 'https://bandemical.herokuapp.com/'
+        @else
+            uri = 'http://localhost:8000/'
         @endif
         console.log('aqui es',uri)
         const selectBranches = () => {
