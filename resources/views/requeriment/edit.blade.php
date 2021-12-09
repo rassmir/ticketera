@@ -5,7 +5,8 @@
         <div class="text-left">
             <h2 class="text-pri">EDITAR REQUERIMIENTO</h2>
         </div>
-        <form id="frm-nuevo-requerimiento" method="POST" action="{{route('app.requeriment.update',['id'=>$requeriment->id])}}">
+        <form id="frm-nuevo-requerimiento" method="POST"
+              action="{{route('app.requeriment.update',['id'=>$requeriment->id])}}">
             @csrf
             <div class="row mb-36">
                 <div class="col-lg-12">
@@ -22,12 +23,30 @@
                                 <div class="col-lg-7">
                                     <select class="form-control" name="type">
                                         <option disabled selected>Seleccione Tipo De Requerimiento</option>
-                                        <option value="Hora Extra" @if($requeriment->type==="Hora Extra") selected='selected' @endif>Hora Extra</option>
-                                        <option value="Recado Medico" @if($requeriment->type==="Recado Médico") selected='selected' @endif>Recado Médico</option>
-                                        <option value="Certificado Medico" @if($requeriment->type==="Certificado Medico") selected='selected' @endif>Certificado Médico</option>
-                                        <option value="Orden de Examen" @if($requeriment->type==="Orden de Examen") selected='selected' @endif>Orden De Exámen</option>
-                                        <option value="Seguro complementario" @if($requeriment->type==="Seguro complementario") selected='selected' @endif>Seguro Complementario</option>
-                                        <option value="Receta Medica" @if($requeriment->type==="Receta Medica") selected='selected' @endif>Receta Médica</option>
+                                        <option value="Hora Extra"
+                                                @if($requeriment->type==="Hora Extra") selected='selected' @endif>Hora
+                                            Extra
+                                        </option>
+                                        <option value="Recado Medico"
+                                                @if($requeriment->type==="Recado Médico") selected='selected' @endif>
+                                            Recado Médico
+                                        </option>
+                                        <option value="Certificado Medico"
+                                                @if($requeriment->type==="Certificado Medico") selected='selected' @endif>
+                                            Certificado Médico
+                                        </option>
+                                        <option value="Orden de Examen"
+                                                @if($requeriment->type==="Orden de Examen") selected='selected' @endif>
+                                            Orden De Exámen
+                                        </option>
+                                        <option value="Seguro complementario"
+                                                @if($requeriment->type==="Seguro complementario") selected='selected' @endif>
+                                            Seguro Complementario
+                                        </option>
+                                        <option value="Receta Medica"
+                                                @if($requeriment->type==="Receta Medica") selected='selected' @endif>
+                                            Receta Médica
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -39,7 +58,8 @@
                                     <p class="mb-0">Número de solicitud</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" placeholder="R-15242021" disabled value="{{$requeriment->id}}">
+                                    <input type="text" class="form-control" placeholder="R-15242021" disabled
+                                           value="{{$requeriment->id}}">
                                 </div>
                             </div>
                         </div>
@@ -50,7 +70,8 @@
                                 </div>
                                 <div class="col-lg-7">
                                     <input id="date-time" readonly type="datetime" class="form-control"
-                                           placeholder="Fecha" name="datetime_local" value="{{$requeriment->datetime_local}}">
+                                           placeholder="Fecha" name="datetime_local"
+                                           value="{{$requeriment->datetime_local}}">
                                 </div>
                             </div>
                         </div>
@@ -62,8 +83,13 @@
                                 </div>
                                 <div class="col-lg-7">
                                     <select class="form-control" name="state">
-                                        <option value="Ingresado" @if($requeriment->state==="Ingresado") selected='selected' @endif>Ingresado</option>
-                                        <option value="Cerrado" @if($requeriment->state==="Cerrado") selected='selected' @endif>Cerrado</option>
+                                        <option value="Ingresado"
+                                                @if($requeriment->state==="Ingresado") selected='selected' @endif>
+                                            Ingresado
+                                        </option>
+                                        <option value="Cerrado"
+                                                @if($requeriment->state==="Cerrado") selected='selected' @endif>Cerrado
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -78,7 +104,10 @@
                                     <p class="mb-0">RUT*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" value="{{$requeriment->rut}}" maxlength="12" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="RUT form-control ob" data-type="text" data-msj="Ingrese un RUT"  placeholder="RUT" name="rut" >
+                                    <input type="text" value="{{$requeriment->rut}}" maxlength="12"
+                                           oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                           class="RUT form-control ob" data-type="text" data-msj="Ingrese un RUT"
+                                           placeholder="RUT" name="rut">
                                 </div>
                             </div>
                         </div>
@@ -89,7 +118,9 @@
                                     <p class="mb-0">Primer nombre*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" value="{{$requeriment->name}}"  class="form-control ob" data-type="text" data-msj="Ingrese un nombre" placeholder="Primer nombre" name="name">
+                                    <input type="text" value="{{$requeriment->name}}" class="form-control ob"
+                                           data-type="text" data-msj="Ingrese un nombre" placeholder="Primer nombre"
+                                           name="name">
                                 </div>
                             </div>
                         </div>
@@ -100,7 +131,9 @@
                                     <p class="mb-0">Apellido Paterno*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" value="{{$requeriment->father_name}}" class="form-control ob" data-type="text" data-msj="Ingrese el apellido paterno" placeholder="Apellido Paterno"
+                                    <input type="text" value="{{$requeriment->father_name}}" class="form-control ob"
+                                           data-type="text" data-msj="Ingrese el apellido paterno"
+                                           placeholder="Apellido Paterno"
                                            name="father_name">
                                 </div>
                             </div>
@@ -112,7 +145,9 @@
                                     <p class="mb-0">Apellido Materno*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" value="{{$requeriment->mother_name}}" class="form-control ob" data-type="text" data-msj="Ingrese el apellido materno" placeholder="Apellido Materno"
+                                    <input type="text" value="{{$requeriment->mother_name}}" class="form-control ob"
+                                           data-type="text" data-msj="Ingrese el apellido materno"
+                                           placeholder="Apellido Materno"
                                            name="mother_name">
                                 </div>
                             </div>
@@ -124,7 +159,8 @@
                                     <p class="mb-0">Fono celular 1</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" value="{{$requeriment->phone1}}" class="form-control" placeholder="Fono celular" name="phone1">
+                                    <input type="text" value="{{$requeriment->phone1}}" class="form-control"
+                                           placeholder="Fono celular" name="phone1">
                                 </div>
                             </div>
                         </div>
@@ -135,7 +171,8 @@
                                     <p class="mb-0">Fono celular 2</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" value="{{$requeriment->phone2}}" class="form-control" placeholder="Fono celular 2" name="phone2">
+                                    <input type="text" value="{{$requeriment->phone2}}" class="form-control"
+                                           placeholder="Fono celular 2" name="phone2">
                                 </div>
                             </div>
                         </div>
@@ -146,7 +183,9 @@
                                     <p class="mb-0">Fono fijo 1*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" value="{{$requeriment->fije1}}" class="form-control ob" data-type="number" data-msj="Ingrese número fijo" placeholder="Fono fijo 1" name="fije1">
+                                    <input type="text" value="{{$requeriment->fije1}}" class="form-control ob"
+                                           data-type="number" data-msj="Ingrese número fijo" placeholder="Fono fijo 1"
+                                           name="fije1">
                                 </div>
                             </div>
                         </div>
@@ -161,11 +200,13 @@
                                     <p class="mb-0">Clinica</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="clinics" class="form-control ob selectpicker" data-live-search="true" data-type="select" data-msj="Seleccione una Clínica" name="clinic_id"
+                                    <select id="clinics" class="form-control ob selectpicker" data-live-search="true"
+                                            data-type="select" data-msj="Seleccione una Clínica" name="clinic_id"
                                             onchange="selectBranches()">
                                         <option selected disabled value="0">Seleccione clínica</option>
                                         @foreach($clinics as $clinic)
-                                            <option value="{{$clinic->id}}" @if($clinic->id==$requeriment->clinic_id) selected='selected' @endif>{{$clinic->name}}</option>
+                                            <option value="{{$clinic->id}}"
+                                                    @if($clinic->id==$requeriment->clinic_id) selected='selected' @endif>{{$clinic->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -177,7 +218,8 @@
                                     <p class="mb-0">Sucursal</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="branches" class="form-control ob" data-live-search="true" data-type="select" data-msj="Seleccione una Sucursal" name="branch_id"
+                                    <select id="branches" class="form-control ob" data-live-search="true"
+                                            data-type="select" data-msj="Seleccione una Sucursal" name="branch_id"
                                             onchange="selectCenterMedic()">
                                         <option value="0" selected disabled>Seleccione Sucursal</option>
                                     </select>
@@ -191,7 +233,9 @@
                                     <p class="mb-0">Centro Médico</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="center_medics" class="form-control ob" data-live-search="true" data-type="select" data-msj="Seleccione un Centro Médico" name="center_medical_id"
+                                    <select id="center_medics" class="form-control ob" data-live-search="true"
+                                            data-type="select" data-msj="Seleccione un Centro Médico"
+                                            name="center_medical_id"
                                             onchange="selectUnits()">
                                         <option value="0" selected disabled>Seleccione Centro Médico</option>
                                     </select>
@@ -205,7 +249,8 @@
                                     <p class="mb-0">Unidades</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="units" class="form-control ob" data-live-search="true" data-type="select" data-msj="Seleccione una Unidad" name="unit_id"
+                                    <select id="units" class="form-control ob" data-live-search="true"
+                                            data-type="select" data-msj="Seleccione una Unidad" name="unit_id"
                                             onchange="selectProfessionals()">
                                         <option value="0" selected disabled>Seleccione Unidad</option>
                                     </select>
@@ -219,7 +264,9 @@
                                     <p class="mb-0">Profesionales</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="professionals" class="form-control ob" data-live-search="true" data-type="select" data-msj="Seleccione un profesional" name="professional_id"
+                                    <select id="professionals" class="form-control ob" data-live-search="true"
+                                            data-type="select" data-msj="Seleccione un profesional"
+                                            name="professional_id"
                                             onchange="selectEspecialities()">
                                         <option value="0" selected disabled>Seleccione Profesional</option>
                                     </select>
@@ -233,7 +280,9 @@
                                     <p class="mb-0">Especialidad*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="especialities" class="form-control ob" data-live-search="true" data-type="select" data-msj="Seleccione una Especialidad" name="especiality_id">
+                                    <select id="especialities" class="form-control ob" data-live-search="true"
+                                            data-type="select" data-msj="Seleccione una Especialidad"
+                                            name="especiality_id">
                                         <option value="0" selected disabled>Seleccione Especialidad</option>
                                     </select>
                                 </div>
@@ -246,7 +295,8 @@
                                     <p class="mb-0">Fecha Creación</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input id="date" type="date" class="form-control" readonly name="date" value="{{$requeriment->date}}">
+                                    <input id="date" type="date" class="form-control" readonly name="date"
+                                           value="{{$requeriment->date}}">
                                 </div>
                             </div>
                         </div>
@@ -257,7 +307,8 @@
                                     <p class="mb-0">Fecha Probable H.E</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="date" class="form-control" name="date_he" value="{{$requeriment->date_he}}">
+                                    <input type="date" class="form-control" name="date_he"
+                                           value="{{$requeriment->date_he}}">
                                 </div>
                             </div>
                         </div>
@@ -268,7 +319,8 @@
                                     <p class="mb-0">Fecha última consulta</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="date" class="form-control" name="date_last" value="{{$requeriment->date_last}}">
+                                    <input type="date" class="form-control" name="date_last"
+                                           value="{{$requeriment->date_last}}">
                                 </div>
                             </div>
                         </div>
@@ -279,7 +331,8 @@
                                     <p class="mb-0">Fecha Probable respuesta</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="date" class="form-control" name="date_response" value="{{$requeriment->date_response}}">
+                                    <input type="date" class="form-control" name="date_response"
+                                           value="{{$requeriment->date_response}}">
                                 </div>
                             </div>
                         </div>
@@ -290,7 +343,9 @@
                                     <p class="mb-0">Email*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="email" value="{{$requeriment->email}}" class="form-control ob" data-type="text" data-msj="Ingrese un correo" placeholder="Ingrese un Email" name="email">
+                                    <input type="email" value="{{$requeriment->email}}" class="form-control ob"
+                                           data-type="text" data-msj="Ingrese un correo" placeholder="Ingrese un Email"
+                                           name="email">
                                 </div>
                             </div>
                         </div>
@@ -329,7 +384,8 @@
                                     <p class="mb-0">Nombre del profesional</p>
                                 </div>
                                 <div class="col-lg-12 mt-8">
-                                    <input type="text" value="{{$requeriment->name_professional}}" class="form-control" placeholder="Nombre del profesional"
+                                    <input type="text" value="{{$requeriment->name_professional}}" class="form-control"
+                                           placeholder="Nombre del profesional"
                                            name="name_professional">
                                 </div>
                             </div>
@@ -352,7 +408,8 @@
                                     <p class="mb-0">Fecha y hora del ticket solucionado</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="datetime" class="form-control" readonly name="date_solution" value="{{$requeriment->date_solution}}">
+                                    <input type="datetime" class="form-control" readonly name="date_solution"
+                                           value="{{$requeriment->date_solution}}">
                                 </div>
                             </div>
                         </div>
@@ -373,7 +430,8 @@
                                     <p class="mb-0">Fecha de cierre de la solicitud</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="date" class="form-control" readonly name="date_close" value="{{$requeriment->date_close}}">
+                                    <input type="date" class="form-control" readonly name="date_close"
+                                           value="{{$requeriment->date_close}}">
                                 </div>
                             </div>
                         </div>
@@ -409,13 +467,8 @@
 @endsection
 @push('scripts')
     <script type="text/javascript">
-        let uri = '';
-        @if (env('APP_ENV') === 'Production')
-            uri = 'https://bandemical.herokuapp.com/'
-        @else
-            uri = 'http://localhost:8000/'
-        @endif
-        console.log('aqui es',uri)
+        let uri = '{{env('APP_URL')}}';
+        console.log('aqui es', uri);
         const selectBranches = () => {
             let clinic_id = $("#clinics").val();
             $.ajax({
@@ -441,7 +494,7 @@
             let branch_id = $("#branches").val();
             $.ajax({
                 type: "GET",
-                url: uri +"centros-medicos/" + branch_id,
+                url: uri + "centros-medicos/" + branch_id,
                 success: function (response) {
                     let centers = $('#center_medics');
                     centers.empty();
@@ -461,7 +514,7 @@
             let center_medical_id = $("#center_medics").val();
             $.ajax({
                 type: "GET",
-                url: uri +"unidades/" + center_medical_id,
+                url: uri + "unidades/" + center_medical_id,
                 success: function (response) {
                     let units = $('#units');
                     units.empty();
@@ -481,7 +534,7 @@
             let units = $("#units").val();
             $.ajax({
                 type: "GET",
-                url: uri +"profesionales/" + units,
+                url: uri + "profesionales/" + units,
                 success: function (response) {
                     let professionals = $('#professionals');
                     professionals.empty();
@@ -501,7 +554,7 @@
             let professionals = $("#professionals").val();
             $.ajax({
                 type: "GET",
-                url: uri +"especialidades/" + professionals,
+                url: uri + "especialidades/" + professionals,
                 success: function (response) {
                     let especialities = $('#especialities');
                     especialities.empty();
@@ -519,34 +572,33 @@
 
         // GUARDAR REQUERIMIENTO
 
-        $('#btn-registrar-requerimiento').on('click', function(e){
+        $('#btn-registrar-requerimiento').on('click', function (e) {
             e.preventDefault();
             console.log("inicio-sesion");
 
             var validacion_datos = ValidadorAuto('.ob');
 
-            if(validacion_datos == "true"){
+            if (validacion_datos == "true") {
                 $('#frm-nuevo-requerimiento').submit();
-            }else{
+            } else {
                 return false;
             }
 
         });
 
 
-        $('.RUT').on('keyup', function(){
+        $('.RUT').on('keyup', function () {
             let valor = $(this).val();
             let longitud = $(this).val().length;
             console.log(longitud);
 
-            if(longitud == 2){
+            if (longitud == 2) {
                 $(this).val(valor + ".");
-            }else if(longitud == 6){
+            } else if (longitud == 6) {
                 $(this).val(valor + ".");
-            }
-            else if(longitud == 10){
+            } else if (longitud == 10) {
                 $(this).val(valor + "-");
-            }else {
+            } else {
                 $(this).val(valor);
             }
         });
