@@ -93,11 +93,11 @@
                                             </li>
                                                 <li><a href="editar-requerimiento/{{$req->id}}" class="btn bg-tri mr-12 text-black"><i
                                                             class="far fa-edit"></i></a></li>
-                                                <li>
-                                                    <button onclick="confirmDelete({{$req->id}})"
-                                                            class="btn bg-tri mr-12 text-black"><i
-                                                            class="fas fa-trash"></i></button>
-                                                </li>
+{{--                                                <li>--}}
+{{--                                                    <button onclick="confirmDelete({{$req->id}})"--}}
+{{--                                                            class="btn bg-tri mr-12 text-black"><i--}}
+{{--                                                            class="fas fa-trash"></i></button>--}}
+{{--                                                </li>--}}
                                             </ul>
                                     </td>
                                 </tr>
