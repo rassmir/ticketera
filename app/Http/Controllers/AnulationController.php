@@ -16,6 +16,18 @@ class AnulationController extends Controller
         return view('anulation.index');
     }
 
+    //BETA
+    public function excel()
+    {
+        return view('anulation.excel');
+    }
+
+    public function detailExcel()
+    {
+        return view('anulation.detail-excel');
+    }
+    //
+
     /**
      * Show the form for creating a new resource.
      *

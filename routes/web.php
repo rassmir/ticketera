@@ -59,8 +59,9 @@ Route::group(['middleware' => ['auth']], function () {
 
 //Anulaciones
     Route::get('/buscar-anulaciones', [AnulationController::class, 'index'])->name('app.anulation.index');
+    Route::get('/excel', [AnulationController::class, 'excel'])->name('app.anulation.excel');
+    Route::get('/detalle-excel', [AnulationController::class, 'detailExcel'])->name('app.anulation.detailexcel');
+    Route::get('/buscar-anulaciones', [AnulationController::class, 'index'])->name('app.anulation.index');
     Route::get('/crear-anulacion', [AnulationController::class, 'create'])->name('app.anulation.create');
 
 });
-
-Route::view('/subir-excel','anulation.excel');
