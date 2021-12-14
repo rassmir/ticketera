@@ -21,15 +21,25 @@ class RequerimentController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $clinics = Clinic::orderBy('name')->get();
+        $rq_id = trim($request->get('rq_id'));
+        $clinic_id = trim($request->get('clinic_id'));
+        $params = [
+            ['requeriments.id', 'LIKE', '%' . $rq_id . '%'],
+            ['clinics.id', 'LIKE', '%' . $clinic_id . '%']
+        ];
         $requeriments = Requeriment::join('clinics', 'clinics.id', '=', 'requeriments.clinic_id')
             ->join('center_medicals', 'center_medicals.id', '=', 'requeriments.center_medical_id')
             ->join('professionals', 'professionals.id', '=', 'requeriments.professional_id')
             ->select(['requeriments.*', 'clinics.name as clinicname', 'center_medicals.name as centername', 'professionals.name as profname'])
+            ->where($params)
             ->get();
         return view('requeriment.index',
-            ['requeriments' => $requeriments]);
+            ['requeriments' => $requeriments,
+             'clinics' => $clinics
+            ]);
     }
 
     /**

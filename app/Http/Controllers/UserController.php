@@ -28,15 +28,23 @@ class UserController extends Controller
         return view('password');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $roles = Role::orderBy('name')->get();
+        $role_id = trim($request->get('role_id'));
+        $rut = trim($request->get('rut'));
+        $params = [
+            ['roles.id', 'LIKE', '%' . $role_id . '%'],
+            ['users.rut', 'LIKE', '%' . $rut . '%']
+        ];
         $users = RoleUser::join('users', 'users.id', '=', 'role_user.user_id')
             ->join('roles', 'roles.id', '=', 'role_user.role_id')
             ->select(['users.*', 'roles.display_name as rolname'])
+            ->where($params)
             ->orderBy('created_at', 'DESC')
             ->get();
         return view('user.index',
-            ['users' => $users]);
+            ['users' => $users, 'roles' => $roles]);
     }
 
     public function authenticate(Request $request)

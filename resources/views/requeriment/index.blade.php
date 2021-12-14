@@ -6,7 +6,8 @@
             <h2 class="text-pri">LISTADO DE REQUERIMIENTOS</h2>
             <p class="font-20 font-pri">Muestra las acciones realiza por los usuarios</p>
         </div>
-        <div class="row mt-48 mb-36">
+        <div class="mt-48 mb-36">
+            <form method="GET" action="{{route('app.requeriment.index')}}" class="row">
             <div class="col-lg-10">
                 <div class="row">
                     <div class="col-lg-6 mt-8">
@@ -15,21 +16,22 @@
                                 <p class="mb-0">Clínica</p>
                             </div>
                             <div class="col-lg-7">
-                                <select class="form-control">
-                                    <option>Clinica 1</option>
-                                    <option>Clinica 2</option>
+                                <select class="form-control" name="clinic_id">
+                                    <option selected disabled>Filtro por clínica</option>
+                                    @foreach($clinics as $clinic)
+                                    <option value="{{$clinic->id}}">{{$clinic->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                     </div>
-
                     <div class="col-lg-6 mt-8">
                         <div class="row align-items-center">
                             <div class="col-lg-5 text-left">
                                 <p class="mb-0">Nº Requerimiento</p>
                             </div>
                             <div class="col-lg-7">
-                                <input type="text" class="form-control" placeholder="#">
+                                <input type="text" class="form-control" placeholder="#" name="rq_id">
                             </div>
                         </div>
                     </div>
@@ -58,9 +60,10 @@
             </div>
             <div class="col-lg-1 text-center mt-8">
                 <button class="btn bg-sec border-sec text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
-                        style="min-width:190px;"><i class="fas fa-search"></i> Buscar
+                        style="min-width:190px;" type="submit"><i class="fas fa-search"></i> Buscar
                 </button>
             </div>
+            </form>
             <!-- TABLA -->
             <div class="col-lg-12 mt-36">
                 <hr>
@@ -80,7 +83,7 @@
                         <tbody>
                         @foreach($requeriments as $key=> $req)
                             <tr>
-                                <td>{{++$key}}</td>
+                                <td>{{$req->id}}</td>
                                     <td>{{$req->rut}}</td>
                                     <td>{{$req->datetime_local}}</td>
                                     <td>{{$req->state}}</td>
