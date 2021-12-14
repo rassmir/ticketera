@@ -312,19 +312,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-lg-4 mt-8">
-                            <div class="row align-items-center">
-                                <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Fecha última consulta</p>
-                                </div>
-                                <div class="col-lg-7">
-                                    <input type="date" class="form-control" name="date_last"
-                                           value="{{$requeriment->date_last}}">
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
@@ -357,11 +344,35 @@
                         <div class="col-lg-12 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-12 text-left font-weight-bold">
-                                    <p class="mb-0">Observación del paciente</p>
+                                    <p class="mb-0">Descripcion de solicitud 1</p>
                                 </div>
                                 <div class="col-lg-12 mt-8">
-                                    <textarea class="form-control" placeholder="Ingrese una observación" rows="5"
-                                              name="observation">{{$requeriment->observation}}</textarea>
+                                    <textarea class="form-control" placeholder="Ingrese una observación 1" rows="5"
+                                              name="observation">{{$requeriment->description1}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mt-8">
+                            <div class="row align-items-center">
+                                <div class="col-lg-12 text-left font-weight-bold">
+                                    <p class="mb-0">Descripcion de solicitud 2</p>
+                                </div>
+                                <div class="col-lg-12 mt-8">
+                                    <textarea class="form-control" placeholder="Ingrese una observación 2" rows="5"
+                                              name="observation">{{$requeriment->description2}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mt-8">
+                            <div class="row align-items-center">
+                                <div class="col-lg-12 text-left font-weight-bold">
+                                    <p class="mb-0">Descripcion de solicitud 3</p>
+                                </div>
+                                <div class="col-lg-12 mt-8">
+                                    <textarea class="form-control" placeholder="Ingrese una observación 3" rows="5"
+                                              name="observation">{{$requeriment->description3}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -374,31 +385,6 @@
                                 <div class="col-lg-12 mt-8">
                                     <textarea class="form-control" placeholder="Respuesta del centro médico" rows="5"
                                               name="response_medic">{{$requeriment->response_medic}}</textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12 mt-16">
-                            <div class="row align-items-center">
-                                <div class="col-lg-12 text-left  font-weight-bold">
-                                    <p class="mb-0">Nombre del profesional</p>
-                                </div>
-                                <div class="col-lg-12 mt-8">
-                                    <input type="text" value="{{$requeriment->name_professional}}" class="form-control"
-                                           placeholder="Nombre del profesional"
-                                           name="name_professional">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12 mt-16">
-                            <div class="row align-items-center">
-                                <div class="col-lg-12 text-left font-weight-bold">
-                                    <p class="mb-0">Resumen de Gestión</p>
-                                </div>
-                                <div class="col-lg-12 mt-8">
-                                    <textarea class="form-control" placeholder="Respuesta del centro médico" rows="5"
-                                              name="resumen">{{$requeriment->resumen}}</textarea>
                                 </div>
                             </div>
                         </div>

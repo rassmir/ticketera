@@ -262,18 +262,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-lg-4 mt-8">
-                            <div class="row align-items-center">
-                                <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Fecha última consulta</p>
-                                </div>
-                                <div class="col-lg-7">
-                                    <input type="date" class="form-control" name="date_last">
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
@@ -303,15 +291,38 @@
                         <div class="col-lg-12 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-12 text-left font-weight-bold">
-                                    <p class="mb-0">Observación del paciente</p>
+                                    <p class="mb-0">Descripcion de solicitud</p>
                                 </div>
                                 <div class="col-lg-12 mt-8">
-                                    <textarea class="form-control" placeholder="Ingrese una observación" rows="5"
-                                              name="observation"></textarea>
+                                    <textarea class="form-control" placeholder="Ingrese una observación 1" rows="5"
+                                              name="description1"></textarea>
                                 </div>
                             </div>
                         </div>
 
+                        <div class="col-lg-12 mt-8">
+                            <div class="row align-items-center">
+                                <div class="col-lg-12 text-left font-weight-bold">
+                                    <p class="mb-0">Descripcion de solicitud 2</p>
+                                </div>
+                                <div class="col-lg-12 mt-8">
+                                    <textarea class="form-control" placeholder="Ingrese una observación 2" rows="5"
+                                              name="description2"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mt-8">
+                            <div class="row align-items-center">
+                                <div class="col-lg-12 text-left font-weight-bold">
+                                    <p class="mb-0">Descripcion de solicitud 3</p>
+                                </div>
+                                <div class="col-lg-12 mt-8">
+                                    <textarea class="form-control" placeholder="Ingrese una observación 3" rows="5"
+                                              name="description3"></textarea>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-lg-12 mt-16">
                             <div class="row align-items-center">
                                 <div class="col-lg-12 text-left font-weight-bold">
@@ -323,31 +334,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-lg-12 mt-16">
-                            <div class="row align-items-center">
-                                <div class="col-lg-12 text-left  font-weight-bold">
-                                    <p class="mb-0">Nombre del profesional</p>
-                                </div>
-                                <div class="col-lg-12 mt-8">
-                                    <input type="text" class="form-control" placeholder="Nombre del profesional"
-                                           name="name_professional">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12 mt-16">
-                            <div class="row align-items-center">
-                                <div class="col-lg-12 text-left font-weight-bold">
-                                    <p class="mb-0">Resumen de Gestión</p>
-                                </div>
-                                <div class="col-lg-12 mt-8">
-                                    <textarea class="form-control" placeholder="Respuesta del centro médico" rows="5"
-                                              name="resumen"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="col-lg-4 mt-16">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">

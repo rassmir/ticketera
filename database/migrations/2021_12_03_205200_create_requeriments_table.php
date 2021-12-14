@@ -39,12 +39,10 @@ class CreateRequerimentsTable extends Migration
             $table->foreign('especiality_id')->references('id')->on('especialities')->onDelete('cascade')->onUpdate('cascade');
             $table->date('date');
             $table->date('date_he')->nullable();
-            $table->date('date_last')->nullable();
             $table->date('date_response')->nullable();
             $table->string('email');
             $table->longText('observation')->nullable();
             $table->longText('response_medic')->nullable();
-            $table->longText('name_professional')->nullable();
             $table->longText('resumen')->nullable();
             $table->dateTime('date_solution')->nullable();
             $table->string('user_create');
