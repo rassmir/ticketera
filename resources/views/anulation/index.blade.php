@@ -71,8 +71,11 @@
                             <td>Ingresado</td>
                             <td>
                                 <ul class="d-lg-flex">
-                                    <li><i class="far fa-eye mr-12"></i></li>
-                                    <li><i class="far fa-edit mr-12"></i></li>
+                                    <li><a href="#"><i class="far fa-eye mr-12 font-16"></i></a></li>
+                                    <li><a href="#"><i class="far fa-edit mr-12 font-16"></i></a></li>
+                                    <li><a href="excel"><i class="far fa-file-excel mr-12 font-16"></i></a></li>
+                                    <li><a href="detalle-excel"><i class="far fa-file-alt font-16"></i></a></li>
+
                                 </ul>
                             </td>
 
