@@ -162,3 +162,103 @@ const deleteRegister = (id, url, csrf) => {
         }
     })
 }
+
+const selectBranches = () => {
+    let clinic_id = $("#clinics").val();
+    $.ajax({
+        type: "GET",
+        url: "sucursales/" + clinic_id,
+        success: function (response) {
+            let branches = $('#branches');
+            branches.empty();
+            branches.append('<option selected disabled>Seleccione Sucursal</option>');
+            for (let i = 0; i < response.length; i++) {
+                branches.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
+            }
+            branches.selectpicker();
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
+
+const selectCenterMedic = () => {
+    let branch_id = $("#branches").val();
+    $.ajax({
+        type: "GET",
+        url: "centros-medicos/" + branch_id,
+        success: function (response) {
+            let centers = $('#center_medics');
+            centers.empty();
+            centers.append('<option selected disabled>Seleccione Centro Médico</option>');
+            for (let i = 0; i < response.length; i++) {
+                centers.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
+            }
+            centers.selectpicker();
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
+
+const selectUnits = () => {
+    let center_medical_id = $("#center_medics").val();
+    $.ajax({
+        type: "GET",
+        url: "unidades/" + center_medical_id,
+        success: function (response) {
+            let units = $('#units');
+            units.empty();
+            units.append('<option selected disabled>Seleccione Unidad</option>');
+            for (let i = 0; i < response.length; i++) {
+                units.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
+            }
+            units.selectpicker();
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
+
+const selectProfessionals = () => {
+    let units = $("#units").val();
+    $.ajax({
+        type: "GET",
+        url: "profesionales/" + units,
+        success: function (response) {
+            let professionals = $('#professionals');
+            professionals.empty();
+            professionals.append('<option selected disabled>Seleccione Profesional</option>');
+            for (let i = 0; i < response.length; i++) {
+                professionals.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
+            }
+            professionals.selectpicker();
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
+
+const selectEspecialities = () => {
+    let professionals = $("#professionals").val();
+    $.ajax({
+        type: "GET",
+        url: "especialidades/" + professionals,
+        success: function (response) {
+            let especialities = $('#especialities');
+            especialities.empty();
+            especialities.append('<option selected disabled>Seleccione Especialidad</option>');
+            for (let i = 0; i < response.length; i++) {
+                especialities.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
+            }
+            especialities.selectpicker();
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}

@@ -5,41 +5,50 @@
         <div class="text-left">
             <h2 class="text-pri">LISTADO DE ANULACIONES</h2>
         </div>
-        <div class="row mt-48 mb-36">
-            <div class="col-lg-10">
-                <div class="row">
-                    <div class="col-lg-6 mt-8">
-                        <div class="row align-items-center">
-                            <div class="col-lg-5 text-left">
-                                <p class="mb-0">Clínica</p>
-                            </div>
-                            <div class="col-lg-7">
-                                <select class="form-control">
-                                    <option>Clinica 1</option>
-                                    <option>Clinica 2</option>
-                                </select>
+
+        <div class="mt-48 mb-36">
+            <form method="get" action="{{route('app.anulation.index')}}" class="row">
+                <div class="col-lg-10">
+                    <div class="row">
+                        <div class="col-lg-6 mt-8">
+                            <div class="row align-items-center">
+                                <div class="col-lg-5 text-left">
+                                    <p class="mb-0">Clínica</p>
+                                </div>
+                                <div class="col-lg-7">
+                                    <select class="form-control" name="clinic_name">
+                                        <option disabled selected>Seleccione clínica</option>
+                                        @foreach($clinics as $clinic)
+                                        <option value="{{$clinic->name}}">{{$clinic->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-lg-6 mt-8">
-                        <div class="row align-items-center">
-                            <div class="col-lg-5 text-left">
-                                <p class="mb-0">Centro médico</p>
-                            </div>
-                            <div class="col-lg-7">
-                                <select class="form-control">
-                                    <option>Seleccione un centro médico</option>
-                                </select>
+                        <div class="col-lg-6 mt-8">
+                            <div class="row align-items-center">
+                                <div class="col-lg-5 text-left">
+                                    <p class="mb-0">Centro médico</p>
+                                </div>
+                                <div class="col-lg-7">
+                                    <select class="form-control" name="center_name">
+                                        <option disabled selected>Seleccione Centro médico</option>
+                                        @foreach($centers as $center)
+                                            <option value="{{$center->name}}">{{$center->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-1 text-center mt-8">
-                <button class="btn bg-sec border-sec text-white pl-24 pr-24 mt-sm-20 font-weight-bold" style="min-width:190px;"> <i class="far fa-search"></i> Buscar</button>
-            </div>
-
+                <div class="col-lg-1 text-center mt-8">
+                    <button type="submit" class="btn bg-sec border-sec text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
+                            style="min-width:190px;"><i class="fas fa-search"></i> Buscar
+                    </button>
+                </div>
+            </form>
             <!-- TABLA -->
 
             <div class="col-lg-12 mt-20">
@@ -53,33 +62,31 @@
                             <th>Nombre Doctor</th>
                             <th>Especialidad</th>
                             <th>Obs secretaria</th>
-                            <th>Usuario creación Req</th>
                             <th>Motivo anulación</th>
                             <th>Estado solicitud</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($anulations as $anula)
                         <tr>
-                            <td>47854645</td>
-                            <td>La Dehesa</td>
-                            <td>Carmen Paz</td>
-                            <td>Psicopedagoga</td>
-                            <td>Por favor reagendar segùn disponibilidad</td>
-                            <td>Camila Romero</td>
-                            <td>Otros</td>
-                            <td>Ingresado</td>
+                            <td>{{$anula->id}}</td>
+                            <td>{{$anula->centername}}</td>
+                            <td>{{$anula->profname}}</td>
+                            <td>{{$anula->espname}}</td>
+                            <td>{{$anula->message}}</td>
+                            <td>{{$anula->anulation}}</td>
+                            <td>{{$anula->state}}</td>
                             <td>
                                 <ul class="d-lg-flex">
                                     <li><a href="#"><i class="far fa-eye mr-12 font-16"></i></a></li>
                                     <li><a href="#"><i class="far fa-edit mr-12 font-16"></i></a></li>
                                     <li><a href="excel"><i class="far fa-file-excel mr-12 font-16"></i></a></li>
                                     <li><a href="detalle-excel"><i class="far fa-file-alt font-16"></i></a></li>
-
                                 </ul>
                             </td>
-
                         </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -89,7 +96,7 @@
 @endsection
 @push('scripts')
     <script type="text/javascript">
-        $(document).ready( function () {
+        $(document).ready(function () {
             $('#table-anulaciones').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
@@ -101,15 +108,15 @@
                         columns: [0, 1, 2, 3, 4, 5]
                     }
                 },
-                {
-                    extend: 'pdfHtml5',
-                    orientation: 'landscape',
-                    pageSize: 'LEGAL',
-                    exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5]
-                    }
-                },
-                'print'
+                    {
+                        extend: 'pdfHtml5',
+                        orientation: 'landscape',
+                        pageSize: 'LEGAL',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5]
+                        }
+                    },
+                    'print'
                 ],
                 exportOptions: {
                     modifier: {
