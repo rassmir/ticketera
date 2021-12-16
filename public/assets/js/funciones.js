@@ -163,6 +163,16 @@ const deleteRegister = (id, url, csrf) => {
     })
 }
 
+$(document).ready(function () {
+    var tipo_usuario = $('option:selected', this).val();
+
+    if (tipo_usuario == "4") {
+        $('.listado-clinicas').css({'display': 'block'});
+    } else {
+        $('.listado-clinicas').css({'display': 'none'});
+    }
+});
+
 const selectBranches = () => {
     let clinic_id = $("#clinics").val();
     $.ajax({

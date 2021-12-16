@@ -14,8 +14,25 @@
                                     <p class="mb-0">Tipo de usuarios</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select class="form-control ob" data-type="select" data-msj="Seleccione un Rol" name="role_id">
-                                        <option selected disabled>{{$user->rolname}}</option>
+                                    <select class="form-control ob tipo_usuario" data-type="select" data-msj="Seleccione un Rol" name="role_id">
+                                        @foreach($roles as $rol)
+                                            <option disabled
+                                                value="{{$rol->id}}" {{ $user->hasRole($rol->name) ? 'selected' : '' }}>{{ $rol->display_name }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    <select class="form-control mt-16 listado-clinicas" style="display:none;"
+                                            name="clinic_id">
+                                        <option disabled selected>Seleccione clinica</option>
+                                        @foreach($clinics as $clinic)
+                                            <option disabled value="{{$clinic->id}}"
+                                            @foreach($user->clinic as $usr)
+                                                {{ $usr->pivot->clinic_id == $clinic->id ? 'selected' : '' }}
+                                            @endforeach
+                                            >
+                                                {{$clinic->name}}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

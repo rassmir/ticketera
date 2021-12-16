@@ -47,7 +47,7 @@ class UserController extends Controller
             ->get();
         return view('user.index',
             ['users' => $users,
-              'roles' => $roles
+                'roles' => $roles
             ]);
     }
 
@@ -78,7 +78,7 @@ class UserController extends Controller
         $roles = Role::orderBy('name')->get();
         return view('user.create',
             ['roles' => $roles,
-             'clinics' => $clinics
+                'clinics' => $clinics
             ]);
     }
 
@@ -124,14 +124,15 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = RoleUser::join('users', 'users.id', '=', 'role_user.user_id')
-            ->join('roles', 'roles.id', '=', 'role_user.role_id')
-            ->select(['users.*', 'roles.display_name as rolname'])
-            ->orderBy('created_at', 'DESC')
-            ->where('users.id', '=', $id)
-            ->first();
+        $clinics = Clinic::orderBy('name')->get();
+        $roles = Role::orderBy('name')->get();
+        $user = User::findOrFail($id);
         return view('user.show',
-            ['user' => $user]);
+            [
+                'user' => $user,
+                'roles' => $roles,
+                'clinics' => $clinics
+            ]);
     }
 
     /**
