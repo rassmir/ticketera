@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clinic;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\User;
@@ -30,6 +31,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
+
         $roles = Role::orderBy('name')->get();
         $role_id = trim($request->get('role_id'));
         $rut = trim($request->get('rut'));
@@ -44,7 +46,9 @@ class UserController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
         return view('user.index',
-            ['users' => $users, 'roles' => $roles]);
+            ['users' => $users,
+              'roles' => $roles
+            ]);
     }
 
     public function authenticate(Request $request)
@@ -70,9 +74,12 @@ class UserController extends Controller
 
     public function create()
     {
+        $clinics = Clinic::orderBy('name')->get();
         $roles = Role::orderBy('name')->get();
         return view('user.create',
-            ['roles' => $roles]);
+            ['roles' => $roles,
+             'clinics' => $clinics
+            ]);
     }
 
 
@@ -97,6 +104,7 @@ class UserController extends Controller
             $user->password = bcrypt($request->input('password'));
             $user->save();
             $user->attachRole($request->input('role_id'));
+            $user->clinic()->attach($request->input('clinic_id'));
             return Redirect::back()->with(array(
                 'success' => 'Guardado Correctamente !!'
             ));

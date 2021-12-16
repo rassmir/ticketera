@@ -94,6 +94,7 @@ class RequerimentController extends Controller
     {
         try {
             $requeriments = new Requeriment();
+            $requeriments->number_solicity = $request->input('number_solicity');
             $requeriments->type = $request->input('type');
             $requeriments->datetime_local = $request->input('datetime_local');
             $requeriments->state = $request->input('state');

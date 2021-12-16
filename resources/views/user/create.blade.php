@@ -17,10 +17,17 @@
                                     <p class="mb-0">Tipo de usuarios</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select class="form-control ob" data-type="select" data-msj="Seleccione un Rol" name="role_id">
+                                    <select class="form-control ob tipo_usuario" data-type="select" data-msj="Seleccione un Rol" name="role_id">
                                         <option selected disabled value="0">Seleccione Rol De Usuario</option>
                                         @foreach($roles as $rol)
                                             <option value="{{$rol->id}}">{{$rol->display_name}}</option>
+                                        @endforeach
+                                    </select>
+
+                                    <select class="form-control mt-16 listado-clinicas" style="display:none;" name="clinic_id">
+                                        <option disabled selected>Seleccione clinica</option>
+                                        @foreach($clinics as $clinic)
+                                        <option value="{{$clinic->id}}">{{$clinic->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -120,7 +127,15 @@
 
 @push('scripts')
 <script>
-    console.log("Crear usuario");
+    $('.tipo_usuario').on('change', function(){
+        var tipo_usuario = $('option:selected', this).val();
+
+        if(tipo_usuario == "4"){
+            $('.listado-clinicas').css({'display':'block'});
+        }else{
+            $('.listado-clinicas').css({'display':'none'});
+        }
+    });
 
     $('#btn-registrar-usuario').on('click', function(e){
         e.preventDefault();

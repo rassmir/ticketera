@@ -81,6 +81,7 @@ class AnulationController extends Controller
     {
         try {
             $anulations = new Anulation();
+            $anulations->number_solicity = $request->input('number_solicity');
             $anulations->clinic_id = $request->input('clinic_id');
             $anulations->branch_id = $request->input('branch_id');
             $anulations->center_medical_id = $request->input('center_medical_id');

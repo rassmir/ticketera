@@ -40,7 +40,7 @@
                                     <p class="mb-0">Número de solicitud</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" placeholder="R-15242021" disabled>
+                                    <input type="text" class="form-control" readonly value="{{"R-".date('dmy'.date('gis'))}}" name="number_solicity">
                                 </div>
                             </div>
                         </div>

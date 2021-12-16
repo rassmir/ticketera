@@ -5,12 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Clinic extends Model
+class ClinicUser extends Model
 {
     use HasFactory;
-
-    public function user()
-    {
-        return $this->belongsToMany(User::class);
-    }
+    protected $table = 'clinic_user';
 }

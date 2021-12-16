@@ -16,7 +16,7 @@
                                     <p class="mb-0">Número Ticket</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" placeholder="A-15242021" disabled>
+                                    <input type="text" class="form-control" value="{{"A-".date('dmy'.date('gis'))}}" readonly name="number_ticket">
                                 </div>
                             </div>
                         </div>
