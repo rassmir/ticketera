@@ -56,7 +56,7 @@ function ValidadorAuto(clase) {
         var valor = $(this).val();
         var campo = jQuery(this);
 
-        //$(clase).css({'border':'1px solid #e9ecef'});
+        $(clase).css({'border':'1px solid #e9ecef'});
 
         if (msj_val == "") {
             msj_val = "Debe llenar todos los campos";
@@ -65,7 +65,7 @@ function ValidadorAuto(clase) {
         switch (type) {
             case "text":
 
-                campo.css({'border': '2px solid ##df2517'});
+                campo.css({'border': '2px solid #df2517'});
                 //campo.remove();
 
                 if (!valor) {
@@ -88,12 +88,28 @@ function ValidadorAuto(clase) {
                         title: 'Parece que hubo un error',
                         text: msj_val
                     });
-                    $(this).css({'border': '2px solid ##df2517'});
+                    $(this).css({'border': '2px solid #df2517'});
 
                     retorno = "false";
                     return false;
                 }
                 break;
+
+                case "mail":
+                    if (valor.indexOf('@', 0) == -1 || valor.indexOf('.', 0) == -1) {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Parece que hubo un error',
+                            text: 'El formato de correo electrónico introducido no es correcto, por ejemplo: prueba@correo.com'
+                            //text: msj_val
+                        });
+                        $(this).css({'border': '2px solid #df2517'});
+
+                        retorno = "false";
+                        return false;
+                    }
+                break;
+
             case "select":
                 if (validIsNullOrEmptOrMinusOne(valor) || validIsNullOrEmptyOrZero(valor)) {
                     Swal.fire({
@@ -101,7 +117,7 @@ function ValidadorAuto(clase) {
                         title: 'Parece que hubo un error',
                         text: msj_val
                     });
-                    $(this).css({'border': '2px solid ##df2517'});
+                    $(this).css({'border': '2px solid #df2517'});
 
                     retorno = "false";
                     return false;
@@ -118,7 +134,7 @@ function ValidadorAuto(clase) {
                         title: 'Parece que hubo un error',
                         text: msj_val
                     });
-                    $(this).css({'border': '2px solid ##df2517'});
+                    $(this).css({'border': '2px solid #df2517'});
 
                     retorno = "false";
                     return false;

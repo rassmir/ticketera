@@ -36,7 +36,7 @@
                                     <p class="mb-0">Estado</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select class="form-control" name="state">
+                                    <select class="form-control" name="state" disabled>
                                         <option>{{$requeriment->state}}</option>
                                     </select>
                                 </div>
@@ -127,7 +127,7 @@
                                     <p class="mb-0">Clinica</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="clinics" class="form-control ob" data-type="select" data-msj="Seleccione una Clínica" name="clinic_id">
+                                    <select id="clinics" class="form-control ob" data-type="select" data-msj="Seleccione una Clínica" name="clinic_id" disabled>
                                             <option selected disabled value="0">{{$requeriment->clinicname}}</option>
                                     </select>
                                 </div>
@@ -139,7 +139,7 @@
                                     <p class="mb-0">Sucursal</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="branches" class="form-control ob" data-type="select" data-msj="Seleccione una Sucursal" name="branch_id">
+                                    <select id="branches" class="form-control ob" data-type="select" data-msj="Seleccione una Sucursal" name="branch_id" disabled>
                                         <option value="0" selected disabled>{{$requeriment->braname}}</option>
                                     </select>
                                 </div>
@@ -152,7 +152,7 @@
                                     <p class="mb-0">Centro Médico</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="center_medics" class="form-control ob" data-type="select" data-msj="Seleccione un Centro Médico" name="center_medical_id">
+                                    <select id="center_medics" class="form-control ob" data-type="select" data-msj="Seleccione un Centro Médico" name="center_medical_id" disabled>
                                         <option value="0" selected disabled>{{$requeriment->centername}}</option>
                                     </select>
                                 </div>
@@ -165,7 +165,7 @@
                                     <p class="mb-0">Unidades</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="units" class="form-control ob" data-type="select" data-msj="Seleccione una Unidad" name="unit_id">
+                                    <select id="units" class="form-control ob" data-type="select" data-msj="Seleccione una Unidad" name="unit_id" disabled>
                                         <option value="0" selected disabled>{{$requeriment->unitname}}</option>
                                     </select>
                                 </div>
@@ -178,7 +178,7 @@
                                     <p class="mb-0">Profesionales</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="professionals" class="form-control ob" data-type="select" data-msj="Seleccione un profesional" name="professional_id">
+                                    <select id="professionals" class="form-control ob" data-type="select" data-msj="Seleccione un profesional" name="professional_id" disabled>
                                         <option value="0" selected disabled>{{$requeriment->profname}}</option>
                                     </select>
                                 </div>
@@ -191,7 +191,7 @@
                                     <p class="mb-0">Especialidad*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="especialities" class="form-control ob" data-type="select" data-msj="Seleccione una Especialidad" name="especiality_id">
+                                    <select id="especialities" class="form-control ob" data-type="select" data-msj="Seleccione una Especialidad" name="especiality_id" disabled>
                                         <option value="0" selected disabled>{{$requeriment->espname}}</option>
                                     </select>
                                 </div>
@@ -256,7 +256,31 @@
                         <div class="col-lg-12 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-12 text-left font-weight-bold">
-                                    <p class="mb-0">Observación del paciente</p>
+                                    <p class="mb-0">Descripción de solicitud</p>
+                                </div>
+                                <div class="col-lg-12 mt-8">
+                                    <textarea class="form-control" placeholder="Ingrese una observación" rows="5"
+                                              name="observation" disabled>{{$requeriment->observation}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mt-8">
+                            <div class="row align-items-center">
+                                <div class="col-lg-12 text-left font-weight-bold">
+                                    <p class="mb-0">Descripción de solicitud 2</p>
+                                </div>
+                                <div class="col-lg-12 mt-8">
+                                    <textarea class="form-control" placeholder="Ingrese una observación" rows="5"
+                                              name="observation" disabled>{{$requeriment->observation}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mt-8">
+                            <div class="row align-items-center">
+                                <div class="col-lg-12 text-left font-weight-bold">
+                                    <p class="mb-0">Descripción de solicitud 3</p>
                                 </div>
                                 <div class="col-lg-12 mt-8">
                                     <textarea class="form-control" placeholder="Ingrese una observación" rows="5"
@@ -276,7 +300,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        <!--
                         <div class="col-lg-12 mt-16">
                             <div class="row align-items-center">
                                 <div class="col-lg-12 text-left  font-weight-bold">
@@ -299,7 +323,7 @@
                                               name="resumen" readonly>{{$requeriment->resumen}}</textarea>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
 
                         <div class="col-lg-4 mt-16">
                             <div class="row align-items-center">

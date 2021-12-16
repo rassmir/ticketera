@@ -105,7 +105,10 @@ class UserController extends Controller
             $user->save();
             $user->attachRole($request->input('role_id'));
             $user->clinic()->attach($request->input('clinic_id'));
-            return Redirect::back()->with(array(
+            /*return Redirect::back()->with(array(
+                'success' => 'Guardado Correctamente !!'
+            ));*/
+            return Redirect('buscar-usuarios')->with(array(
                 'success' => 'Guardado Correctamente !!'
             ));
         } catch (Exception $ex) {

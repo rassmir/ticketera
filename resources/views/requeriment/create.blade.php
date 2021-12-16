@@ -20,8 +20,8 @@
                                     <p class="mb-0">Tipo de requerimiento</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select class="form-control" name="type">
-                                        <option disabled selected>Seleccione Tipo De Requerimiento</option>
+                                    <select class="form-control ob" class="ob" data-type="select" data-msj="Seleccione un requerimiento" name="type">
+                                        <option value="0" disabled selected>Seleccione Tipo De Requerimiento</option>
                                         <option value="Hora Extra">Hora Extra</option>
                                         <option value="Recado Medico">Recado Médico</option>
                                         <option value="Certificado Medico">Certificado Médico</option>
@@ -79,7 +79,7 @@
                                     <p class="mb-0">RUT*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" maxlength="12" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="RUT form-control ob" data-type="text" data-msj="Ingrese un RUT"  placeholder="RUT" name="rut">
+                                    <input type="text" maxlength="10" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="RUT form-control ob" data-type="text" data-msj="Ingrese un RUT"  placeholder="RUT" name="rut">
                                 </div>
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                                     <p class="mb-0">Fono celular 1</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" placeholder="Fono celular" name="phone1">
+                                    <input type="text" maxlength="10" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" placeholder="Fono celular" name="phone1">
                                 </div>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
                                     <p class="mb-0">Fono celular 2</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" placeholder="Fono celular 2" name="phone2">
+                                    <input type="text" maxlength="10" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="form-control" placeholder="Fono celular 2" name="phone2">
                                 </div>
                             </div>
                         </div>
@@ -147,7 +147,18 @@
                                     <p class="mb-0">Fono fijo 1*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control ob" data-type="number" data-msj="Ingrese número fijo" placeholder="Fono fijo 1" name="fije1">
+                                    <input type="text" class="form-control ob" maxlength="12" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" data-type="number" data-msj="Ingrese número fijo" placeholder="Fono fijo 1" name="fije1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mt-8">
+                            <div class="row align-items-center">
+                                <div class="col-lg-5 text-left font-weight-bold">
+                                    <p class="mb-0">Email*</p>
+                                </div>
+                                <div class="col-lg-7">
+                                    <input type="email" class="form-control ob" data-type="mail" data-msj="Ingrese un correo" placeholder="Ingrese un Email" name="email">
                                 </div>
                             </div>
                         </div>
@@ -273,16 +284,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-4 mt-8">
-                            <div class="row align-items-center">
-                                <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Email*</p>
-                                </div>
-                                <div class="col-lg-7">
-                                    <input type="email" class="form-control ob" data-type="text" data-msj="Ingrese un correo" placeholder="Ingrese un Email" name="email">
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="col-lg-12 mt-20">
                             <hr>
@@ -297,10 +299,12 @@
                                     <textarea class="form-control" placeholder="Ingrese una observación 1" rows="5"
                                               name="description1"></textarea>
                                 </div>
+                                <button id="sec-obs" class="mt-16 ml-8 btn-primary border-0 br-4">Segunda observacion</button>
+                                <button id="tri-obs" class="mt-16 ml-8 btn-primary border-0 br-4">Tercera observacion</button>
                             </div>
                         </div>
 
-                        <div class="col-lg-12 mt-8">
+                        <div class="col-lg-12 mt-8" id="segunda-observacion" style="display:none;">
                             <div class="row align-items-center">
                                 <div class="col-lg-12 text-left font-weight-bold">
                                     <p class="mb-0">Descripcion de solicitud 2</p>
@@ -312,7 +316,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-12 mt-8">
+                        <div class="col-lg-12 mt-8" id="tercera-observacion" style="display:none;">
                             <div class="row align-items-center">
                                 <div class="col-lg-12 text-left font-weight-bold">
                                     <p class="mb-0">Descripcion de solicitud 3</p>
@@ -404,6 +408,16 @@
             $('#date').val(now.toISOString().split('T')[0])
         });
 
+        $('#sec-obs').on('click', function(e){
+            e.preventDefault();
+            $('#segunda-observacion').fadeIn();
+        });
+
+        $('#tri-obs').on('click', function(e){
+            e.preventDefault();
+            $('#tercera-observacion').fadeIn();
+        });
+
         // GUARDAR REQUERIMIENTO
 
         $('#btn-registrar-requerimiento').on('click', function(e){
@@ -420,7 +434,7 @@
 
     });
 
-
+/*
     $('.RUT').on('keyup', function(){
         let valor = $(this).val();
         let longitud = $(this).val().length;
@@ -436,6 +450,6 @@
         }else {
             $(this).val(valor);
         }
-    });
+    });*/
     </script>
 @endpush

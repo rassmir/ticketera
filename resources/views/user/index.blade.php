@@ -104,7 +104,7 @@
                 buttons: [{
                     extend: 'excelHtml5',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5]
+                        columns: [0, 1, 2, 3]
                     }
                 },
                     {
@@ -112,7 +112,7 @@
                         orientation: 'landscape',
                         pageSize: 'LEGAL',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3]
                         }
                     },
                     'print'
