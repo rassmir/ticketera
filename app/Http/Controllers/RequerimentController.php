@@ -24,11 +24,11 @@ class RequerimentController extends Controller
     public function index(Request $request)
     {
         $clinics = Clinic::orderBy('name')->get();
-        $rq_id = trim($request->get('rq_id'));
-        $clinic_id = trim($request->get('clinic_id'));
+        $rq_name = trim($request->get('rq_name'));
+        $clinic_name = trim($request->get('clinic_name'));
         $params = [
-            ['requeriments.id', 'LIKE', '%' . $rq_id . '%'],
-            ['clinics.id', 'LIKE', '%' . $clinic_id . '%']
+            ['requeriments.number_solicity', 'LIKE', '%' . $rq_name . '%'],
+            ['clinics.name', 'LIKE', '%' . $clinic_name . '%']
         ];
         $requeriments = Requeriment::join('clinics', 'clinics.id', '=', 'requeriments.clinic_id')
             ->join('center_medicals', 'center_medicals.id', '=', 'requeriments.center_medical_id')

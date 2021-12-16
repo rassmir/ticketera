@@ -142,12 +142,14 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $clinics = Clinic::orderBy('name')->get();
         $roles = Role::orderBy('name')->get();
         $user = User::findOrFail($id);
         return view('user.edit',
             [
                 'user' => $user,
-                'roles' => $roles
+                'roles' => $roles,
+                'clinics' => $clinics
             ]);
     }
 
@@ -168,6 +170,8 @@ class UserController extends Controller
             $user->update();
             $user->role()->detach();
             $user->attachRole($request->input('role_id'));
+            $user->clinic()->detach();
+            $user->clinic()->attach($request->input('clinic_id'));
             return Redirect::back()->with(array(
                 'success' => 'Actualizado Correctamente !!'
             ));

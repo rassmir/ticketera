@@ -16,10 +16,10 @@
                                 <p class="mb-0">Clínica</p>
                             </div>
                             <div class="col-lg-7">
-                                <select class="form-control" name="clinic_id">
+                                <select class="form-control" name="clinic_name">
                                     <option selected disabled>Filtro por clínica</option>
                                     @foreach($clinics as $clinic)
-                                    <option value="{{$clinic->id}}">{{$clinic->name}}</option>
+                                    <option value="{{$clinic->name}}">{{$clinic->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -31,7 +31,7 @@
                                 <p class="mb-0">Nº Requerimiento</p>
                             </div>
                             <div class="col-lg-7">
-                                <input type="text" class="form-control" placeholder="#" name="rq_id">
+                                <input type="text" class="form-control" placeholder="#" name="rq_name">
                             </div>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                         <tbody>
                         @foreach($requeriments as $key=> $req)
                             <tr>
-                                <td>{{$req->id}}</td>
+                                <td>{{$req->number_solicity}}</td>
                                     <td>{{$req->rut}}</td>
                                     <td>{{$req->datetime_local}}</td>
                                     <td>{{$req->state}}</td>
