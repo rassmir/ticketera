@@ -119,7 +119,7 @@
                             anulación</a></li>
                     <li><a href="{{route('app.anulation.index')}}"><i class="fas fa-chevron-right mr-16"></i> Buscar
                             anulación</a></li>
-                    <li><a href="{{route('app.anulation.index')}}"><i class="fas fa-chevron-right mr-16"></i> Detalle
+                    <li><a href="{{route('app.anulation.detailanulation')}}"><i class="fas fa-chevron-right mr-16"></i> Detalle
                             anulación</a>
                     </li>
                 </ul>
