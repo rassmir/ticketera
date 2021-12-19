@@ -68,15 +68,15 @@
                                 <td>{{$user->rut}}</td>
                                 <td>
                                     <ul class="d-lg-flex">
-                                        <li><a href="ver-usuario/{{$user->id}}" class="btn bg-tri mr-12 text-black"><i
+                                        <li><a href="ver-usuario/{{$user->id}}" class="btn mr-12 text-black"><i
                                                     class="far fa-eye"></i></a>
                                         </li>
                                         <li><a href="editar-usuario/{{$user->id}}"
-                                               class="btn bg-tri mr-12 text-black"><i class="far fa-edit"></i></a>
+                                               class="btn mr-12 text-black"><i class="far fa-edit"></i></a>
                                         </li>
                                         <li>
                                             <button onclick="confirmDelete({{$user->id}})"
-                                                    class="btn bg-tri mr-12 text-black"><i class="fas fa-trash"></i>
+                                                    class="btn mr-12 text-black"><i class="fas fa-trash"></i>
                                             </button>
                                         </li>
                                     </ul>
