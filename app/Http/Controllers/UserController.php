@@ -59,7 +59,11 @@ class UserController extends Controller
         ]);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/buscar-usuarios');
+            if (Auth::user()->hasRole('administrador')) {
+                return redirect()->intended('/buscar-usuarios');
+            } else {
+                return redirect()->intended('/buscar-requerimientos');
+            }
         }
         return Redirect::back()->with(array(
             'error' => 'Credenciales Inválidas !!'

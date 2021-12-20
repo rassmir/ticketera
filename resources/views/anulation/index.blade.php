@@ -79,7 +79,9 @@
                             <td>{{$anula->state}}</td>
                             <td>
                                 <ul class="d-lg-flex">
+                                    @if(!Auth::user()->hasRole('administrador'))
                                     <li><a href="/ver-anulacion/{{$anula->id}}"><i class="far fa-eye mr-12 font-16"></i></a></li>
+                                    @endif
                                     <li><a href="/editar-anulacion/{{$anula->id}}"><i class="far fa-edit mr-12 font-16"></i></a></li>
                                     <li><a href="excel"><i class="far fa-file-excel mr-12 font-16"></i></a></li>
                                     <li><a href="/subir-excel/{{$anula->number_ticket}}"><i class="far fa-file-alt font-16"></i></a></li>

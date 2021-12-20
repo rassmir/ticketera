@@ -38,10 +38,10 @@
         <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-link">
-{{--                    @if(Auth::user()->hasRole('administrador'))--}}
-                        <a class="dropdown-item pl-0" href="{{route('app.user.create')}}"><i
-                                class="fas fa-chevron-right mr-8 text-sec"></i> Nuevo usuario</a>
-{{--                    @endif--}}
+                    {{--                    @if(Auth::user()->hasRole('administrador'))--}}
+                    <a class="dropdown-item pl-0" href="{{route('app.user.create')}}"><i
+                            class="fas fa-chevron-right mr-8 text-sec"></i> Nuevo usuario</a>
+                    {{--                    @endif--}}
                     <a class="dropdown-item pl-0" href="{{route('app.user.index')}}"><i
                             class="fas fa-chevron-right mr-8 text-sec"></i> Buscar usuarios</a>
                     <a class="dropdown-item pl-0" href="{{route('app.requeriment.create')}}"><i
@@ -97,15 +97,17 @@
     <div class="row">
         <div class="col-lg-3 col-xl-2">
             <div class="p-48 p-sm-16 bg-white font-16 d-none d-lg-block">
-                <h3>Usuarios</h3>
-                <ul class="pl-8">
-                    @if(Auth::user()->hasRole('administrador'))
-                    <li><a href="{{route('app.user.create')}}"><i class="fas fa-chevron-right mr-16"></i> Nuevo usuario</a>
-                    </li>
-                    @endif
-                    <li><a href="{{route('app.user.index')}}"><i class="fas fa-chevron-right mr-16"></i> Buscar usuarios</a>
-                    </li>
-                </ul>
+                @if(Auth::user()->hasRole('administrador'))
+                    <h3>Usuarios</h3>
+                    <ul class="pl-8">
+                        <li><a href="{{route('app.user.create')}}"><i class="fas fa-chevron-right mr-16"></i> Nuevo
+                                usuario</a>
+                        </li>
+                        <li><a href="{{route('app.user.index')}}"><i class="fas fa-chevron-right mr-16"></i> Buscar
+                                usuarios</a>
+                        </li>
+                    </ul>
+                @endif
                 <h3>Requerimientos</h3>
                 <ul class="pl-8">
                     <li><a href="{{route('app.requeriment.create')}}"><i class="fas fa-chevron-right mr-16"></i> Nuevo
@@ -119,7 +121,8 @@
                             anulación</a></li>
                     <li><a href="{{route('app.anulation.index')}}"><i class="fas fa-chevron-right mr-16"></i> Buscar
                             anulación</a></li>
-                    <li><a href="{{route('app.anulation.detailanulation')}}"><i class="fas fa-chevron-right mr-16"></i> Detalle
+                    <li><a href="{{route('app.anulation.detailanulation')}}"><i class="fas fa-chevron-right mr-16"></i>
+                            Detalle
                             anulación</a>
                     </li>
                 </ul>

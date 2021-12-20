@@ -73,7 +73,9 @@
                                 <td>{{$detail->trys}}</td>
                                 <td>
                                     <ul class="d-lg-flex">
+                                        @if(!Auth::user()->hasRole('administrador'))
                                         <li><a href="/ver-detalle-anulacion/{{$detail->id}}"><i class="far fa-eye mr-12 font-16"></i></a></li>
+                                        @endif
                                         <li><i class="far fa-edit mr-12"></i></li>
                                     </ul>
                                 </td>
