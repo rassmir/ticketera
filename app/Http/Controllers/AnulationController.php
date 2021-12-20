@@ -186,9 +186,9 @@ class AnulationController extends Controller
             ->join('units', 'units.id', '=', 'anulations.unit_id')
             ->join('professionals', 'professionals.id', '=', 'anulations.professional_id')
             ->join('especialities', 'especialities.id', '=', 'anulations.especiality_id')
-            ->select(['anulations.*', 'clinics.name as clinicname',
-                'center_medicals.name as centername', 'professionals.name as profname',
-                'branches.name as braname', 'units.name as unitname', 'especialities.name as espname'])
+            ->select(['anulations.*', 'clinics.name as clinicname', 'clinics.id as clinicid',
+                'center_medicals.name as centername','center_medicals.id as centerid', 'professionals.name as profname','professionals.id as profid',
+                'branches.name as braname','branches.id as branid', 'units.name as unitname','units.id as unitid', 'especialities.name as espname','especialities.id as espid'])
             ->orderBy('created_at', 'DESC')
             ->where('anulations.id', '=', $id)
             ->first();
@@ -217,6 +217,7 @@ class AnulationController extends Controller
             $anulation->professional_id = $request->input('professional_id');
             $anulation->especiality_id = $request->input('especiality_id');
             $anulation->anulation = $request->input('anulation');
+            $anulation->message = $request->input('message');
             $anulation->state = $request->input('state');
             $anulation->update();
             return Redirect::back()->with(array(

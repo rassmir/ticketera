@@ -28,9 +28,8 @@
                                 <div class="col-lg-7">
                                     <select id="clinics" class="form-control ob selectpicker" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Clínica" name="clinic_id"
-                                            onchange="selectBranches()" disabled>
-                                        <option selected disabled value="0">Seleccione clínica</option>
-
+                                            onchange="selectBranches()" readonly>
+                                        <option selected value="{{$anulation->clinicid}}">{{$anulation->clinicname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -44,7 +43,7 @@
                                     <select id="branches" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Sucursal" name="branch_id"
                                             onchange="selectCenterMedic()">
-                                        <option value="0" selected disabled>Seleccione Sucursal</option>
+                                        <option selected value="{{$anulation->branid}}">{{$anulation->braname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -60,7 +59,7 @@
                                             data-type="select" data-msj="Seleccione un Centro Médico"
                                             name="center_medical_id"
                                             onchange="selectUnits()">
-                                        <option value="0" selected disabled>Seleccione Centro Médico</option>
+                                        <option selected value="{{$anulation->centerid}}">{{$anulation->centername}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -74,8 +73,8 @@
                                 <div class="col-lg-7">
                                     <select id="units" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Unidad" name="unit_id"
-                                            onchange="selectProfessionals()" disabled>
-                                        <option value="0" selected disabled>Seleccione Unidad</option>
+                                            onchange="selectProfessionals()" readonly>
+                                        <option selected value="{{$anulation->unitid}}">{{$anulation->unitname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -91,7 +90,7 @@
                                             data-type="select" data-msj="Seleccione un profesional"
                                             name="professional_id"
                                             onchange="selectEspecialities()">
-                                        <option value="0" selected disabled>Seleccione Profesional</option>
+                                        <option selected value="{{$anulation->profid}}">{{$anulation->profname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -106,7 +105,7 @@
                                     <select id="especialities" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Especialidad"
                                             name="especiality_id">
-                                        <option value="0" selected disabled>Seleccione Especialidad</option>
+                                        <option selected value="{{$anulation->espid}}">{{$anulation->espname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -157,18 +156,18 @@
                                 <div class="col-lg-7">
                                     <select class="form-control" name="state">
                                         <option selected disabled>Seleccione un estado</option>
-                                        <option value="motivo1"
+                                        <option value="Ingresado"
                                                 @if($anulation->state==="Ingresado") selected='selected' @endif>
                                                 Ingresado
                                         </option>
-                                        <option value="motivo2"
+                                        <option value="Proceso"
                                                 @if($anulation->state==="Proceso") selected='selected' @endif>En Proceso
                                         </option>
-                                        <option value="motivo3"
+                                        <option value="Solucionado"
                                                 @if($anulation->state==="Solucionado") selected='selected' @endif>
                                                 Solucionado
                                         </option>
-                                        <option value="motivo4"
+                                        <option value="Cerrado"
                                                 @if($anulation->state==="Cerrado") selected='selected' @endif>Cerrado
                                         </option>
                                     </select>
