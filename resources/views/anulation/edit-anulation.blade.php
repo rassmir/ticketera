@@ -3,10 +3,10 @@
 @section('app-content')
 <div class="main-content p-48 p-sm-16 bg-white mt-sm-16">
         <div class="text-left">
-            <h2 class="text-pri">ANULACION A-XXX</h2>
+            <h2 class="text-pri">ANULACION {{$anulation->number_ticket}}</h2>
         </div>
         <div class="row mt-48 mb-36">
-            <form method="POST" action="{{route('app.anulation.store')}}">
+            <form method="POST" action="{{route('app.anulation.update',['id'=>$anulation->id])}}">
                 <div class="col-lg-12">
                     @csrf
                     <div class="row">
@@ -16,7 +16,7 @@
                                     <p class="mb-0">Número Ticket</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" value="" readonly name="number_ticket">
+                                    <input type="text" class="form-control" value="{{$anulation->number_ticket}}" readonly name="number_ticket">
                                 </div>
                             </div>
                         </div>
@@ -118,12 +118,21 @@
                                     <p class="mb-0">Motivo Anulación*</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select class="form-control" name="anulation" disabled>
-                                        <option selected disabled>Seleccione un motivo</option>
-                                        <option value="motivo1">motivo1</option>
-                                        <option value="motivo2">motivo2</option>
-                                        <option value="motivo3">motivo3</option>
-                                        <option value="motivo4">motivo4</option>
+                                    <select class="form-control" name="anulation">
+                                        <option value="motivo1"
+                                                @if($anulation->anulation==="motivo1") selected='selected' @endif>
+                                            Motivo1
+                                        </option>
+                                        <option value="motivo2"
+                                                @if($anulation->anulation==="motivo2") selected='selected' @endif>Motivo2
+                                        </option>
+                                        <option value="motivo3"
+                                                @if($anulation->anulation==="motivo3") selected='selected' @endif>
+                                            Motivo3
+                                        </option>
+                                        <option value="motivo4"
+                                                @if($anulation->anulation==="motivo4") selected='selected' @endif>Motivo4
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -135,7 +144,7 @@
                                 </div>
                                 <div class="col-lg-12 mt-8">
                                     <textarea name="message" class="form-control" placeholder="Ingrese una observación"
-                                              rows="5" disabled></textarea>
+                                              rows="5">{{$anulation->message}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -146,12 +155,22 @@
                                     <p class="mb-0">Estado</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select class="form-control" name="state" disabled>
+                                    <select class="form-control" name="state">
                                         <option selected disabled>Seleccione un estado</option>
-                                        <option value="estado1">Estado 1</option>
-                                        <option value="estado2">Estado 2</option>
-                                        <option value="estado3">Estado 3</option>
-                                        <option value="estado4">Estado 4</option>
+                                        <option value="motivo1"
+                                                @if($anulation->state==="estado1") selected='selected' @endif>
+                                            Estado1
+                                        </option>
+                                        <option value="motivo2"
+                                                @if($anulation->state==="estado2") selected='selected' @endif>Estado2
+                                        </option>
+                                        <option value="motivo3"
+                                                @if($anulation->state==="estado3") selected='selected' @endif>
+                                            Estado3
+                                        </option>
+                                        <option value="motivo4"
+                                                @if($anulation->state==="estado4") selected='selected' @endif>Estado4
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -173,3 +192,8 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script type="text/javascript">
+
+    </script>
+@endpush

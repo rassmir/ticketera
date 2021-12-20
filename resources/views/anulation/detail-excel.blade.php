@@ -73,7 +73,7 @@
                                 <td>{{$detail->trys}}</td>
                                 <td>
                                     <ul class="d-lg-flex">
-                                        <li><i class="far fa-eye mr-12"></i></li>
+                                        <li><a href="/ver-detalle-anulacion/{{$detail->id}}"><i class="far fa-eye mr-12 font-16"></i></a></li>
                                         <li><i class="far fa-edit mr-12"></i></li>
                                     </ul>
                                 </td>

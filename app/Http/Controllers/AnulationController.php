@@ -88,6 +88,14 @@ class AnulationController extends Controller
         ]);
     }
 
+    public function showDetailAnulation($id)
+    {
+        $detailanulation = DetailAnulation::findOrFail($id);
+        return view('anulation.show-detail-anulation', [
+            'detailanulation' => $detailanulation
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -139,22 +147,44 @@ class AnulationController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $clinics = Clinic::orderBy('name')->get();
+        $anulation = Anulation::join('clinics', 'clinics.id', '=', 'anulations.clinic_id')
+            ->join('branches', 'branches.id', '=', 'anulations.branch_id')
+            ->join('center_medicals', 'center_medicals.id', '=', 'anulations.center_medical_id')
+            ->join('units', 'units.id', '=', 'anulations.unit_id')
+            ->join('professionals', 'professionals.id', '=', 'anulations.professional_id')
+            ->join('especialities', 'especialities.id', '=', 'anulations.especiality_id')
+            ->select(['anulations.*', 'clinics.name as clinicname',
+                'center_medicals.name as centername', 'professionals.name as profname',
+                'branches.name as braname', 'units.name as unitname', 'especialities.name as espname'])
+            ->orderBy('created_at', 'DESC')
+            ->where('anulations.id', '=', $id)
+            ->first();
+        return view('anulation.show-anulation',
+            ['anulation' => $anulation,
+                'clinics' => $clinics
+            ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $clinics = Clinic::orderBy('name')->get();
+        $anulation = Anulation::findOrFail($id);
+        return view('anulation.edit-anulation',
+            [
+                'anulation' => $anulation,
+                'clinics' => $clinics
+            ]);
     }
 
     /**
@@ -162,11 +192,30 @@ class AnulationController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $anulation = Anulation::findOrFail($id);
+            $anulation->clinic_id = $request->input('clinic_id');
+            $anulation->branch_id = $request->input('branch_id');
+            $anulation->center_medical_id = $request->input('center_medical_id');
+            $anulation->unit_id = $request->input('unit_id');
+            $anulation->professional_id = $request->input('professional_id');
+            $anulation->especiality_id = $request->input('especiality_id');
+            $anulation->anulation = $request->input('anulation');
+            $anulation->state = $request->input('state');
+            $anulation->update();
+            return Redirect::back()->with(array(
+                'success' => 'Actualizado Correctamente !!'
+            ));
+        } catch (Exception $ex) {
+            Log::error($ex);
+            return Redirect::back()->with(array(
+                'error' => 'Error al actualizar !!'
+            ));
+        }
     }
 
     /**

@@ -454,7 +454,6 @@
 @push('scripts')
     <script type="text/javascript">
         let uri = '{{env('APP_URL')}}/';
-        console.log('aqui es', uri);
         const selectBranches = () => {
             let clinic_id = $("#clinics").val();
             $.ajax({

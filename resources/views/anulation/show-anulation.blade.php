@@ -3,10 +3,9 @@
 @section('app-content')
 <div class="main-content p-48 p-sm-16 bg-white mt-sm-16">
         <div class="text-left">
-            <h2 class="text-pri">ANULACION A-XXX</h2>
+            <h2 class="text-pri">ANULACION {{$anulation->number_ticket}}</h2>
         </div>
         <div class="row mt-48 mb-36">
-            <form method="POST" action="{{route('app.anulation.store')}}">
                 <div class="col-lg-12">
                     @csrf
                     <div class="row">
@@ -16,7 +15,7 @@
                                     <p class="mb-0">Número Ticket</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" value="" readonly name="number_ticket">
+                                    <input type="text" class="form-control" value="{{$anulation->number_ticket}}" readonly name="number_ticket">
                                 </div>
                             </div>
                         </div>
@@ -29,8 +28,7 @@
                                     <select id="clinics" class="form-control ob selectpicker" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Clínica" name="clinic_id"
                                             onchange="selectBranches()" disabled>
-                                        <option selected disabled value="0">Seleccione clínica</option>
-
+                                        <option selected disabled value="0">{{$anulation->clinicname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -43,8 +41,8 @@
                                 <div class="col-lg-7">
                                     <select id="branches" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Sucursal" name="branch_id"
-                                            onchange="selectCenterMedic()">
-                                        <option value="0" selected disabled>Seleccione Sucursal</option>
+                                            onchange="selectCenterMedic()" disabled>
+                                        <option value="0" selected disabled>{{$anulation->braname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -59,8 +57,8 @@
                                     <select id="center_medics" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione un Centro Médico"
                                             name="center_medical_id"
-                                            onchange="selectUnits()">
-                                        <option value="0" selected disabled>Seleccione Centro Médico</option>
+                                            onchange="selectUnits()" disabled>
+                                        <option value="0" selected>{{$anulation->centername}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -75,7 +73,7 @@
                                     <select id="units" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Unidad" name="unit_id"
                                             onchange="selectProfessionals()" disabled>
-                                        <option value="0" selected disabled>Seleccione Unidad</option>
+                                        <option value="0" selected>{{$anulation->unitname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -90,8 +88,8 @@
                                     <select id="professionals" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione un profesional"
                                             name="professional_id"
-                                            onchange="selectEspecialities()">
-                                        <option value="0" selected disabled>Seleccione Profesional</option>
+                                            onchange="selectEspecialities()" disabled>
+                                        <option value="0" selected >{{$anulation->profname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -105,8 +103,8 @@
                                 <div class="col-lg-7">
                                     <select id="especialities" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Especialidad"
-                                            name="especiality_id">
-                                        <option value="0" selected disabled>Seleccione Especialidad</option>
+                                            name="especiality_id" disabled>
+                                        <option value="0" selected >{{$anulation->espname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -119,11 +117,7 @@
                                 </div>
                                 <div class="col-lg-7">
                                     <select class="form-control" name="anulation" disabled>
-                                        <option selected disabled>Seleccione un motivo</option>
-                                        <option value="motivo1">motivo1</option>
-                                        <option value="motivo2">motivo2</option>
-                                        <option value="motivo3">motivo3</option>
-                                        <option value="motivo4">motivo4</option>
+                                        <option selected>{{$anulation->anulation}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -135,7 +129,7 @@
                                 </div>
                                 <div class="col-lg-12 mt-8">
                                     <textarea name="message" class="form-control" placeholder="Ingrese una observación"
-                                              rows="5" disabled></textarea>
+                                              rows="5" disabled>{{$anulation->message}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -147,18 +141,13 @@
                                 </div>
                                 <div class="col-lg-7">
                                     <select class="form-control" name="state" disabled>
-                                        <option selected disabled>Seleccione un estado</option>
-                                        <option value="estado1">Estado 1</option>
-                                        <option value="estado2">Estado 2</option>
-                                        <option value="estado3">Estado 3</option>
-                                        <option value="estado4">Estado 4</option>
+                                        <option selected>{{$anulation->message}}</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
         </div>
     </div>
 @endsection

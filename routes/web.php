@@ -61,14 +61,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/buscar-anulaciones', [AnulationController::class, 'index'])->name('app.anulation.index');
     Route::get('/crear-anulacion', [AnulationController::class, 'create'])->name('app.anulation.create');
     Route::post('/guardar-anulacion', [AnulationController::class, 'store'])->name('app.anulation.store');
+    Route::get('/ver-anulacion/{id}', [AnulationController::class, 'show'])->name('app.anulation.show');
+    Route::get('/editar-anulacion/{id}', [AnulationController::class, 'edit'])->name('app.anulation.edit');
+    Route::post('/actualizar-anulacion/{id}', [AnulationController::class, 'update'])->name('app.anulation.update');
+
 
     Route::get('/subir-excel/{ticket}', [AnulationController::class, 'excel'])->name('app.anulation.excel');
     Route::post('/guardar-excel', [AnulationController::class, 'importexcel'])->name('app.anulation.import.excel');
     Route::get('/detalle-anulacion', [AnulationController::class, 'detailAnulation'])->name('app.anulation.detailanulation');
+    Route::get('/ver-detalle-anulacion/{id}', [AnulationController::class, 'showDetailAnulation'])->name('app.anulation.show.detailanulation');
 });
 
-Route::view('ver-anulacion','anulation.show-anulation');
-Route::view('editar-anulacion','anulation.edit-anulation');
 Route::view('editar-detalle-anulacion','anulation.edit-detail-anulation');
-Route::view('ver-detalle-anulacion','anulation.show-detail-anulation');
 Route::view('correo','email.correo');

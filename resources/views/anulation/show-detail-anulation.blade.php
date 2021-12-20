@@ -3,7 +3,7 @@
 @section('app-content')
 <div class="main-content p-48 p-sm-16 bg-white mt-sm-16">
         <div class="text-left">
-            <h2 class="text-pri">Registro A-123456</h2>
+            <h2 class="text-pri">Registro {{$detailanulation->number_ticket}}</h2>
             <hr>
         </div>
         <div class="row mt-48 mb-36">
@@ -15,7 +15,7 @@
                                 <p class="mb-0">Fecha anulación:</p>
                             </div>
                             <div class="col-lg-7">
-                                <input type="date" value="30/12/2021" class="form-control" disabled>
+                                <input type="text" value="{{$detailanulation->date_anulation}}" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                                 <p class="mb-0">Hora:</p>
                             </div>
                             <div class="col-lg-7">
-                                <input type="date" value="30/12/2021" class="form-control" disabled>
+                                <input type="text" value="{{$detailanulation->hour}}" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                                 <p class="mb-0">Paciente</p>
                             </div>
                             <div class="col-lg-7">
-                                <input type="text" value="LUCERO SANCHEZ VALENTINA VERONICA" class="form-control" disabled>
+                                <input type="text" value="{{$detailanulation->patient}}" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                                 <p class="mb-0">Médico:</p>
                             </div>
                             <div class="col-lg-7">
-                                <input type="text" value="DIAZ PAREDES PAULA" class="form-control" disabled>
+                                <input type="text" value="{{$detailanulation->name_doctor}}" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                                 <p class="mb-0">Teléfono 1:</p>
                             </div>
                             <div class="col-lg-7">
-                                <input type="text" value="0" class="form-control" disabled>
+                                <input type="text" value="{{$detailanulation->phone1}}" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                                 <p class="mb-0">Teléfono 2:</p>
                             </div>
                             <div class="col-lg-7">
-                                <input type="text" value="0" class="form-control" disabled>
+                                <input type="text" value="{{$detailanulation->phone2}}" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                                 <p class="mb-0">Respuesta:</p>
                             </div>
                             <div class="col-lg-7">
-                                <input type="text" value="IREAL15" class="form-control" disabled>
+                                <input type="text" value="{{$detailanulation->response_anulation}}" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                                 <p class="mb-0">Fecha de carga:</p>
                             </div>
                             <div class="col-lg-7">
-                                <input type="date" value="30/12/2021" class="form-control" disabled>
+                                <input type="date" value="{{$detailanulation->load}}" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                                 <p class="mb-0">Fecha de cierre:</p>
                             </div>
                             <div class="col-lg-7">
-                                <input type="date" value="30/12/2021" class="form-control" disabled>
+                                <input type="text" value="{{$detailanulation->close}}" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                                 <p class="mb-0">Ejecutivo:</p>
                             </div>
                             <div class="col-lg-7">
-                                <input type="text" value="" class="form-control" disabled>
+                                <input type="text" value="{{$detailanulation->executive}}" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                                 <p class="mb-0">Intentos:</p>
                             </div>
                             <div class="col-lg-7">
-                                <input type="number" value="0" class="form-control" disabled>
+                                <input type="number" value="{{$detailanulation->trys}}" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
