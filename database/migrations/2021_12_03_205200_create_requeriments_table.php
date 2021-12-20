@@ -42,9 +42,10 @@ class CreateRequerimentsTable extends Migration
             $table->date('date_he')->nullable();
             $table->date('date_response')->nullable();
             $table->string('email');
-            $table->longText('observation')->nullable();
+            $table->longText('description1')->nullable();
+            $table->longText('description2')->nullable();
+            $table->longText('description3')->nullable();
             $table->longText('response_medic')->nullable();
-            $table->longText('resumen')->nullable();
             $table->dateTime('date_solution')->nullable();
             $table->string('user_create');
             $table->date('date_close')->nullable();
