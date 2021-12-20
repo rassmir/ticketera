@@ -91,13 +91,14 @@
                                     <td>{{$req->profname}}</td>
                                     <td>
                                         <ul class="d-lg-flex">
-                                            @if(!Auth::user()->hasRole('administrador'))
+
                                             <li><a href="ver-requerimiento/{{$req->id}}"
                                                    class="btn bg-tri mr-12 text-black"><i class="far fa-eye"></i></a>
                                             </li>
-                                            @endif
+                                            @if(!Auth::user()->hasRole('administrador'))
                                                 <li><a href="editar-requerimiento/{{$req->id}}" class="btn bg-tri mr-12 text-black"><i
                                                             class="far fa-edit"></i></a></li>
+                                                            @endif
 {{--                                                <li>--}}
 {{--                                                    <button onclick="confirmDelete({{$req->id}})"--}}
 {{--                                                            class="btn bg-tri mr-12 text-black"><i--}}
