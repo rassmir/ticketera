@@ -19,7 +19,7 @@ class CreateProfessionalsTable extends Migration
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('code');
+            $table->string('code')->nullable();
             $table->timestamps();
         });
     }
