@@ -58,6 +58,7 @@
                         <thead>
                         <tr class="bg-pri text-white">
                             <th>#</th>
+                            <th>Numero Ticket</th>
                             <th>Centro médico</th>
                             <th>Nombre Doctor</th>
                             <th>Especialidad</th>
@@ -71,6 +72,7 @@
                         @foreach($anulations as $anula)
                         <tr>
                             <td>{{$anula->id}}</td>
+                            <td>{{$anula->number_ticket}}</td>
                             <td>{{$anula->centername}}</td>
                             <td>{{$anula->profname}}</td>
                             <td>{{$anula->espname}}</td>

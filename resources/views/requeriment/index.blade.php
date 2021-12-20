@@ -75,8 +75,12 @@
                             <th>RUT Paciente</th>
                             <th>Fecha ingreso</th>
                             <th>Estado</th>
+                            <th>Clínica</th>
+                            <th>Sucursal</th>
                             <th>Centro médico</th>
+                            <th>Unidad</th>
                             <th>Médico</th>
+                            <th>Especialidad</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -87,8 +91,12 @@
                                     <td>{{$req->rut}}</td>
                                     <td>{{$req->datetime_local}}</td>
                                     <td>{{$req->state}}</td>
+                                    <td>{{$req->clinicname}}</td>
+                                    <td>{{$req->branchname}}</td>
                                     <td>{{$req->centername}}</td>
+                                    <td>{{$req->unitname}}</td>
                                     <td>{{$req->profname}}</td>
+                                    <td>{{$req->spename}}</td>
                                     <td>
                                         <ul class="d-lg-flex">
 
@@ -130,7 +138,7 @@
                 buttons: [{
                     extend: 'excelHtml5',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5]
+                        columns: [0, 1, 2, 3, 4, 5,6,7,8,9]
                     }
                 },
                     {
@@ -138,7 +146,7 @@
                         orientation: 'landscape',
                         pageSize: 'LEGAL',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4, 5,6,7,8,9]
                         }
                     },
                     'print'
@@ -151,7 +159,7 @@
                         page: 'all', // 'all', 'current'
                         search: 'none' // 'none', 'applied', 'removed'
                     },
-                    columns: [0, 1, 2, 3, 4, 5]
+                    columns: [0, 1, 2, 3, 4, 5,6,7,8,9]
                 }
 
             });
