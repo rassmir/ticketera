@@ -189,11 +189,12 @@ $(document).ready(function () {
     }
 });
 
+let uri = 'http://localhost:8000/';
 const selectBranches = () => {
     let clinic_id = $("#clinics").val();
     $.ajax({
         type: "GET",
-        url: "sucursales/" + clinic_id,
+        url: uri + "sucursales/" + clinic_id,
         success: function (response) {
             let branches = $('#branches');
             branches.empty();
@@ -213,7 +214,7 @@ const selectCenterMedic = () => {
     let branch_id = $("#branches").val();
     $.ajax({
         type: "GET",
-        url: "centros-medicos/" + branch_id,
+        url: uri + "centros-medicos/" + branch_id,
         success: function (response) {
             let centers = $('#center_medics');
             centers.empty();
@@ -233,7 +234,7 @@ const selectUnits = () => {
     let center_medical_id = $("#center_medics").val();
     $.ajax({
         type: "GET",
-        url: "unidades/" + center_medical_id,
+        url: uri + "unidades/" + center_medical_id,
         success: function (response) {
             let units = $('#units');
             units.empty();
@@ -253,7 +254,7 @@ const selectProfessionals = () => {
     let units = $("#units").val();
     $.ajax({
         type: "GET",
-        url: "profesionales/" + units,
+        url: uri + "profesionales/" + units,
         success: function (response) {
             let professionals = $('#professionals');
             professionals.empty();
@@ -273,7 +274,7 @@ const selectEspecialities = () => {
     let professionals = $("#professionals").val();
     $.ajax({
         type: "GET",
-        url: "especialidades/" + professionals,
+        url: uri + "especialidades/" + professionals,
         success: function (response) {
             let especialities = $('#especialities');
             especialities.empty();

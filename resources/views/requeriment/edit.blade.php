@@ -210,12 +210,13 @@
                                 <div class="col-lg-7">
                                     <select id="clinics" class="form-control ob selectpicker" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Clínica" name="clinic_id"
-                                            onchange="editselectBranches()">
-                                        <option selected disabled value="0">Seleccione clínica</option>
-                                        @foreach($clinics as $clinic)
-                                            <option value="{{$clinic->id}}"
-                                                    @if($clinic->id==$requeriment->clinic_id) selected='selected' @endif>{{$clinic->name}}</option>
-                                        @endforeach
+                                            onchange="selectBranches()">
+                                        <option selected value="{{$requeriment->clinicid}}">{{$requeriment->clinicname}}</option>
+{{--                                        @foreach($clinics as $clinic)--}}
+{{--                                            <option value="{{$clinic->id}}"--}}
+{{--                                                    @if($clinic->id==$requeriment->clinic_id) selected='selected' @endif>{{$clinic->name}}</option>--}}
+{{--                                            <option value="{{$clinic->id}}">{{$clinic->name}}</option>--}}
+{{--                                        @endforeach--}}
                                     </select>
                                 </div>
                             </div>
@@ -228,8 +229,8 @@
                                 <div class="col-lg-7">
                                     <select id="branches" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Sucursal" name="branch_id"
-                                            onchange="editselectCenterMedic()">
-                                        <option value="0" selected disabled>Seleccione Sucursal</option>
+                                            onchange="selectCenterMedic()">
+                                        <option selected value="{{$requeriment->branid}}">{{$requeriment->braname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -245,7 +246,7 @@
                                             data-type="select" data-msj="Seleccione un Centro Médico"
                                             name="center_medical_id"
                                             onchange="selectUnits()">
-                                        <option value="0" selected disabled>Seleccione Centro Médico</option>
+                                        <option selected value="{{$requeriment->centerid}}">{{$requeriment->centername}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -260,7 +261,7 @@
                                     <select id="units" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Unidad" name="unit_id"
                                             onchange="selectProfessionals()">
-                                        <option value="0" selected disabled>Seleccione Unidad</option>
+                                        <option selected value="{{$requeriment->unitid}}">{{$requeriment->unitname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -276,7 +277,7 @@
                                             data-type="select" data-msj="Seleccione un profesional"
                                             name="professional_id"
                                             onchange="selectEspecialities()">
-                                        <option value="0" selected disabled>Seleccione Profesional</option>
+                                        <option selected value="{{$requeriment->profid}}">{{$requeriment->profname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -291,7 +292,7 @@
                                     <select id="especialities" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Especialidad"
                                             name="especiality_id">
-                                        <option value="0" selected disabled>Seleccione Especialidad</option>
+                                        <option selected value="{{$requeriment->espid}}">{{$requeriment->espname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -356,7 +357,7 @@
                                 </div>
                                 <div class="col-lg-12 mt-8">
                                     <textarea class="form-control" placeholder="Ingrese una observación 1" rows="5"
-                                              name="observation">{{$requeriment->description1}}</textarea>
+                                              name="description1">{{$requeriment->description1}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -368,7 +369,7 @@
                                 </div>
                                 <div class="col-lg-12 mt-8">
                                     <textarea class="form-control" placeholder="Ingrese una observación 2" rows="5"
-                                              name="observation">{{$requeriment->description2}}</textarea>
+                                              name="description2">{{$requeriment->description2}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -380,7 +381,7 @@
                                 </div>
                                 <div class="col-lg-12 mt-8">
                                     <textarea class="form-control" placeholder="Ingrese una observación 3" rows="5"
-                                              name="observation">{{$requeriment->description3}}</textarea>
+                                              name="description3">{{$requeriment->description3}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -461,12 +462,14 @@
 @endsection
 @push('scripts')
     <script type="text/javascript">
-        let uri = '{{env('APP_URL')}}/';
+        let uri = 'http://localhost:8000/';
 
-        $(document).ready(function () {
-            let clinic_id = $("#clinics").val();
-            editselectBranches(clinic_id)
-        });
+        // $(document).ready(function () {
+            // let clinic_id = $("#clinics").val();
+            // let branch_id = $("#branches").val();
+            // console.log(branch_id);
+            // editselectBranches(clinic_id)
+        // });
 
         const editselectBranches = (clinic_id) => {
             $.ajax({

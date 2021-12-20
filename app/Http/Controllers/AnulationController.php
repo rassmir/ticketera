@@ -179,7 +179,19 @@ class AnulationController extends Controller
     public function edit($id)
     {
         $clinics = Clinic::orderBy('name')->get();
-        $anulation = Anulation::findOrFail($id);
+//        $anulation = Anulation::findOrFail($id);
+        $anulation = Anulation::join('clinics', 'clinics.id', '=', 'anulations.clinic_id')
+            ->join('branches', 'branches.id', '=', 'anulations.branch_id')
+            ->join('center_medicals', 'center_medicals.id', '=', 'anulations.center_medical_id')
+            ->join('units', 'units.id', '=', 'anulations.unit_id')
+            ->join('professionals', 'professionals.id', '=', 'anulations.professional_id')
+            ->join('especialities', 'especialities.id', '=', 'anulations.especiality_id')
+            ->select(['anulations.*', 'clinics.name as clinicname',
+                'center_medicals.name as centername', 'professionals.name as profname',
+                'branches.name as braname', 'units.name as unitname', 'especialities.name as espname'])
+            ->orderBy('created_at', 'DESC')
+            ->where('anulations.id', '=', $id)
+            ->first();
         return view('anulation.edit-anulation',
             [
                 'anulation' => $anulation,

@@ -175,7 +175,19 @@ class RequerimentController extends Controller
     public function edit($id)
     {
         $clinics = Clinic::orderBy('name')->get();
-        $requeriment = Requeriment::findOrFail($id);
+//        $requeriment = Requeriment::findOrFail($id);
+        $requeriment = Requeriment::join('clinics', 'clinics.id', '=', 'requeriments.clinic_id')
+            ->join('branches', 'branches.id', '=', 'requeriments.branch_id')
+            ->join('center_medicals', 'center_medicals.id', '=', 'requeriments.center_medical_id')
+            ->join('units', 'units.id', '=', 'requeriments.unit_id')
+            ->join('professionals', 'professionals.id', '=', 'requeriments.professional_id')
+            ->join('especialities', 'especialities.id', '=', 'requeriments.especiality_id')
+            ->select(['requeriments.*', 'clinics.name as clinicname', 'clinics.id as clinicid',
+                'center_medicals.name as centername','center_medicals.id as centerid', 'professionals.name as profname','professionals.id as profid',
+                'branches.name as braname','branches.id as branid', 'units.name as unitname','units.id as unitid', 'especialities.name as espname','especialities.id as espid'])
+            ->orderBy('created_at', 'DESC')
+            ->where('requeriments.id', '=', $id)
+            ->first();
         return view('requeriment.edit',
             [
                 'requeriment' => $requeriment,
