@@ -55,6 +55,7 @@
                             <th>#</th>
                             <th>Tipo de usuario</th>
                             <th>Nombres y Apellidos</th>
+                            <th>Email</th>
                             <th>RUT</th>
                             <th>Acciones</th>
                         </tr>
@@ -65,6 +66,7 @@
                                 <td>{{++$key}}</td>
                                 <td>{{$user->rolname}}</td>
                                 <td>{{$user->name_complete}}</td>
+                                <td>{{$user->email}}</td>
                                 <td>{{$user->rut}}</td>
                                 <td>
                                     <ul class="d-lg-flex">
