@@ -210,7 +210,7 @@
                                 <div class="col-lg-7">
                                     <select id="clinics" class="form-control ob selectpicker" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Clínica" name="clinic_id"
-                                            onchange="selectBranches()">
+                                            onchange="editselectBranches()">
                                         <option selected disabled value="0">Seleccione clínica</option>
                                         @foreach($clinics as $clinic)
                                             <option value="{{$clinic->id}}"
@@ -228,7 +228,7 @@
                                 <div class="col-lg-7">
                                     <select id="branches" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Sucursal" name="branch_id"
-                                            onchange="selectCenterMedic()">
+                                            onchange="editselectCenterMedic()">
                                         <option value="0" selected disabled>Seleccione Sucursal</option>
                                     </select>
                                 </div>
@@ -462,8 +462,13 @@
 @push('scripts')
     <script type="text/javascript">
         let uri = '{{env('APP_URL')}}/';
-        const selectBranches = () => {
+
+        $(document).ready(function () {
             let clinic_id = $("#clinics").val();
+            editselectBranches(clinic_id)
+        });
+
+        const editselectBranches = (clinic_id) => {
             $.ajax({
                 type: "GET",
                 url: uri + "sucursales/" + clinic_id,
@@ -481,9 +486,8 @@
                 }
             });
         }
-        selectBranches();
 
-        const selectCenterMedic = () => {
+        const editselectCenterMedic = () => {
             let branch_id = $("#branches").val();
             $.ajax({
                 type: "GET",
@@ -503,65 +507,65 @@
             });
         }
 
-        const selectUnits = () => {
-            let center_medical_id = $("#center_medics").val();
-            $.ajax({
-                type: "GET",
-                url: uri + "unidades/" + center_medical_id,
-                success: function (response) {
-                    let units = $('#units');
-                    units.empty();
-                    units.append('<option selected disabled>Seleccione Unidad</option>');
-                    for (let i = 0; i < response.length; i++) {
-                        units.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
-                    }
-                    units.selectpicker();
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-        }
-
-        const selectProfessionals = () => {
-            let units = $("#units").val();
-            $.ajax({
-                type: "GET",
-                url: uri + "profesionales/" + units,
-                success: function (response) {
-                    let professionals = $('#professionals');
-                    professionals.empty();
-                    professionals.append('<option selected disabled>Seleccione Profesional</option>');
-                    for (let i = 0; i < response.length; i++) {
-                        professionals.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
-                    }
-                    professionals.selectpicker();
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-        }
-
-        const selectEspecialities = () => {
-            let professionals = $("#professionals").val();
-            $.ajax({
-                type: "GET",
-                url: uri + "especialidades/" + professionals,
-                success: function (response) {
-                    let especialities = $('#especialities');
-                    especialities.empty();
-                    especialities.append('<option selected disabled>Seleccione Especialidad</option>');
-                    for (let i = 0; i < response.length; i++) {
-                        especialities.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
-                    }
-                    especialities.selectpicker();
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-        }
+        // const selectUnits = () => {
+        //     let center_medical_id = $("#center_medics").val();
+        //     $.ajax({
+        //         type: "GET",
+        //         url: uri + "unidades/" + center_medical_id,
+        //         success: function (response) {
+        //             let units = $('#units');
+        //             units.empty();
+        //             units.append('<option selected disabled>Seleccione Unidad</option>');
+        //             for (let i = 0; i < response.length; i++) {
+        //                 units.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
+        //             }
+        //             units.selectpicker();
+        //         },
+        //         error: function (error) {
+        //             console.log(error);
+        //         }
+        //     });
+        // }
+        //
+        // const selectProfessionals = () => {
+        //     let units = $("#units").val();
+        //     $.ajax({
+        //         type: "GET",
+        //         url: uri + "profesionales/" + units,
+        //         success: function (response) {
+        //             let professionals = $('#professionals');
+        //             professionals.empty();
+        //             professionals.append('<option selected disabled>Seleccione Profesional</option>');
+        //             for (let i = 0; i < response.length; i++) {
+        //                 professionals.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
+        //             }
+        //             professionals.selectpicker();
+        //         },
+        //         error: function (error) {
+        //             console.log(error);
+        //         }
+        //     });
+        // }
+        //
+        // const selectEspecialities = () => {
+        //     let professionals = $("#professionals").val();
+        //     $.ajax({
+        //         type: "GET",
+        //         url: uri + "especialidades/" + professionals,
+        //         success: function (response) {
+        //             let especialities = $('#especialities');
+        //             especialities.empty();
+        //             especialities.append('<option selected disabled>Seleccione Especialidad</option>');
+        //             for (let i = 0; i < response.length; i++) {
+        //                 especialities.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
+        //             }
+        //             especialities.selectpicker();
+        //         },
+        //         error: function (error) {
+        //             console.log(error);
+        //         }
+        //     });
+        // }
 
         // GUARDAR REQUERIMIENTO
 
