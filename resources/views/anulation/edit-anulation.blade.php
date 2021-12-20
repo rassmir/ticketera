@@ -158,18 +158,18 @@
                                     <select class="form-control" name="state">
                                         <option selected disabled>Seleccione un estado</option>
                                         <option value="motivo1"
-                                                @if($anulation->state==="estado1") selected='selected' @endif>
-                                            Estado1
+                                                @if($anulation->state==="Ingresado") selected='selected' @endif>
+                                                Ingresado
                                         </option>
                                         <option value="motivo2"
-                                                @if($anulation->state==="estado2") selected='selected' @endif>Estado2
+                                                @if($anulation->state==="Proceso") selected='selected' @endif>En Proceso
                                         </option>
                                         <option value="motivo3"
-                                                @if($anulation->state==="estado3") selected='selected' @endif>
-                                            Estado3
+                                                @if($anulation->state==="Solucionado") selected='selected' @endif>
+                                                Solucionado
                                         </option>
                                         <option value="motivo4"
-                                                @if($anulation->state==="estado4") selected='selected' @endif>Estado4
+                                                @if($anulation->state==="Cerrado") selected='selected' @endif>Cerrado
                                         </option>
                                     </select>
                                 </div>

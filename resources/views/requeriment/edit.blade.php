@@ -87,6 +87,14 @@
                                                 @if($requeriment->state==="Ingresado") selected='selected' @endif>
                                             Ingresado
                                         </option>
+                                        <option value="Proceso"
+                                                @if($requeriment->state==="Proceso") selected='selected' @endif>
+                                            En Proceso
+                                        </option>
+                                        <option value="Solucionado"
+                                                @if($requeriment->state==="Solucionado") selected='selected' @endif>
+                                            Solucionado
+                                        </option>
                                         <option value="Cerrado"
                                                 @if($requeriment->state==="Cerrado") selected='selected' @endif>Cerrado
                                         </option>

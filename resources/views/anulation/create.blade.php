@@ -150,10 +150,10 @@
                                 <div class="col-lg-7">
                                     <select class="form-control" name="state">
                                         <option selected disabled>Seleccione un estado</option>
-                                        <option value="estado1">Estado 1</option>
-                                        <option value="estado2">Estado 2</option>
-                                        <option value="estado3">Estado 3</option>
-                                        <option value="estado4">Estado 4</option>
+                                        <option value="Ingresado">Ingresado</option>
+                                        <option value="Proceso">En Proceso</option>
+                                        <option value="Solucionado">Solucionado</option>
+                                        <option value="Cerrado">Cerrado</option>
                                     </select>
                                 </div>
                             </div>
