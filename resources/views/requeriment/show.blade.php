@@ -14,7 +14,7 @@
                                     <p class="mb-0">Número de solicitud</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" placeholder="R-15242021" readonly value="{{$requeriment->id}}">
+                                    <input type="text" class="form-control" placeholder="R-15242021" readonly value="{{$requeriment->number_solicity}}">
                                 </div>
                             </div>
                         </div>
@@ -260,7 +260,7 @@
                                 </div>
                                 <div class="col-lg-12 mt-8">
                                     <textarea class="form-control" placeholder="Ingrese una observación" rows="5"
-                                              name="observation" disabled>{{$requeriment->observation}}</textarea>
+                                              name="observation" disabled>{{$requeriment->description1}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -272,7 +272,7 @@
                                 </div>
                                 <div class="col-lg-12 mt-8">
                                     <textarea class="form-control" placeholder="Ingrese una observación" rows="5"
-                                              name="observation" disabled>{{$requeriment->observation}}</textarea>
+                                              name="observation" disabled>{{$requeriment->description2}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -284,7 +284,7 @@
                                 </div>
                                 <div class="col-lg-12 mt-8">
                                     <textarea class="form-control" placeholder="Ingrese una observación" rows="5"
-                                              name="observation" disabled>{{$requeriment->observation}}</textarea>
+                                              name="observation" disabled>{{$requeriment->description3}}</textarea>
                                 </div>
                             </div>
                         </div>
