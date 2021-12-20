@@ -110,15 +110,19 @@
                 @endif
                 <h3>Requerimientos</h3>
                 <ul class="pl-8">
+                    @if(!Auth::user()->hasRole('administrador'))
                     <li><a href="{{route('app.requeriment.create')}}"><i class="fas fa-chevron-right mr-16"></i> Nuevo
                             requerimiento</a></li>
+                    @endif
                     <li><a href="{{route('app.requeriment.index')}}"><i class="fas fa-chevron-right mr-16"></i> Buscar
                             Requerimiento</a></li>
                 </ul>
                 <h3>Anulaciones</h3>
                 <ul class="pl-8">
+                    @if(!Auth::user()->hasRole('administrador'))
                     <li><a href="{{route('app.anulation.create')}}"><i class="fas fa-chevron-right mr-16"></i> Nueva
                             anulación</a></li>
+                    @endif
                     <li><a href="{{route('app.anulation.index')}}"><i class="fas fa-chevron-right mr-16"></i> Buscar
                             anulación</a></li>
                     <li><a href="{{route('app.anulation.detailanulation')}}"><i class="fas fa-chevron-right mr-16"></i>
