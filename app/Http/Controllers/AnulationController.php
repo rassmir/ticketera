@@ -98,7 +98,22 @@ class AnulationController extends Controller
 
     public function consultingDetailTicketByID($idticket)
     {
-        $ticket = DetailAnulation::where('number_ticket','=',$idticket)->get();
+        $ticket = DetailAnulation::where('number_ticket','=',$idticket)
+                  ->where('trys','=',Null)
+                  ->orWhere('trys','=',0)
+                  ->get();
+
+        return \Response::json($ticket, 200);
+    }
+
+    public function sendEmailTicketByID($idticket)
+    {
+        //Retornamos los Registro que tengan un correo de la tabla detalle_anulacion con el Número de ticket -> $idticket
+        $ticket = DetailAnulation::where('number_ticket','=',$idticket)
+        //->where('email','<>',Null)
+        ->Where('email','<>','')
+        ->get();
+        // Enviamos los correos
         return \Response::json($ticket, 200);
     }
 

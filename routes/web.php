@@ -70,6 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/detalle-anulacion', [AnulationController::class, 'detailAnulation'])->name('app.anulation.detailanulation');
     Route::get('/ver-detalle-anulacion/{id}', [AnulationController::class, 'showDetailAnulation'])->name('app.anulation.show.detailanulation');
     Route::get('/consultar-ticket/{idticket}', [AnulationController::class, 'consultingDetailTicketByID'])->name('app.consulting-ticket');
+    Route::get('/enviar-correos/{idticket}', [AnulationController::class, 'sendEmailTicketByID'])->name('app.sending-email');
 
 });
 

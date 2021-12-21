@@ -119,6 +119,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-4 text-center mt-8">
+                        <div class="row align-items-center">
+                            <div class="col-lg-5 text-left">
+                                <p class="mb-0">Correo:</p>
+                            </div>
+                            <div class="col-lg-7">
+                                <input type="text" value="{{$detailanulation->email}}" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@
             <h2 class="text-pri">ANULACION {{$anulation->number_ticket}}</h2>
         </div>
         <div class="row mt-48 mb-36">
-            <form method="POST" action="{{route('app.anulation.update',['id'=>$anulation->id])}}">
+            <form id="form_editar_anulacion" method="POST" action="{{route('app.anulation.update',['id'=>$anulation->id])}}">
                 <div class="col-lg-12">
                     @csrf
                     <div class="row">
@@ -16,7 +16,7 @@
                                     <p class="mb-0">Número Ticket</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" value="{{$anulation->number_ticket}}"
+                                    <input type="text" id="nro_ticket" class="form-control" value="{{$anulation->number_ticket}}"
                                            readonly name="number_ticket">
                                 </div>
                             </div>
@@ -161,7 +161,7 @@
                                     <p class="mb-0">Estado</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select class="form-control" name="state">
+                                    <select id="estado_anulacion" class="form-control" name="state">
                                         <option selected disabled>Seleccione un estado</option>
                                         <option value="Ingresado"
                                                 @if($anulation->state==="Ingresado") selected='selected' @endif>
@@ -185,7 +185,7 @@
                             <div class="row align-items-center">
                                 <div class="col-lg-12 text-left text-lg-center font-weight-bold">
                                     <hr>
-                                    <button type="submit"
+                                    <button id="edit-anulacion" type="submit"
                                             class="btn bg-pri border-pri text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
                                             style="min-width:190px;"> Editar Anulación
                                     </button>
@@ -200,11 +200,54 @@
 @endsection
 @push('scripts')
     <script type="text/javascript">
-        $(document).ready(function () {
-            consultingAnulation('A-20122133810')
-        })
 
-        const consultingAnulation = (idticket) => {
+
+        $('#edit-anulacion').on('click', function(e){
+            e.preventDefault();
+            let estado = $('#estado_anulacion option:selected').val();
+            let idticket = $('#nro_ticket').val();
+
+            if(estado == "Cerrado"){
+                $.ajax({
+                type: "GET",
+                url: uri + "consultar-ticket/" + idticket,
+                success: function (response) {
+
+                    registros_nc = response.length;
+                    console.log(registros_nc);
+
+                    Swal.fire({
+                        title: 'Esta seguro que desea cerrar esta anulación?',
+                        text: 'Actualmente hay ' + registros_nc + ' Registro no contactados, desea enviarles una notificación?',
+                        showDenyButton: true,
+                        showCancelButton: true,
+                        confirmButtonText: 'No, cerrar anulación',
+                        denyButtonText: `Notificar pacientes`,
+                        cancelButtonText: `Cancelar`,
+                    }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                            $('#form_editar_anulacion').submit();
+                        } else if (result.isDenied) {
+                            console.log("Notificar a pacientes del ticket " + idticket);
+                        }
+                    })
+                   console.log(response)
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+            }else{
+                $('#form_editar_anulacion').submit();
+            }
+
+
+
+            //consultingAnulation('A-20122133810');
+        });
+
+        /*const consultingAnulation = (idticket) => {
             $.ajax({
                 type: "GET",
                 url: uri + "consultar-ticket/" + idticket,
@@ -215,6 +258,6 @@
                     console.log(error);
                 }
             });
-        }
+        }*/
     </script>
 @endpush

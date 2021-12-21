@@ -160,6 +160,7 @@ class RequerimentController extends Controller
             ->orderBy('created_at', 'DESC')
             ->where('requeriments.id', '=', $id)
             ->first();
+
         return view('requeriment.show',
             ['requeriment' => $requeriment,
                 'clinics' => $clinics
@@ -188,6 +189,7 @@ class RequerimentController extends Controller
             ->orderBy('created_at', 'DESC')
             ->where('requeriments.id', '=', $id)
             ->first();
+
         return view('requeriment.edit',
             [
                 'requeriment' => $requeriment,

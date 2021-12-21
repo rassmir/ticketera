@@ -219,6 +219,7 @@
                                         {{--                                            <option value="{{$clinic->id}}">{{$clinic->name}}</option>--}}
                                         {{--                                        @endforeach--}}
                                     </select>
+
                                 </div>
                             </div>
                         </div>
@@ -468,6 +469,26 @@
 @endsection
 @push('scripts')
     <script type="text/javascript">
+
+
+$(document).ready(function(){
+    RecuperarSucursales();
+});
+
+const RecuperarSucursales = () => {
+    $.ajax({
+                type: "GET",
+                url: uri + "sucursales/" + 4,
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+    });
+}
+
+
         // let uri = 'http://localhost:8000/';
         const onChangeState = () => {
             let now = new Date();

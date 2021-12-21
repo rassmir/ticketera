@@ -24,6 +24,7 @@ class DetailAnulation extends Model
         'tiphication',
         'executive',
         'date_gestion',
-        'trys'
+        'trys',
+        'email'
     ];
 }

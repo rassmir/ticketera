@@ -42,6 +42,7 @@ class DetailAnulationsImport implements ToModel, WithStartRow
             'executive' => $row[10],
             'date_gestion' => $row[11],
             'trys' => $row[12],
+            'email' => $row[13],
         ]);
     }
 }
