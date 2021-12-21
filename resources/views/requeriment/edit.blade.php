@@ -82,7 +82,7 @@
                                     <p class="mb-0">Estado</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select class="form-control" name="state">
+                                    <select class="form-control" name="state" id="state" onchange="onChangeState()">
                                         <option value="Ingresado"
                                                 @if($requeriment->state==="Ingresado") selected='selected' @endif>
                                             Ingresado
@@ -211,12 +211,13 @@
                                     <select id="clinics" class="form-control ob selectpicker" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Clínica" name="clinic_id"
                                             onchange="selectBranches()">
-                                        <option selected value="{{$requeriment->clinicid}}">{{$requeriment->clinicname}}</option>
-{{--                                        @foreach($clinics as $clinic)--}}
-{{--                                            <option value="{{$clinic->id}}"--}}
-{{--                                                    @if($clinic->id==$requeriment->clinic_id) selected='selected' @endif>{{$clinic->name}}</option>--}}
-{{--                                            <option value="{{$clinic->id}}">{{$clinic->name}}</option>--}}
-{{--                                        @endforeach--}}
+                                        <option selected
+                                                value="{{$requeriment->clinicid}}">{{$requeriment->clinicname}}</option>
+                                        {{--                                        @foreach($clinics as $clinic)--}}
+                                        {{--                                            <option value="{{$clinic->id}}"--}}
+                                        {{--                                                    @if($clinic->id==$requeriment->clinic_id) selected='selected' @endif>{{$clinic->name}}</option>--}}
+                                        {{--                                            <option value="{{$clinic->id}}">{{$clinic->name}}</option>--}}
+                                        {{--                                        @endforeach--}}
                                     </select>
                                 </div>
                             </div>
@@ -230,7 +231,8 @@
                                     <select id="branches" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Sucursal" name="branch_id"
                                             onchange="selectCenterMedic()">
-                                        <option selected value="{{$requeriment->branid}}">{{$requeriment->braname}}</option>
+                                        <option selected
+                                                value="{{$requeriment->branid}}">{{$requeriment->braname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -246,7 +248,8 @@
                                             data-type="select" data-msj="Seleccione un Centro Médico"
                                             name="center_medical_id"
                                             onchange="selectUnits()">
-                                        <option selected value="{{$requeriment->centerid}}">{{$requeriment->centername}}</option>
+                                        <option selected
+                                                value="{{$requeriment->centerid}}">{{$requeriment->centername}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -261,7 +264,8 @@
                                     <select id="units" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Unidad" name="unit_id"
                                             onchange="selectProfessionals()">
-                                        <option selected value="{{$requeriment->unitid}}">{{$requeriment->unitname}}</option>
+                                        <option selected
+                                                value="{{$requeriment->unitid}}">{{$requeriment->unitname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -277,7 +281,8 @@
                                             data-type="select" data-msj="Seleccione un profesional"
                                             name="professional_id"
                                             onchange="selectEspecialities()">
-                                        <option selected value="{{$requeriment->profid}}">{{$requeriment->profname}}</option>
+                                        <option selected
+                                                value="{{$requeriment->profid}}">{{$requeriment->profname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -292,7 +297,8 @@
                                     <select id="especialities" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Especialidad"
                                             name="especiality_id">
-                                        <option selected value="{{$requeriment->espid}}">{{$requeriment->espname}}</option>
+                                        <option selected
+                                                value="{{$requeriment->espid}}">{{$requeriment->espname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -403,7 +409,7 @@
                                     <p class="mb-0">Fecha y hora del ticket solucionado</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="datetime" class="form-control" readonly name="date_solution"
+                                    <input id="date_solution" type="datetime" class="form-control" readonly name="date_solution"
                                            value="{{$requeriment->date_solution}}">
                                 </div>
                             </div>
@@ -425,7 +431,7 @@
                                     <p class="mb-0">Fecha de cierre de la solicitud</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="date" class="form-control" readonly name="date_close"
+                                    <input id="date_close" type="text" class="form-control" readonly name="date_close"
                                            value="{{$requeriment->date_close}}">
                                 </div>
                             </div>
@@ -462,13 +468,24 @@
 @endsection
 @push('scripts')
     <script type="text/javascript">
-        let uri = 'http://localhost:8000/';
-
+        // let uri = 'http://localhost:8000/';
+        const onChangeState = () => {
+            let now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            let state = $("#state").val();
+            if (state === 'Solucionado') {
+                $("#date_solution").val(now.toISOString().slice(0, 16));
+                $("#date_close").val('');
+            }else if(state === 'Cerrado'){
+                $("#date_close").val(now.toISOString().slice(0, 16));
+                $("#date_solution").val('');
+            }
+        }
         // $(document).ready(function () {
-            // let clinic_id = $("#clinics").val();
-            // let branch_id = $("#branches").val();
-            // console.log(branch_id);
-            // editselectBranches(clinic_id)
+        // let clinic_id = $("#clinics").val();
+        // let branch_id = $("#branches").val();
+        // console.log(branch_id);
+        // editselectBranches(clinic_id)
         // });
 
         const editselectBranches = (clinic_id) => {

@@ -64,9 +64,6 @@
                                 <div class="col-lg-7">
                                     <select class="form-control" name="state">
                                         <option value="Ingresado">Ingresado</option>
-                                        <option value="Proceso">En Proceso</option>
-                                        <option value="Solucionado">Solucionado</option>
-                                        <option value="Cerrado">Cerrado</option>
                                     </select>
                                 </div>
                             </div>
