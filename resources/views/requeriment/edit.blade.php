@@ -431,7 +431,7 @@
                                     <p class="mb-0">Fecha de cierre de la solicitud</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input id="date_close" type="text" class="form-control" readonly name="date_close"
+                                    <input id="date_close" type="datetime" class="form-control" readonly name="date_close"
                                            value="{{$requeriment->date_close}}">
                                 </div>
                             </div>
@@ -478,6 +478,7 @@
                 $("#date_close").val('');
             }else if(state === 'Cerrado'){
                 $("#date_close").val(now.toISOString().slice(0, 16));
+            }else{
                 $("#date_solution").val('');
             }
         }

@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/guardar-excel', [AnulationController::class, 'importexcel'])->name('app.anulation.import.excel');
     Route::get('/detalle-anulacion', [AnulationController::class, 'detailAnulation'])->name('app.anulation.detailanulation');
     Route::get('/ver-detalle-anulacion/{id}', [AnulationController::class, 'showDetailAnulation'])->name('app.anulation.show.detailanulation');
+    Route::get('/consultar-ticket/{idticket}', [AnulationController::class, 'consultingDetailTicketByID'])->name('app.consulting-ticket');
+
 });
 
 Route::view('editar-detalle-anulacion','anulation.edit-detail-anulation');

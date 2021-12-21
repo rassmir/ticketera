@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title','Editar Anulación')
 @section('app-content')
-<div class="main-content p-48 p-sm-16 bg-white mt-sm-16">
+    <div class="main-content p-48 p-sm-16 bg-white mt-sm-16">
         <div class="text-left">
             <h2 class="text-pri">ANULACION {{$anulation->number_ticket}}</h2>
         </div>
@@ -16,7 +16,8 @@
                                     <p class="mb-0">Número Ticket</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="text" class="form-control" value="{{$anulation->number_ticket}}" readonly name="number_ticket">
+                                    <input type="text" class="form-control" value="{{$anulation->number_ticket}}"
+                                           readonly name="number_ticket">
                                 </div>
                             </div>
                         </div>
@@ -29,7 +30,8 @@
                                     <select id="clinics" class="form-control ob selectpicker" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Clínica" name="clinic_id"
                                             onchange="selectBranches()" readonly>
-                                        <option selected value="{{$anulation->clinicid}}">{{$anulation->clinicname}}</option>
+                                        <option selected
+                                                value="{{$anulation->clinicid}}">{{$anulation->clinicname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -59,7 +61,8 @@
                                             data-type="select" data-msj="Seleccione un Centro Médico"
                                             name="center_medical_id"
                                             onchange="selectUnits()">
-                                        <option selected value="{{$anulation->centerid}}">{{$anulation->centername}}</option>
+                                        <option selected
+                                                value="{{$anulation->centerid}}">{{$anulation->centername}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -74,7 +77,8 @@
                                     <select id="units" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Unidad" name="unit_id"
                                             onchange="selectProfessionals()" readonly>
-                                        <option selected value="{{$anulation->unitid}}">{{$anulation->unitname}}</option>
+                                        <option selected
+                                                value="{{$anulation->unitid}}">{{$anulation->unitname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -90,7 +94,8 @@
                                             data-type="select" data-msj="Seleccione un profesional"
                                             name="professional_id"
                                             onchange="selectEspecialities()">
-                                        <option selected value="{{$anulation->profid}}">{{$anulation->profname}}</option>
+                                        <option selected
+                                                value="{{$anulation->profid}}">{{$anulation->profname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -123,14 +128,16 @@
                                             Motivo1
                                         </option>
                                         <option value="motivo2"
-                                                @if($anulation->anulation==="motivo2") selected='selected' @endif>Motivo2
+                                                @if($anulation->anulation==="motivo2") selected='selected' @endif>
+                                            Motivo2
                                         </option>
                                         <option value="motivo3"
                                                 @if($anulation->anulation==="motivo3") selected='selected' @endif>
                                             Motivo3
                                         </option>
                                         <option value="motivo4"
-                                                @if($anulation->anulation==="motivo4") selected='selected' @endif>Motivo4
+                                                @if($anulation->anulation==="motivo4") selected='selected' @endif>
+                                            Motivo4
                                         </option>
                                     </select>
                                 </div>
@@ -158,14 +165,14 @@
                                         <option selected disabled>Seleccione un estado</option>
                                         <option value="Ingresado"
                                                 @if($anulation->state==="Ingresado") selected='selected' @endif>
-                                                Ingresado
+                                            Ingresado
                                         </option>
                                         <option value="Proceso"
                                                 @if($anulation->state==="Proceso") selected='selected' @endif>En Proceso
                                         </option>
                                         <option value="Solucionado"
                                                 @if($anulation->state==="Solucionado") selected='selected' @endif>
-                                                Solucionado
+                                            Solucionado
                                         </option>
                                         <option value="Cerrado"
                                                 @if($anulation->state==="Cerrado") selected='selected' @endif>Cerrado
@@ -193,6 +200,21 @@
 @endsection
 @push('scripts')
     <script type="text/javascript">
+        $(document).ready(function () {
+            consultingAnulation('A-20122133810')
+        })
 
+        const consultingAnulation = (idticket) => {
+            $.ajax({
+                type: "GET",
+                url: uri + "consultar-ticket/" + idticket,
+                success: function (response) {
+                   console.log(response)
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
     </script>
 @endpush

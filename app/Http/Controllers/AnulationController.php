@@ -96,6 +96,12 @@ class AnulationController extends Controller
         ]);
     }
 
+    public function consultingDetailTicketByID($idticket)
+    {
+        $ticket = DetailAnulation::where('number_ticket','=',$idticket)->get();
+        return \Response::json($ticket, 200);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -187,8 +193,8 @@ class AnulationController extends Controller
             ->join('professionals', 'professionals.id', '=', 'anulations.professional_id')
             ->join('especialities', 'especialities.id', '=', 'anulations.especiality_id')
             ->select(['anulations.*', 'clinics.name as clinicname', 'clinics.id as clinicid',
-                'center_medicals.name as centername','center_medicals.id as centerid', 'professionals.name as profname','professionals.id as profid',
-                'branches.name as braname','branches.id as branid', 'units.name as unitname','units.id as unitid', 'especialities.name as espname','especialities.id as espid'])
+                'center_medicals.name as centername', 'center_medicals.id as centerid', 'professionals.name as profname', 'professionals.id as profid',
+                'branches.name as braname', 'branches.id as branid', 'units.name as unitname', 'units.id as unitid', 'especialities.name as espname', 'especialities.id as espid'])
             ->orderBy('created_at', 'DESC')
             ->where('anulations.id', '=', $id)
             ->first();
