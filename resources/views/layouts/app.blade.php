@@ -110,14 +110,14 @@
                 @endif
                 <h3>Requerimientos</h3>
                 <ul class="pl-8">
+                    <li><a href="{{route('app.dashboard')}}"><i class="fas fa-chevron-right mr-16"></i> Dashboard
+                            requerimiento</a>
+                    </li>
                     @if(!Auth::user()->hasRole('administrador'))
                     <li><a href="{{route('app.requeriment.create')}}"><i class="fas fa-chevron-right mr-16"></i> Nuevo
                             requerimiento</a>
                     </li>
                     @endif
-                        <li><a href="{{route('app.dashboard')}}"><i class="fas fa-chevron-right mr-16"></i> Dashboard
-                                requerimiento</a>
-                        </li>
                     <li><a href="{{route('app.requeriment.index')}}"><i class="fas fa-chevron-right mr-16"></i> Buscar
                             Requerimiento</a></li>
                 </ul>
