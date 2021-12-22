@@ -2,6 +2,7 @@
 @section('title','Buscar Requerimiento')
 @section('app-content')
     <div class="main-content p-48 p-sm-16 bg-white mt-sm-16">
+
         <div class="text-left">
             <h2 class="text-pri">LISTADO DE REQUERIMIENTOS</h2>
             <p class="font-20 font-pri">Muestra las acciones realiza por los usuarios</p>
@@ -119,6 +120,14 @@
                         </tbody>
                     </table>
                 </div>
+
+                {{-- {{$requerimiento}} --}}
+                    <div class="col-lg-4">
+                        <canvas id="myChart" width="400" height="400"></canvas>
+                    </div>
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4"></div>
+
             </div>
         </div>
     </div>
@@ -126,6 +135,48 @@
 
 @push('scripts')
     <script type="text/javascript">
+
+        // GRFICOS
+
+        const ctx = document.getElementById('myChart');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+// FIN DE GRAFICOS
+
+
         const confirmDelete = (id) => {
             deleteRegister(id, 'eliminar-requerimiento', '{{csrf_token()}}');
         }

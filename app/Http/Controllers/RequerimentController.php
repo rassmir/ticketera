@@ -31,6 +31,7 @@ class RequerimentController extends Controller
             ['requeriments.number_solicity', 'LIKE', '%' . $rq_name . '%'],
             ['clinics.name', 'LIKE', '%' . $clinic_name . '%']
         ];
+
         $requeriments = Requeriment::join('clinics', 'clinics.id', '=', 'requeriments.clinic_id')
             ->join('branches', 'branches.id', '=', 'requeriments.branch_id')
             ->join('units', 'units.id', '=', 'requeriments.unit_id')
@@ -40,9 +41,26 @@ class RequerimentController extends Controller
             ->select(['requeriments.*', 'clinics.name as clinicname', 'branches.name as branchname', 'units.name as unitname', 'center_medicals.name as centername', 'professionals.name as profname', 'especialities.name as spename'])
             ->where($params)
             ->get();
+
+        // PRUEBA
+
+        $requeriment = Requeriment::join('clinics', 'clinics.id', '=', 'requeriments.clinic_id')
+        ->join('branches', 'branches.id', '=', 'requeriments.branch_id')
+        ->join('units', 'units.id', '=', 'requeriments.unit_id')
+        ->join('center_medicals', 'center_medicals.id', '=', 'requeriments.center_medical_id')
+        ->join('professionals', 'professionals.id', '=', 'requeriments.professional_id')
+        ->join('especialities', 'especialities.id', '=', 'requeriments.especiality_id')
+        ->select(['requeriments.*', 'clinics.name as clinicname', 'branches.name as branchname', 'units.name as unitname', 'center_medicals.name as centername', 'professionals.name as profname', 'especialities.name as spename'])
+        ->where($params)
+        ->get();
+
+        // FIN PRUEBA
+
+
         return view('requeriment.index',
             ['requeriments' => $requeriments,
-             'clinics' => $clinics
+             'clinics' => $clinics,
+             'requerimiento' => $requeriment
             ]);
     }
 

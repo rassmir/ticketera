@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('title','Editar Requerimiento')
 @section('app-content')
+
     <div class="main-content p-48 p-sm-16 bg-white mt-sm-16">
+    <div class='loader'><div class='content'><img src='{{asset('assets/img/loader.gif')}}'><p>Cargando datos del Requerimiento...</p></div></div>
         <div class="text-left">
             <h2 class="text-pri">EDITAR REQUERIMIENTO</h2>
         </div>
@@ -211,13 +213,10 @@
                                     <select id="clinics" class="form-control ob selectpicker" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Clínica" name="clinic_id"
                                             onchange="selectBranches()">
-                                        <option selected
-                                                value="{{$requeriment->clinicid}}">{{$requeriment->clinicname}}</option>
-                                        {{--                                        @foreach($clinics as $clinic)--}}
-                                        {{--                                            <option value="{{$clinic->id}}"--}}
-                                        {{--                                                    @if($clinic->id==$requeriment->clinic_id) selected='selected' @endif>{{$clinic->name}}</option>--}}
-                                        {{--                                            <option value="{{$clinic->id}}">{{$clinic->name}}</option>--}}
-                                        {{--                                        @endforeach--}}
+                                                @foreach($clinics as $clinic)
+                                                <option value="{{$clinic->id}}"
+                                                    @if($clinic->id==$requeriment->clinic_id) selected='selected' @endif>{{$clinic->name}}</option>
+                                                @endforeach
                                     </select>
 
                                 </div>
@@ -232,8 +231,6 @@
                                     <select id="branches" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Sucursal" name="branch_id"
                                             onchange="selectCenterMedic()">
-                                        <option selected
-                                                value="{{$requeriment->branid}}">{{$requeriment->braname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -249,8 +246,6 @@
                                             data-type="select" data-msj="Seleccione un Centro Médico"
                                             name="center_medical_id"
                                             onchange="selectUnits()">
-                                        <option selected
-                                                value="{{$requeriment->centerid}}">{{$requeriment->centername}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -265,8 +260,6 @@
                                     <select id="units" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Unidad" name="unit_id"
                                             onchange="selectProfessionals()">
-                                        <option selected
-                                                value="{{$requeriment->unitid}}">{{$requeriment->unitname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -282,8 +275,6 @@
                                             data-type="select" data-msj="Seleccione un profesional"
                                             name="professional_id"
                                             onchange="selectEspecialities()">
-                                        <option selected
-                                                value="{{$requeriment->profid}}">{{$requeriment->profname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -298,8 +289,6 @@
                                     <select id="especialities" class="form-control ob" data-live-search="true"
                                             data-type="select" data-msj="Seleccione una Especialidad"
                                             name="especiality_id">
-                                        <option selected
-                                                value="{{$requeriment->espid}}">{{$requeriment->espname}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -468,23 +457,36 @@
     </div>
 @endsection
 @push('scripts')
-    <script type="text/javascript">
-
+<script type="text/javascript">
 
 $(document).ready(function(){
-    RecuperarSucursales();
+    RecuperarDatos("sucursales", '{{$requeriment->clinicid}}', "#branches", '{{$requeriment->branid}}');
+    RecuperarDatos("centros-medicos", '{{$requeriment->branid}}', "#center_medics", '{{$requeriment->centerid}}');
+    RecuperarDatos("unidades", '{{$requeriment->centerid}}', "#units", '{{$requeriment->unitid}}');
+    RecuperarDatos("profesionales", '{{$requeriment->unitid}}', "#professionals", '{{$requeriment->profid}}');
+    RecuperarDatos("especialidades", '{{$requeriment->profid}}', "#especialities", '{{$requeriment->espid}}');
+    setTimeout(function(){
+        $('.loader').fadeOut();
+    }, 3000);
 });
 
-const RecuperarSucursales = () => {
+const RecuperarDatos = (urlBase, valor, idSelect, valorActual) => {
     $.ajax({
-                type: "GET",
-                url: uri + "sucursales/" + 4,
-                success: function (response) {
-                    console.log(response);
-                },
-                error: function (error) {
-                    console.log(error);
-                }
+        type: "GET",
+        url: uri + urlBase + "/" +  valor,
+        success: function (response) {
+            $.each(response, function(i, item){
+                $(idSelect).append("<option value="+ item['id'] +">" + item['name'] + "</option>");
+            });
+            setTimeout(function(){
+                $("option[value='"+valorActual+"']", idSelect).attr("selected", true);
+            }, 300);
+
+
+        },
+        error: function (error) {
+            console.log(error);
+        }
     });
 }
 

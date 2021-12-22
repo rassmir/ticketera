@@ -122,10 +122,16 @@
                                 <div class="col-lg-7">
                                     <select class="form-control" name="anulation">
                                         <option selected disabled>Seleccione un motivo</option>
-                                        <option value="motivo1">motivo1</option>
-                                        <option value="motivo2">motivo2</option>
-                                        <option value="motivo3">motivo3</option>
-                                        <option value="motivo4">motivo4</option>
+                                        <option value="reagendamiento">Reagendamiento</option>
+                                        <option value="peticion_paciente">Petición del paciente</option>
+                                        <option value="motivos_medico">Motivos de médico</option>
+                                        <option value="vacaciones">Vacaciones</option>
+                                        <option value="personal">Personal</option>
+                                        <option value="curso">Curso/congreso</option>
+                                        <option value="enfermedad">Enfermedad</option>
+                                        <option value="duelo">Duelo</option>
+                                        <option value="reunion">Reunion</option>
+                                        <option value="otro">Otro</option>
                                     </select>
                                 </div>
                             </div>
