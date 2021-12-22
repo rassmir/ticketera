@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ProfeRequeriment;
 use App\Models\Branch;
 use App\Models\CenterMedical;
 use App\Models\Clinic;
@@ -11,9 +12,10 @@ use App\Models\Requeriment;
 use App\Models\Unit;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use function Ramsey\Uuid\v1;
 
 class RequerimentController extends Controller
 {
@@ -146,6 +148,16 @@ class RequerimentController extends Controller
             $requeriments->date_close = $request->input('date_close');
             $requeriments->user_close = $request->input('user_close');
             $requeriments->save();
+            try {
+                $email_professional =  Requeriment::join('professionals', 'professionals.id', '=', 'requeriments.professional_id')
+                    ->select(['professionals.email as correo'])
+                    ->where('professionals.id','=', $requeriments->professional_id)
+                    ->first();
+                Mail::to($email_professional->correo)->queue(new ProfeRequeriment($requeriments));
+            }catch (Exception $ex){
+                Log::error($ex);
+            }
+
             return Redirect::back()->with(array(
                 'success' => 'Guardado Correctamente !!'
             ));
@@ -279,5 +291,9 @@ class RequerimentController extends Controller
         return Redirect::back()->with(array(
             'success' => 'Eliminado Correctamente !!'
         ));
+    }
+
+    public function dashboard(){
+        return view('requeriment.dashboard');
     }
 }

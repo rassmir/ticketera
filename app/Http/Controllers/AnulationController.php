@@ -110,7 +110,6 @@ class AnulationController extends Controller
     {
         //Retornamos los Registro que tengan un correo de la tabla detalle_anulacion con el Número de ticket -> $idticket
         $ticket = DetailAnulation::where('number_ticket','=',$idticket)
-        //->where('email','<>',Null)
         ->Where('email','<>','')
         ->get();
         // Enviamos los correos

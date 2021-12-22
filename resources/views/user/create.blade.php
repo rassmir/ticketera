@@ -127,16 +127,6 @@
 
 @push('scripts')
 <script>
-    $('.tipo_usuario').on('change', function(){
-        var tipo_usuario = $('option:selected', this).val();
-
-        if(tipo_usuario == "4"){
-            $('.listado-clinicas').css({'display':'block'});
-        }else{
-            $('.listado-clinicas').css({'display':'none'});
-        }
-    });
-
     $('#btn-registrar-usuario').on('click', function(e){
         e.preventDefault();
         var password = $('#pass').val();

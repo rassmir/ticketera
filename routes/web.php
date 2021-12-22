@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RequerimentController;
 use App\Http\Controllers\AnulationController;
+use App\Http\Controllers\ResetPasswordController;
 
 
 Route::get('logs', [LogViewerController::class, 'index']);
@@ -22,7 +23,11 @@ Route::get('logs', [LogViewerController::class, 'index']);
 
 Route::get('/', [UserController::class, 'login'])->name('login');
 Route::post('/autenticacion', [UserController::class, 'authenticate'])->name('app.user.auth');
-Route::get('/recuperar-contrasena', [UserController::class, 'forget'])->name('forget');
+Route::get('/recuperar-contrasena', [ResetPasswordController::class, 'index'])->name('forget');
+Route::post('/recuperar-contrasena', [ResetPasswordController::class, 'validateToResetPassword'])->name('validate-reset-password');
+Route::get('token-password/{token}', [ResetPasswordController::class, 'formEmailPasswordWithToken'])->name('show.after.reset');
+Route::post('/enviar-resetear-contrasena', [ResetPasswordController::class, 'submitResetPasswordForm'])->name('submit-reset-password');
+
 
 Route::group(['middleware' => ['role:administrador', 'auth']], function () {
     Route::get('/nuevo-usuario', [UserController::class, 'create'])->name('app.user.create');
@@ -48,6 +53,7 @@ Route::group(['middleware' => ['auth']], function () {
     //Especialidades
     Route::get('/especialidades/{idprofessional}', [RequerimentController::class, 'especialities'])->name('app.especialities');
 
+    Route::get('/dashboard-requerimientos', [RequerimentController::class, 'dashboard'])->name('app.dashboard');
     Route::get('/buscar-requerimientos', [RequerimentController::class, 'index'])->name('app.requeriment.index');
     Route::get('/nuevo-requerimiento', [RequerimentController::class, 'create'])->name('app.requeriment.create');
     Route::post('/guardar-requerimiento', [RequerimentController::class, 'store'])->name('app.requeriment.store');

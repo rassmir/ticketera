@@ -29,6 +29,7 @@ class CreateDetailAnulationsTable extends Migration
             $table->string('executive')->nullable();
             $table->string('date_gestion')->nullable();
             $table->string('trys')->nullable();
+            $table->string('email')->nullable();
         });
     }
 
