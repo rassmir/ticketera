@@ -85,7 +85,7 @@
                                 <p class="mb-0">Fecha de carga:</p>
                             </div>
                             <div class="col-lg-7">
-                                <input type="date" value="{{$detailanulation->load}}" class="form-control" readonly>
+                                <input type="date" value="{{$detailanulation->date_load}}" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                                 <p class="mb-0">Fecha de cierre:</p>
                             </div>
                             <div class="col-lg-7">
-                                <input type="text" value="{{$detailanulation->close}}" class="form-control" readonly>
+                                <input type="text" value="{{$detailanulation->date_close}}" class="form-control" readonly>
                             </div>
                         </div>
                     </div>

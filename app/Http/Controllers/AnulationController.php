@@ -96,12 +96,56 @@ class AnulationController extends Controller
         ]);
     }
 
+
+    public function editDetailAnulation($id){
+        $detailanulation = DetailAnulation::findOrFail($id);
+        return view('anulation.edit-detail-anulation', [
+            'detailanulation' => $detailanulation
+        ]);
+    }
+
+    public function updateDetailAnulation(Request $request, $id)
+    {
+        try {
+            $detailAnulation = DetailAnulation::findOrFail($id);
+            $detailAnulation->date_anulation = $request->input('date_anulation');
+            $detailAnulation->hour = $request->input('hour');
+            $detailAnulation->patient = $request->input('patient');
+            $detailAnulation->name_doctor = $request->input('name_doctor');
+            $detailAnulation->phone1 = $request->input('phone1');
+            $detailAnulation->phone2 = $request->input('phone2');
+            $detailAnulation->date_load = $request->input('date_load');
+            $detailAnulation->date_close = $request->input('date_close');
+            $detailAnulation->executive = $request->input('executive');
+            $detailAnulation->trys = $request->input('trys');
+            $detailAnulation->email = $request->input('email');
+            $detailAnulation->update();
+            return Redirect::back()->with(array(
+                'success' => 'Actualizado Correctamente !!'
+            ));
+        } catch (Exception $ex) {
+            Log::error($ex);
+            return Redirect::back()->with(array(
+                'error' => 'Error al actualizar !!'
+            ));
+        }
+    }
+
+    public function destroyDetailAnulation($id)
+    {
+        $detailAnulation = DetailAnulation::findOrFail($id);
+        $detailAnulation->delete($id);
+        return Redirect::back()->with(array(
+            'success' => 'Eliminado Correctamente !!'
+        ));
+    }
+
     public function consultingDetailTicketByID($idticket)
     {
-        $ticket = DetailAnulation::where('number_ticket','=',$idticket)
-                  ->where('trys','=',Null)
-                  ->orWhere('trys','=',0)
-                  ->get();
+        $ticket = DetailAnulation::where('number_ticket', '=', $idticket)
+            ->where('trys', '=', Null)
+            ->orWhere('trys', '=', 0)
+            ->get();
 
         return \Response::json($ticket, 200);
     }
@@ -109,9 +153,9 @@ class AnulationController extends Controller
     public function sendEmailTicketByID($idticket)
     {
         //Retornamos los Registro que tengan un correo de la tabla detalle_anulacion con el Número de ticket -> $idticket
-        $ticket = DetailAnulation::where('number_ticket','=',$idticket)
-        ->Where('email','<>','')
-        ->get();
+        $ticket = DetailAnulation::where('number_ticket', '=', $idticket)
+            ->Where('email', '<>', '')
+            ->get();
         // Enviamos los correos
         return \Response::json($ticket, 200);
     }

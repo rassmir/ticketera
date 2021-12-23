@@ -20,7 +20,8 @@
                             </div>
                         </div>
                         <div class="col-lg-1 text-center mt-8">
-                            <button type="submit" class="btn bg-sec border-sec text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
+                            <button type="submit"
+                                    class="btn bg-sec border-sec text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
                                     style="min-width:190px;"><i class="fas fa-search"></i> Buscar
                             </button>
                         </div>
@@ -73,10 +74,20 @@
                                 <td>{{$detail->trys}}</td>
                                 <td>
                                     <ul class="d-lg-flex">
-                                        <li><a href="/ver-detalle-anulacion/{{$detail->id}}"><i class="far fa-eye mr-12 font-16"></i></a></li>
+                                        <li><a href="/ver-detalle-anulacion/{{$detail->id}}"><i
+                                                    class="far fa-eye mr-12 font-16"></i></a></li>
                                         @if(!Auth::user()->hasRole('administrador'))
-                                        <li><i class="far fa-edit mr-12"></i></li>
+                                            <li><a href="/editar-detalle-anulacion/{{$detail->id}}"><i
+                                                        class="far fa-edit mr-12"></i></a></li>
                                         @endif
+                                        <li>
+                                            <form method="POST" action="{{route('app.anulation.delete.detailanulation',['id'=>$detail->id])}}">
+                                            @csrf
+                                            <button type="submit" style="border: none;background: transparent;color: #1463a5;cursor: pointer;">
+                                                <i class="far fa-trash-alt mr-12 font-16"></i>
+                                            </button>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </td>
                             </tr>

@@ -75,6 +75,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/guardar-excel', [AnulationController::class, 'importexcel'])->name('app.anulation.import.excel');
     Route::get('/detalle-anulacion', [AnulationController::class, 'detailAnulation'])->name('app.anulation.detailanulation');
     Route::get('/ver-detalle-anulacion/{id}', [AnulationController::class, 'showDetailAnulation'])->name('app.anulation.show.detailanulation');
+    Route::get('/editar-detalle-anulacion/{id}', [AnulationController::class, 'editDetailAnulation'])->name('app.anulation.edit.detailanulation');
+    Route::post('/actualizar-detalle-anulacion/{id}', [AnulationController::class, 'updateDetailAnulation'])->name('app.anulation.update.detailanulation');
+    Route::post('/eliminar-detalle-anulacion/{id}', [AnulationController::class, 'destroyDetailAnulation'])->name('app.anulation.delete.detailanulation');
+
     Route::get('/consultar-ticket/{idticket}', [AnulationController::class, 'consultingDetailTicketByID'])->name('app.consulting-ticket');
     Route::get('/enviar-correos/{idticket}', [AnulationController::class, 'sendEmailTicketByID'])->name('app.sending-email');
 
