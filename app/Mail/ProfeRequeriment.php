@@ -26,6 +26,6 @@ class ProfeRequeriment extends Mailable
      */
     public function build()
     {
-        return $this->view('email.requeriment', $this->requeriments->toArray())->subject('prueba');
+        return $this->view('email.requeriment', $this->requeriments->toArray())->subject('Banmedica Requerimiento');
     }
 }

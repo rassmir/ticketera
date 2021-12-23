@@ -16,6 +16,7 @@ class CreateAnulationsTable extends Migration
         Schema::create('anulations', function (Blueprint $table) {
             $table->id();
             $table->string('number_ticket');
+            $table->string('date');
             $table->unsignedBigInteger('clinic_id');
             $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('branch_id');

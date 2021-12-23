@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\DetailAnulationsImport;
+use App\Mail\AnulationMail;
 use App\Models\Anulation;
 use App\Models\CenterMedical;
 use App\Models\Clinic;
@@ -10,7 +11,9 @@ use App\Models\DetailAnulation;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
@@ -97,7 +100,8 @@ class AnulationController extends Controller
     }
 
 
-    public function editDetailAnulation($id){
+    public function editDetailAnulation($id)
+    {
         $detailanulation = DetailAnulation::findOrFail($id);
         return view('anulation.edit-detail-anulation', [
             'detailanulation' => $detailanulation
@@ -185,6 +189,7 @@ class AnulationController extends Controller
         try {
             $anulations = new Anulation();
             $anulations->number_ticket = $request->input('number_ticket');
+            $anulations->date = date('dmy' . date('gis'));
             $anulations->clinic_id = $request->input('clinic_id');
             $anulations->branch_id = $request->input('branch_id');
             $anulations->center_medical_id = $request->input('center_medical_id');
@@ -196,6 +201,24 @@ class AnulationController extends Controller
             $anulations->state = $request->input('state');
             $anulations->user_id = Auth::user()->id;
             $anulations->save();
+            try {
+                $anulationsJoin = Anulation::join('clinics', 'clinics.id', '=', 'anulations.clinic_id')
+                    ->join('center_medicals', 'center_medicals.id', '=', 'anulations.center_medical_id')
+                    ->join('professionals', 'professionals.id', '=', 'anulations.professional_id')
+                    ->join('especialities', 'especialities.id', '=', 'anulations.especiality_id')
+                    ->join('units', 'units.id', '=', 'anulations.unit_id')
+                    ->join('branches', 'branches.id', '=', 'anulations.branch_id')
+                    ->join('users', 'users.id', '=', 'anulations.user_id')
+                    ->select(['anulations.*', 'units.name as uname', 'clinics.name as clinic', 'users.name_complete', 'center_medicals.name as centername',
+                        'professionals.name as profname', 'especialities.name as espname', 'branches.name as brname'])
+                    ->where('anulations.date', '=', $anulations->date)
+                    ->first();
+
+                $beta = [$anulationsJoin->number_ticket,$anulationsJoin->created_at,$anulationsJoin->clinic,$anulationsJoin->brname,$anulationsJoin->centername,$anulationsJoin->uname,$anulationsJoin->profname,$anulationsJoin->espname,$anulationsJoin->anulation];
+                Mail::to('rassmirflores@gmail.com')->queue(new AnulationMail($beta));
+            } catch (Exception $ex) {
+                Log::error($ex);
+            }
             return redirect()->route('app.anulation.excel', ['ticket' => $request->input('number_ticket')])->with(array(
                 'success' => 'Guardado Correctamente !!'
             ));
