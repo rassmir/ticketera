@@ -8,11 +8,11 @@
 
         <div class="mt-48 mb-36">
             <form method="GET" action="{{route('app.user.index')}}" class="row">
-                <div class="col-lg-10">
+                <div class="col-lg-9">
                     <div class="row">
                         <div class="col-lg-6 mt-8">
                             <div class="row align-items-center">
-                                <div class="col-lg-5 text-left">
+                                <div class="col-lg-3 text-left">
                                     <p class="mb-0">Tipo de usuario</p>
                                 </div>
                                 <div class="col-lg-7">
@@ -28,7 +28,7 @@
 
                         <div class="col-lg-6 mt-8">
                             <div class="row align-items-center">
-                                <div class="col-lg-5 text-left">
+                                <div class="col-lg-3 text-left">
                                     <p class="mb-0">RUT</p>
                                 </div>
                                 <div class="col-lg-7">
@@ -38,12 +38,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-1 text-center mt-8">
-                    <button class="btn bg-sec border-sec text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
+                <div class="col-lg-3 text-center mt-8">
+                    <button class="btn bg-sec border-sec text-white pl-20 pr-20 mt-sm-20 font-weight-bold"
                             style="min-width:190px;" type="submit">
                         <i class="fas fa-search"></i>
                         Buscar usuario
                     </button>
+                    <a href="{{url('buscar-usuarios')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20"><i class="fas fa-undo-alt"></i> Regresar</a>
                 </div>
             </form>
             <div class="col-lg-12 mt-20">
@@ -106,7 +107,7 @@
                 buttons: [{
                     extend: 'excelHtml5',
                     exportOptions: {
-                        columns: [0, 1, 2, 3]
+                        columns: [0, 1, 2, 3, 4]
                     }
                 },
                     {
@@ -114,7 +115,7 @@
                         orientation: 'landscape',
                         pageSize: 'LEGAL',
                         exportOptions: {
-                            columns: [0, 1, 2, 3]
+                            columns: [0, 1, 2, 3, 4]
                         }
                     },
                     'print'
@@ -127,7 +128,7 @@
                         page: 'all', // 'all', 'current'
                         search: 'none' // 'none', 'applied', 'removed'
                     },
-                    columns: [0, 1, 2, 3, 4, 5]
+                    columns: [0, 1, 2, 3, 4]
                 }
 
             });

@@ -187,7 +187,7 @@
                                 <div class="col-lg-7">
                                     <select id="estado_anulacion" class="form-control" name="state">
                                         <option selected disabled>Seleccione un estado</option>
-                                        <option value="Ingresado"
+                                        <option value="Ingresado" disabled
                                                 @if($anulation->state==="Ingresado") selected='selected' @endif>
                                             Ingresado
                                         </option>
@@ -209,6 +209,7 @@
                             <div class="row align-items-center">
                                 <div class="col-lg-12 text-left text-lg-center font-weight-bold">
                                     <hr>
+                                    <a href="{{url('buscar-anulaciones')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20">Regresar</a>
                                     <button id="edit-anulacion" type="submit"
                                             class="btn bg-pri border-pri text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
                                             style="min-width:190px;"> Editar Anulación

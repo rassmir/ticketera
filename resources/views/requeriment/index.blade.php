@@ -9,7 +9,7 @@
         </div>
         <div class="mt-48 mb-36">
             <form method="GET" action="{{route('app.requeriment.index')}}" class="row">
-            <div class="col-lg-10">
+            <div class="col-lg-9">
                 <div class="row">
                     <div class="col-lg-6 mt-8">
                         <div class="row align-items-center">
@@ -59,10 +59,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-1 text-center mt-8">
+            <div class="col-lg-3 text-center mt-8">
                 <button class="btn bg-sec border-sec text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
                         style="min-width:190px;" type="submit"><i class="fas fa-search"></i> Buscar
                 </button>
+                <a href="{{url('buscar-requerimientos')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20"><i class="fas fa-undo-alt"></i> Regresar</a>
             </div>
             </form>
             <!-- TABLA -->
@@ -121,12 +122,8 @@
                     </table>
                 </div>
 
-                {{-- {{$requerimiento}} --}}
-                    <div class="col-lg-4">
-                        <canvas id="myChart" width="400" height="400"></canvas>
-                    </div>
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4"></div>
+
+
 
             </div>
         </div>

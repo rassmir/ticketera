@@ -8,7 +8,7 @@
 
         <div class="mt-48 mb-36">
             <form method="get" action="{{route('app.anulation.index')}}" class="row">
-                <div class="col-lg-10">
+                <div class="col-lg-9">
                     <div class="row">
                         <div class="col-lg-6 mt-8">
                             <div class="row align-items-center">
@@ -43,10 +43,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-1 text-center mt-8">
-                    <button type="submit" class="btn bg-sec border-sec text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
+                <div class="col-lg-3 text-center mt-8">
+                    <button type="submit" class="btn bg-sec border-sec text-white pl-20 pr-20 mt-sm-20 font-weight-bold"
                             style="min-width:190px;"><i class="fas fa-search"></i> Buscar
                     </button>
+                    <a href="{{url('buscar-anulaciones')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20"><i class="fas fa-undo-alt"></i> Regresar</a>
                 </div>
             </form>
             <!-- TABLA -->
@@ -111,7 +112,7 @@
                 buttons: [{
                     extend: 'excelHtml5',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5]
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7]
                     }
                 },
                     {
@@ -119,7 +120,7 @@
                         orientation: 'landscape',
                         pageSize: 'LEGAL',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7]
                         }
                     },
                     'print'
@@ -132,7 +133,7 @@
                         page: 'all', // 'all', 'current'
                         search: 'none' // 'none', 'applied', 'removed'
                     },
-                    columns: [0, 1, 2, 3, 4, 5]
+                    columns: [0, 1, 2, 3, 4, 5, 6,]
                 }
 
             });

@@ -85,7 +85,7 @@
                                 </div>
                                 <div class="col-lg-7">
                                     <select class="form-control" name="state" id="state" onchange="onChangeState()">
-                                        <option value="Ingresado"
+                                        <option value="Ingresado" disabled
                                                 @if($requeriment->state==="Ingresado") selected='selected' @endif>
                                             Ingresado
                                         </option>
@@ -125,7 +125,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Primer nombre*</p>
+                                    <p class="mb-0">Primer nombre (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <input type="text" value="{{$requeriment->name}}" class="form-control ob"
@@ -138,7 +138,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Apellido Paterno*</p>
+                                    <p class="mb-0">Apellido Paterno (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <input type="text" value="{{$requeriment->father_name}}" class="form-control ob"
@@ -152,7 +152,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Apellido Materno*</p>
+                                    <p class="mb-0">Apellido Materno (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <input type="text" value="{{$requeriment->mother_name}}" class="form-control ob"
@@ -190,7 +190,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Fono fijo 1*</p>
+                                    <p class="mb-0">Fono fijo 1 (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <input type="text" value="{{$requeriment->fije1}}" class="form-control ob"
@@ -283,7 +283,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Especialidad*</p>
+                                    <p class="mb-0">Especialidad (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <select id="especialities" class="form-control ob" data-live-search="true"
@@ -445,7 +445,7 @@
                                     <hr>
                                     <button id="btn-registrar-requerimiento" type="submit"
                                             class="btn bg-pri border-pri text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
-                                            style="min-width:190px;"> Actualizar
+                                            style="min-width:190px;"> Guardar cambios
                                     </button>
                                 </div>
                             </div>

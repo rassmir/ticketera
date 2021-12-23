@@ -89,10 +89,12 @@
                     <div class="row align-items-center">
                         <div class="col-lg-12 text-left text-lg-center font-weight-bold">
                             <hr>
+                            <a href="{{url('buscar-usuarios')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20">Regresar</a>
                             <button id="btn-registrar-usuario" type="submit"
                                     class="btn bg-pri border-pri text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
-                                    style="min-width:190px;"> Modificar Usuario
+                                    style="min-width:190px;"> Guardar cambios
                             </button>
+
                         </div>
                     </div>
                 </div>

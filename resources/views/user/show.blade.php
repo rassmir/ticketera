@@ -3,7 +3,7 @@
 @section('app-content')
     <div class="main-content p-48 p-sm-16 bg-white mt-sm-16">
         <div class="text-left">
-            <h2 class="text-pri">DETALLE DE USUARIO : {{$user->name_complete}}</h2>
+            <h2 class="text-pri">DETALLE DE USUARIO : {{$user->name_complete}} <a href="{{ url('/editar-usuario/'.$user->id) }}" class="btn-light ml-16 font-16 p-8 br-4 pl-20 pr-20"><i class="far fa-edit"></i> Editar usuario</a></h2>
         </div>
             <div class="row mt-48 mb-36">
                 <div class="col-lg-4">
@@ -14,6 +14,7 @@
                                     <p class="mb-0">Tipo de usuarios</p>
                                 </div>
                                 <div class="col-lg-7">
+
                                     <select class="form-control ob tipo_usuario" data-type="select" data-msj="Seleccione un Rol" name="role_id" disabled>
                                         @foreach($roles as $rol)
                                             <option disabled
@@ -59,10 +60,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="row">
+
                         <div class="col-lg-12 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
@@ -71,6 +69,13 @@
                                 <div class="col-lg-7">
                                     <input type="text" class="form-control ob" data-type="text" data-msj="Ingrese un correo" placeholder="Correo electrónico"
                                            name="email" readonly value="{{$user->email}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mt-8">
+                            <div class="row align-items-center">
+                                <div class="col-lg-12 text-left font-weight-bold mt-24">
+                                <a href="{{url('buscar-usuarios')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20">Regresar</a>
                                 </div>
                             </div>
                         </div>

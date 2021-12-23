@@ -47,11 +47,11 @@
                     <a class="dropdown-item pl-0" href="{{route('app.requeriment.create')}}"><i
                             class="fas fa-chevron-right mr-8 text-sec"></i> Nuevo requerimiento</a>
                     <a class="dropdown-item pl-0" href="{{route('app.requeriment.index')}}"><i
-                            class="fas fa-chevron-right mr-8 text-sec"></i> Buscar Requerimientos</a>
+                            class="fas fa-chevron-right mr-8 text-sec"></i> Listado de Requerimientos</a>
                     <a class="dropdown-item pl-0" href="{{route('app.anulation.create')}}"><i
                             class="fas fa-chevron-right mr-8 text-sec"></i> Nueva anulación</a>
                     <a class="dropdown-item pl-0" href="{{route('app.anulation.index')}}"><i
-                            class="fas fa-chevron-right mr-8 text-sec"></i> Buscar anulaciones</a>
+                            class="fas fa-chevron-right mr-8 text-sec"></i> Listado de Anulaciones</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item pl-0" href="{{ route('logout') }}">Cerra Sesión</a>
                 </li>
@@ -73,12 +73,12 @@
         </h3>
         <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto">
-                <li><p class="text-white pr-16 font-20">{{Auth::user()->name_complete}}</p></li>
+                <li><p class="text-white pr-16 font-20"> {{Auth::user()->name_complete}} <i class="far fa-user-circle ml-8"></i></p></li>
                 <li class="dropdown nav-item">
                     <a href="javascript:void(0)"
                        class="dropdown-toggle nav-link p-0 pl-12 pt-4 pb-4 font-16 br-4 pl-16 pr-16  text-white"
                        data-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-bars"></i>
+
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
                         <li class="nav-link">
@@ -118,7 +118,7 @@
                             requerimiento</a>
                     </li>
                     @endif
-                    <li><a href="{{route('app.requeriment.index')}}"><i class="fas fa-chevron-right mr-16"></i> Buscar
+                    <li><a href="{{route('app.requeriment.index')}}"><i class="fas fa-chevron-right mr-16"></i> Listado de
                             Requerimiento</a></li>
                 </ul>
                 <h3>Anulaciones</h3>
@@ -127,7 +127,7 @@
                     <li><a href="{{route('app.anulation.create')}}"><i class="fas fa-chevron-right mr-16"></i> Nueva
                             anulación</a></li>
                     @endif
-                    <li><a href="{{route('app.anulation.index')}}"><i class="fas fa-chevron-right mr-16"></i> Buscar
+                    <li><a href="{{route('app.anulation.index')}}"><i class="fas fa-chevron-right mr-16"></i> Listado de
                             anulación</a></li>
                     <li><a href="{{route('app.anulation.detailanulation')}}"><i class="fas fa-chevron-right mr-16"></i>
                             Detalle

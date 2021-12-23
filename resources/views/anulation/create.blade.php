@@ -23,7 +23,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Clinica</p>
+                                    <p class="mb-0">Clinica (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <select id="clinics" class="form-control ob selectpicker" data-live-search="true"
@@ -40,7 +40,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Sucursal</p>
+                                    <p class="mb-0">Sucursal (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <select id="branches" class="form-control ob" data-live-search="true"
@@ -55,7 +55,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Centro Médico</p>
+                                    <p class="mb-0">Centro Médico (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <select id="center_medics" class="form-control ob" data-live-search="true"
@@ -71,7 +71,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Unidades</p>
+                                    <p class="mb-0">Unidades (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <select id="units" class="form-control ob" data-live-search="true"
@@ -86,7 +86,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Profesionales</p>
+                                    <p class="mb-0">Profesionales (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <select id="professionals" class="form-control ob" data-live-search="true"
@@ -102,7 +102,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Especialidad*</p>
+                                    <p class="mb-0">Especialidad (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <select id="especialities" class="form-control ob" data-live-search="true"
@@ -117,7 +117,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Motivo Anulación*</p>
+                                    <p class="mb-0">Motivo Anulación (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <select class="form-control" name="anulation">
@@ -139,7 +139,7 @@
                         <div class="col-lg-12 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-12 text-left font-weight-bold">
-                                    <p class="mb-0">Mensaje secretaria*</p>
+                                    <p class="mb-0">Mensaje secretaria (*)</p>
                                 </div>
                                 <div class="col-lg-12 mt-8">
                                     <textarea name="message" class="form-control" placeholder="Ingrese una observación"
@@ -154,12 +154,9 @@
                                     <p class="mb-0">Estado</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select class="form-control" name="state">
-                                        <option selected disabled>Seleccione un estado</option>
-                                        <option value="Ingresado">Ingresado</option>
-                                        <option value="Proceso">En Proceso</option>
-                                        <option value="Solucionado">Solucionado</option>
-                                        <option value="Cerrado">Cerrado</option>
+                                    <select class="form-control" name="state" disabled>
+                                        <option selected>Seleccione un estado</option>
+                                        <option value="Ingresado" selected>Ingresado</option>
                                     </select>
                                 </div>
                             </div>

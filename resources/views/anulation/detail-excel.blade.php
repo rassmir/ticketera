@@ -6,10 +6,10 @@
             <h2 class="text-pri">Detalles de Anulaciones</h2>
         </div>
         <div class="row mt-48 mb-36">
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <form method="get" action="{{route('app.anulation.detailanulation')}}">
                     <div class="row">
-                        <div class="col-lg-6 mt-8">
+                        <div class="col-lg-5 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left">
                                     <p class="mb-0">Número de anulación</p>
@@ -19,11 +19,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-1 text-center mt-8">
+                        <div class="col-lg-5 text-center mt-8">
                             <button type="submit"
                                     class="btn bg-sec border-sec text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
                                     style="min-width:190px;"><i class="fas fa-search"></i> Buscar
                             </button>
+                            <a href="{{url('detalle-anulacion')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20"><i class="fas fa-undo-alt"></i> Regresar</a>
                         </div>
                     </div>
                 </form>

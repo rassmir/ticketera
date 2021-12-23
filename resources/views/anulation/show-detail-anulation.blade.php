@@ -3,7 +3,7 @@
 @section('app-content')
 <div class="main-content p-48 p-sm-16 bg-white mt-sm-16">
         <div class="text-left">
-            <h2 class="text-pri">Registro {{$detailanulation->number_ticket}}</h2>
+            <h2 class="text-pri">Registro {{$detailanulation->number_ticket}} <a href="{{ url('/editar-detalle-anulacion/'.$detailanulation->id) }}" class="btn-light ml-16 font-16 p-8 br-4 pl-20 pr-20"><i class="far fa-edit"></i> Editar registro</a></h2>
             <hr>
         </div>
         <div class="row mt-48 mb-36">
@@ -129,6 +129,10 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-12 text-center">
+                            <hr>
+                            <a href="{{url('detalle-anulacion')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20">Regresar</a>
+                        </div>
                 </div>
             </div>
         </div>

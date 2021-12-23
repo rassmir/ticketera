@@ -9,11 +9,15 @@
 
 
         <div class="text-left">
-            <h2 class="text-pri">VER REQUERIMIENTO : {{$requeriment->rut}}</h2>
+            <h2 class="text-pri">VER REQUERIMIENTO : {{$requeriment->rut}} <a href="{{ url('/editar-requerimiento/'.$requeriment->id) }}" class="btn-light ml-16 font-16 p-8 br-4 pl-20 pr-20"><i class="far fa-edit"></i> Editar requerimiento</a></h2>
         </div>
             <div class="row mt-48 mb-36">
                 <div class="col-lg-12">
                     <div class="row">
+                    <div class="col-lg-12 mt-20">
+                            <h3 class="font-20">Datos del requerimiento</h3>
+                            <hr>
+                        </div>
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
@@ -47,6 +51,10 @@
                                     </select>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-lg-12 mt-20">
+                            <h3 class="font-20">Datos del paciente</h3>
+                            <hr>
                         </div>
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
@@ -125,6 +133,9 @@
                                     <input type="text" class="form-control ob" data-type="number" data-msj="Ingrese número fijo" placeholder="Fono fijo 1" name="fije1" readonly value="{{$requeriment->fije1}}">
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-lg-12 mt-20">
+                            <hr>
                         </div>
 
                         <div class="col-lg-4 mt-8">
@@ -348,6 +359,10 @@
                                            name="user_close" readonly value="{{$requeriment->user_close}}">
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-lg-12 text-center">
+                            <hr>
+                            <a href="{{url('buscar-requerimientos')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20">Regresar</a>
                         </div>
                     </div>
                 </div>

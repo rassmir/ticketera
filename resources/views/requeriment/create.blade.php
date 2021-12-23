@@ -62,7 +62,7 @@
                                     <p class="mb-0">Estado</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select class="form-control" name="state">
+                                    <select class="form-control" name="state" disabled>
                                         <option value="Ingresado">Ingresado</option>
                                     </select>
                                 </div>
@@ -75,7 +75,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">RUT*</p>
+                                    <p class="mb-0">RUT (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <input type="text" maxlength="10" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" class="RUT form-control ob" data-type="text" data-msj="Ingrese un RUT"  placeholder="RUT" name="rut">
@@ -86,7 +86,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Primer nombre*</p>
+                                    <p class="mb-0">Primer nombre (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <input type="text" class="form-control ob" data-type="text" data-msj="Ingrese un nombre" placeholder="Primer nombre" name="name">
@@ -97,7 +97,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Apellido Paterno*</p>
+                                    <p class="mb-0">Apellido Paterno (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <input type="text" class="form-control ob" data-type="text" data-msj="Ingrese el apellido paterno" placeholder="Apellido Paterno"
@@ -109,7 +109,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Apellido Materno*</p>
+                                    <p class="mb-0">Apellido Materno (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <input type="text" class="form-control ob" data-type="text" data-msj="Ingrese el apellido materno" placeholder="Apellido Materno"
@@ -143,7 +143,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Fono fijo 1*</p>
+                                    <p class="mb-0">Fono fijo 1 (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <input type="text" class="form-control ob" maxlength="12" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" data-type="number" data-msj="Ingrese número fijo" placeholder="Fono fijo 1" name="fije1">
@@ -154,7 +154,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Email*</p>
+                                    <p class="mb-0">Email (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <input type="email" class="form-control ob" data-type="mail" data-msj="Ingrese un correo" placeholder="Ingrese un Email" name="email">
@@ -241,7 +241,7 @@
                         <div class="col-lg-4 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
-                                    <p class="mb-0">Especialidad*</p>
+                                    <p class="mb-0">Especialidad (*)</p>
                                 </div>
                                 <div class="col-lg-7">
                                     <select id="especialities" class="form-control ob" data-live-search="true" data-type="select" data-msj="Seleccione una Especialidad" name="especiality_id">
@@ -326,7 +326,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12 mt-16">
+                        <div class="col-lg-12 mt-16" style="">
                             <div class="row align-items-center">
                                 <div class="col-lg-12 text-left font-weight-bold">
                                     <p class="mb-0">Respuesta del centro médico</p>

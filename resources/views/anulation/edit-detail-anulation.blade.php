@@ -3,7 +3,7 @@
 @section('app-content')
     <div class="main-content p-48 p-sm-16 bg-white mt-sm-16">
         <div class="text-left">
-            <h2 class="text-pri">Registro {{$detailanulation->number_ticket}}</h2>
+            <h2 class="text-pri">Registro {{$detailanulation->number_ticket}} </h2>
             <hr>
         </div>
         <form method="POST" action="{{route('app.anulation.update.detailanulation',['id'=>$detailanulation->id])}}">
@@ -136,6 +136,7 @@
                             <div class="row align-items-center">
                                 <div class="col-lg-12 text-left text-lg-center font-weight-bold">
                                     <hr>
+                                    <a href="{{url('detalle-anulacion')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20">Regresar</a>
                                     <button id="edit-anulacion" type="submit"
                                             class="btn bg-pri border-pri text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
                                             style="min-width:190px;"> Editar Detalle Anulación
@@ -143,6 +144,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>

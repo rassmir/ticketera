@@ -65,7 +65,7 @@ function ValidadorAuto(clase) {
         switch (type) {
             case "text":
 
-                campo.css({'border': '2px solid #df2517'});
+
                 //campo.remove();
 
                 if (!valor) {
@@ -75,6 +75,8 @@ function ValidadorAuto(clase) {
                         title: 'Parece que hubo un error',
                         text: msj_val
                     });
+
+                    campo.css({'border': '2px solid #df2517'});
 
                     retorno = "false";
                     return false;
