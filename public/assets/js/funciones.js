@@ -201,7 +201,9 @@ $(document).ready(function () {
     }
 });
 
-let uri = 'http://localhost:8000/';
+// let uri = 'http://localhost:8000/';
+let uri ='https://banmedica.herokuapp.com/';
+
 const selectBranches = () => {
     let clinic_id = $("#clinics").val();
     $.ajax({
