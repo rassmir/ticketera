@@ -9,62 +9,63 @@
         </div>
         <div class="mt-48 mb-36">
             <form method="GET" action="{{route('app.requeriment.index')}}" class="row">
-            <div class="col-lg-9">
-                <div class="row">
-                    <div class="col-lg-6 mt-8">
-                        <div class="row align-items-center">
-                            <div class="col-lg-5 text-left">
-                                <p class="mb-0">Clínica</p>
-                            </div>
-                            <div class="col-lg-7">
-                                <select class="form-control" name="clinic_name">
-                                    <option selected disabled>Filtro por clínica</option>
-                                    @foreach($clinics as $clinic)
-                                    <option value="{{$clinic->name}}">{{$clinic->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mt-8">
-                        <div class="row align-items-center">
-                            <div class="col-lg-5 text-left">
-                                <p class="mb-0">Nº Requerimiento</p>
-                            </div>
-                            <div class="col-lg-7">
-                                <input type="text" class="form-control" placeholder="#" name="rq_name">
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-6 mt-8">
+                            <div class="row align-items-center">
+                                <div class="col-lg-5 text-left">
+                                    <p class="mb-0">Clínica</p>
+                                </div>
+                                <div class="col-lg-7">
+                                    <select class="form-control" name="clinic_name">
+                                        <option selected disabled>Filtro por clínica</option>
+                                        @foreach($clinics as $clinic)
+                                            <option value="{{$clinic->name}}">{{$clinic->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 mt-8">
-                        <div class="row align-items-center">
-                            <div class="col-lg-5 text-left">
-                                <p class="mb-0">Desde</p>
-                            </div>
-                            <div class="col-lg-7">
-                                <input type="date" class="form-control" placeholder="Desde">
+                        <div class="col-lg-6 mt-8">
+                            <div class="row align-items-center">
+                                <div class="col-lg-5 text-left">
+                                    <p class="mb-0">Nº Requerimiento</p>
+                                </div>
+                                <div class="col-lg-7">
+                                    <input type="text" class="form-control" placeholder="#" name="rq_name">
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-lg-6 mt-8">
+                            <div class="row align-items-center">
+                                <div class="col-lg-5 text-left">
+                                    <p class="mb-0">Desde</p>
+                                </div>
+                                <div class="col-lg-7">
+                                    <input type="date" class="form-control" placeholder="Desde">
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="col-lg-6 mt-8">
-                        <div class="row align-items-center">
-                            <div class="col-lg-5 text-left">
-                                <p class="mb-0">Hasta</p>
-                            </div>
-                            <div class="col-lg-7">
-                                <input type="date" class="form-control" placeholder="Hasta">
+                        <div class="col-lg-6 mt-8">
+                            <div class="row align-items-center">
+                                <div class="col-lg-5 text-left">
+                                    <p class="mb-0">Hasta</p>
+                                </div>
+                                <div class="col-lg-7">
+                                    <input type="date" class="form-control" placeholder="Hasta">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 text-center mt-8">
-                <button class="btn bg-sec border-sec text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
-                        style="min-width:190px;" type="submit"><i class="fas fa-search"></i> Buscar
-                </button>
-                <a href="{{url('buscar-requerimientos')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20"><i class="fas fa-undo-alt"></i> Regresar</a>
-            </div>
+                <div class="col-lg-3 text-center mt-8">
+                    <button class="btn bg-sec border-sec text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
+                            style="min-width:190px;" type="submit"><i class="fas fa-search"></i> Buscar
+                    </button>
+                    <a href="{{url('buscar-requerimientos')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20"><i
+                            class="fas fa-undo-alt"></i> Regresar</a>
+                </div>
             </form>
             <!-- TABLA -->
             <div class="col-lg-12 mt-36">
@@ -87,9 +88,45 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($requeriments as $key=> $req)
-                            <tr>
-                                <td>{{$req->number_solicity}}</td>
+                        @if(Auth::user()->hasRole('usuario'))
+                            @foreach($requeriments as $requeriment)
+                                @foreach($requeriment as $req)
+                                    <tr>
+                                        <td>{{$req->number_solicity}}</td>
+                                        <td>{{$req->rut}}</td>
+                                        <td>{{$req->datetime_local}}</td>
+                                        <td>{{$req->state}}</td>
+                                        <td>{{$req->clinicname}}</td>
+                                        <td>{{$req->branchname}}</td>
+                                        <td>{{$req->centername}}</td>
+                                        <td>{{$req->unitname}}</td>
+                                        <td>{{$req->profname}}</td>
+                                        <td>{{$req->spename}}</td>
+                                        <td>
+                                            <ul class="d-lg-flex">
+
+                                                <li><a href="ver-requerimiento/{{$req->id}}"
+                                                       class="btn bg-tri mr-12 text-black"><i class="far fa-eye"></i></a>
+                                                </li>
+                                                @if(!Auth::user()->hasRole('administrador'))
+                                                    <li><a href="editar-requerimiento/{{$req->id}}"
+                                                           class="btn bg-tri mr-12 text-black"><i
+                                                                class="far fa-edit"></i></a></li>
+                                                @endif
+                                                {{--                                                <li>--}}
+                                                {{--                                                    <button onclick="confirmDelete({{$req->id}})"--}}
+                                                {{--                                                            class="btn bg-tri mr-12 text-black"><i--}}
+                                                {{--                                                            class="fas fa-trash"></i></button>--}}
+                                                {{--                                                </li>--}}
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
+                        @else
+                            @foreach($requeriments as $key=> $req)
+                                <tr>
+                                    <td>{{$req->number_solicity}}</td>
                                     <td>{{$req->rut}}</td>
                                     <td>{{$req->datetime_local}}</td>
                                     <td>{{$req->state}}</td>
@@ -106,25 +143,23 @@
                                                    class="btn bg-tri mr-12 text-black"><i class="far fa-eye"></i></a>
                                             </li>
                                             @if(!Auth::user()->hasRole('administrador'))
-                                                <li><a href="editar-requerimiento/{{$req->id}}" class="btn bg-tri mr-12 text-black"><i
+                                                <li><a href="editar-requerimiento/{{$req->id}}"
+                                                       class="btn bg-tri mr-12 text-black"><i
                                                             class="far fa-edit"></i></a></li>
-                                                            @endif
-{{--                                                <li>--}}
-{{--                                                    <button onclick="confirmDelete({{$req->id}})"--}}
-{{--                                                            class="btn bg-tri mr-12 text-black"><i--}}
-{{--                                                            class="fas fa-trash"></i></button>--}}
-{{--                                                </li>--}}
-                                            </ul>
+                                            @endif
+                                            {{--                                                <li>--}}
+                                            {{--                                                    <button onclick="confirmDelete({{$req->id}})"--}}
+                                            {{--                                                            class="btn bg-tri mr-12 text-black"><i--}}
+                                            {{--                                                            class="fas fa-trash"></i></button>--}}
+                                            {{--                                                </li>--}}
+                                        </ul>
                                     </td>
                                 </tr>
                             @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>
-
-
-
-
             </div>
         </div>
     </div>
@@ -136,42 +171,42 @@
         // GRFICOS
 
         const ctx = document.getElementById('myChart');
-const myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
             }
-        }
-    }
-});
+        });
 
-// FIN DE GRAFICOS
+        // FIN DE GRAFICOS
 
 
         const confirmDelete = (id) => {
@@ -186,7 +221,7 @@ const myChart = new Chart(ctx, {
                 buttons: [{
                     extend: 'excelHtml5',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5,6,7,8,9]
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
                     }
                 },
                     {
@@ -194,7 +229,7 @@ const myChart = new Chart(ctx, {
                         orientation: 'landscape',
                         pageSize: 'LEGAL',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5,6,7,8,9]
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
                         }
                     },
                     'print'
@@ -207,7 +242,7 @@ const myChart = new Chart(ctx, {
                         page: 'all', // 'all', 'current'
                         search: 'none' // 'none', 'applied', 'removed'
                     },
-                    columns: [0, 1, 2, 3, 4, 5,6,7,8,9]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
                 }
 
             });

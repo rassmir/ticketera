@@ -6,16 +6,17 @@ use App\Mail\ProfeRequeriment;
 use App\Models\Branch;
 use App\Models\CenterMedical;
 use App\Models\Clinic;
+use App\Models\ClinicUser;
 use App\Models\Especiality;
 use App\Models\Professional;
 use App\Models\Requeriment;
 use App\Models\Unit;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
-use function Ramsey\Uuid\v1;
 
 class RequerimentController extends Controller
 {
@@ -26,7 +27,8 @@ class RequerimentController extends Controller
      */
     public function index(Request $request)
     {
-        $clinics = Clinic::orderBy('name')->get();
+        $clinics = '';
+        $requeriments = '';
         $rq_name = trim($request->get('rq_name'));
         $clinic_name = trim($request->get('clinic_name'));
         $params = [
@@ -44,25 +46,31 @@ class RequerimentController extends Controller
             ->where($params)
             ->get();
 
-        // PRUEBA
-
-        $requeriment = Requeriment::join('clinics', 'clinics.id', '=', 'requeriments.clinic_id')
-        ->join('branches', 'branches.id', '=', 'requeriments.branch_id')
-        ->join('units', 'units.id', '=', 'requeriments.unit_id')
-        ->join('center_medicals', 'center_medicals.id', '=', 'requeriments.center_medical_id')
-        ->join('professionals', 'professionals.id', '=', 'requeriments.professional_id')
-        ->join('especialities', 'especialities.id', '=', 'requeriments.especiality_id')
-        ->select(['requeriments.*', 'clinics.name as clinicname', 'branches.name as branchname', 'units.name as unitname', 'center_medicals.name as centername', 'professionals.name as profname', 'especialities.name as spename'])
-        ->where($params)
-        ->get();
-
-        // FIN PRUEBA
-
-
+        if (Auth::user()->hasRole('usuario')) {
+            $requeriments = [];
+            $clinics = ClinicUser::join('clinics', 'clinics.id', '=', 'clinic_user.clinic_id')
+                ->select(['clinics.name', 'clinic_id'])
+                ->where('user_id', '=', Auth::user()->id)
+                ->get();
+            foreach ($clinics as $clinic) {
+                array_push($requeriments, Requeriment::join('clinics', 'clinics.id', '=', 'requeriments.clinic_id')
+                    ->join('branches', 'branches.id', '=', 'requeriments.branch_id')
+                    ->join('units', 'units.id', '=', 'requeriments.unit_id')
+                    ->join('center_medicals', 'center_medicals.id', '=', 'requeriments.center_medical_id')
+                    ->join('professionals', 'professionals.id', '=', 'requeriments.professional_id')
+                    ->join('especialities', 'especialities.id', '=', 'requeriments.especiality_id')
+                    ->select(['requeriments.*', 'clinics.name as clinicname', 'branches.name as branchname', 'units.name as unitname', 'center_medicals.name as centername', 'professionals.name as profname', 'especialities.name as spename'])
+                    ->where($params)
+                    ->where('requeriments.clinic_id', '=', $clinic->clinic_id)
+                    ->get());
+            }
+//            dd($requeriments);
+        } else {
+            $clinics = Clinic::orderBy('name')->get();
+        }
         return view('requeriment.index',
             ['requeriments' => $requeriments,
-             'clinics' => $clinics,
-             'requerimiento' => $requeriment
+                'clinics' => $clinics,
             ]);
     }
 
@@ -149,12 +157,12 @@ class RequerimentController extends Controller
             $requeriments->user_close = $request->input('user_close');
             $requeriments->save();
             try {
-                $email_professional =  Requeriment::join('professionals', 'professionals.id', '=', 'requeriments.professional_id')
+                $email_professional = Requeriment::join('professionals', 'professionals.id', '=', 'requeriments.professional_id')
                     ->select(['professionals.email as correo'])
-                    ->where('professionals.id','=', $requeriments->professional_id)
+                    ->where('professionals.id', '=', $requeriments->professional_id)
                     ->first();
                 Mail::to($email_professional->correo)->queue(new ProfeRequeriment($requeriments));
-            }catch (Exception $ex){
+            } catch (Exception $ex) {
                 Log::error($ex);
             }
 
@@ -214,8 +222,8 @@ class RequerimentController extends Controller
             ->join('professionals', 'professionals.id', '=', 'requeriments.professional_id')
             ->join('especialities', 'especialities.id', '=', 'requeriments.especiality_id')
             ->select(['requeriments.*', 'clinics.name as clinicname', 'clinics.id as clinicid',
-                'center_medicals.name as centername','center_medicals.id as centerid', 'professionals.name as profname','professionals.id as profid',
-                'branches.name as braname','branches.id as branid', 'units.name as unitname','units.id as unitid', 'especialities.name as espname','especialities.id as espid'])
+                'center_medicals.name as centername', 'center_medicals.id as centerid', 'professionals.name as profname', 'professionals.id as profid',
+                'branches.name as braname', 'branches.id as branid', 'units.name as unitname', 'units.id as unitid', 'especialities.name as espname', 'especialities.id as espid'])
             ->orderBy('created_at', 'DESC')
             ->where('requeriments.id', '=', $id)
             ->first();
@@ -293,7 +301,8 @@ class RequerimentController extends Controller
         ));
     }
 
-    public function dashboard(){
+    public function dashboard()
+    {
         return view('requeriment.dashboard');
     }
 }
