@@ -32,7 +32,7 @@ class UsersImport implements ToCollection, WithStartRow
              RoleUser::create([
                  'role_id' => $row[4],
                  'user_id' => $user->id,
-                 'user_type' => 'App\Models\User'
+                 'user_type' => $row[5]
              ]);
         }
     }
