@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
@@ -112,9 +111,15 @@ class UserController extends Controller
     {
         try {
             $users = User::where('email', $request->email)->get();
-            if (sizeof($users) > 0){
+            $rut = User::where('rut', $request->rut)->get();
+            if (sizeof($users) > 0) {
                 return Redirect::back()->with(array(
                     'error' => 'Este correo ya existe!!'
+                ));
+            }
+            if (sizeof($rut) > 0) {
+                return Redirect::back()->with(array(
+                    'error' => 'Este rut ya existe!!'
                 ));
             }
 
