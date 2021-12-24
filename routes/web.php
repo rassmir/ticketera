@@ -37,7 +37,10 @@ Route::group(['middleware' => ['role:administrador', 'auth']], function () {
     Route::get('/editar-usuario/{id}', [UserController::class, 'edit'])->name('app.user.edit');
     Route::post('/actualizar-usuario/{id}', [UserController::class, 'update'])->name('app.user.update');
     Route::post('/eliminar-usuario/{id}', [UserController::class, 'destroy'])->name('app.user.destroy');
+    Route::get('/descargar-plantilla-usuario', [UserController::class, 'downloadPlantilla'])->name('app.user.excel-download');
+    Route::post('/importar-usuario', [UserController::class, 'importuser'])->name('app.user.import');
 });
+
 //Usuarios
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');

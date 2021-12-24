@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\UsersImport;
 use App\Models\Clinic;
 use App\Models\Role;
 use App\Models\RoleUser;
@@ -11,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -86,6 +89,18 @@ class UserController extends Controller
             ]);
     }
 
+    public function downloadPlantilla()
+    {
+        return response()->download(storage_path('app/public/'.'plantilla.xlsx'));
+    }
+
+    public function importuser(Request $request)
+    {
+        Excel::import(new UsersImport(), $request->file('excel'));
+        return redirect()->route('app.user.index')->with(array(
+            'success' => 'Importado Correctamente !!'
+        ));
+    }
 
     /**
      * Store a newly created resource in storage.
