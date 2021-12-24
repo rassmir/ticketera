@@ -94,16 +94,14 @@
                                                         class="far fa-edit mr-12"></i></a></li>
                                         @endif
                                         <li>
-                                            <form method="POST" action="{{route('app.anulation.delete.detailanulation',['id'=>$detail->id])}}">
-                                            @csrf
-                                            <button type="submit" data-toggle="tooltip" data-placement="top" title="Eliminar" class="opt-listado"  style="border: none;background: transparent;color: #1463a5;cursor: pointer;">
+                                            <button type="submit" data-toggle="modal" data-target="#exampleModal{{$detail->id}}" title="Eliminar" class="opt-listado"  style="border: none;background: transparent;color: #1463a5;cursor: pointer;">
                                                 <i class="far fa-trash-alt mr-12 font-16"></i>
                                             </button>
-                                            </form>
                                         </li>
                                     </ul>
                                 </td>
                             </tr>
+                            @include('anulation.delete-detail-anulation')
                         @endforeach
                         </tbody>
                     </table>
