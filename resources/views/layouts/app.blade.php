@@ -73,7 +73,8 @@
         </h3>
         <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto">
-                <li><p class="text-white pr-16 font-20"> {{Auth::user()->name_complete}} <i class="far fa-user-circle ml-8"></i></p></li>
+                <li><p class="text-white pr-16 font-20"> {{Auth::user()->name_complete}} <i
+                            class="far fa-user-circle ml-8"></i></p></li>
                 <li class="dropdown nav-item">
                     <a href="javascript:void(0)"
                        class="dropdown-toggle nav-link p-0 pl-12 pt-4 pb-4 font-16 br-4 pl-16 pr-16  text-white"
@@ -110,22 +111,27 @@
                 @endif
                 <h3>Requerimientos</h3>
                 <ul class="pl-8">
-                    <li><a href="{{route('app.dashboard')}}"><i class="fas fa-chevron-right mr-16"></i> Dashboard
-                            requerimiento</a>
-                    </li>
-                    @if(!Auth::user()->hasRole('administrador'))
-                    <li><a href="{{route('app.requeriment.create')}}"><i class="fas fa-chevron-right mr-16"></i> Nuevo
-                            requerimiento</a>
-                    </li>
+                    @if(Auth::user()->hasRole('administrador'))
+                        <li><a href="{{route('app.dashboard')}}"><i class="fas fa-chevron-right mr-16"></i> Dashboard
+                                requerimiento</a>
+                        </li>
                     @endif
-                    <li><a href="{{route('app.requeriment.index')}}"><i class="fas fa-chevron-right mr-16"></i> Listado de
-                            Requerimiento</a></li>
+                    @if(!Auth::user()->hasRole('administrador'))
+                        <li><a href="{{route('app.requeriment.create')}}"><i class="fas fa-chevron-right mr-16"></i>
+                                Nuevo
+                                requerimiento</a>
+                        </li>
+                    @endif
+                    <li><a href="{{route('app.requeriment.index')}}"><i class="fas fa-chevron-right mr-16"></i> Listado
+                            de
+                            Requerimiento</a>
+                    </li>
                 </ul>
                 <h3>Anulaciones</h3>
                 <ul class="pl-8">
                     @if(!Auth::user()->hasRole('administrador'))
-                    <li><a href="{{route('app.anulation.create')}}"><i class="fas fa-chevron-right mr-16"></i> Nueva
-                            anulación</a></li>
+                        <li><a href="{{route('app.anulation.create')}}"><i class="fas fa-chevron-right mr-16"></i> Nueva
+                                anulación</a></li>
                     @endif
                     <li><a href="{{route('app.anulation.index')}}"><i class="fas fa-chevron-right mr-16"></i> Listado de
                             anulación</a></li>
