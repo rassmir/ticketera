@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
@@ -91,7 +91,7 @@ class UserController extends Controller
 
     public function downloadPlantilla()
     {
-        return response()->download(storage_path('app/public/'.'plantilla.xlsx'));
+        return response()->download(storage_path('app/public/' . 'plantilla.xlsx'));
     }
 
     public function importuser(Request $request)
@@ -111,6 +111,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
         try {
+            $users = User::where('email', $request->email)->get();
+            if (sizeof($users) > 0){
+                return Redirect::back()->with(array(
+                    'error' => 'Este correo ya existe!!'
+                ));
+            }
+
             $request->validate([
                 'email' => 'required|email',
                 'password' => 'required|confirmed',
