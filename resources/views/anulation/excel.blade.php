@@ -13,9 +13,10 @@
                         <p class="mb-0">Carga Excel (.xls)*</p>
                     </div>
                     <div class="col-lg-12 text-center mt-20">
-                        <input type="file" class="form-control m-auto" style="max-width:400px;" name="file">
+                        <input type="file" class="form-control m-auto mb-24" style="max-width:400px;" name="file">
+                        <a href="{{url('crear-anulacion')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20"><i class="fas fa-arrow-left"></i> Regresar</a>
                         <button type="submit"
-                                class="btn bg-pri border-pri text-white pl-24 pr-24 mt-sm-20 font-weight-bold mt-24"
+                                class="btn bg-pri border-pri text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
                                 style="min-width:190px;"> Subir registros
                         </button>
                     </div>

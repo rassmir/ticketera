@@ -47,7 +47,7 @@
                     <button type="submit" class="btn bg-sec border-sec text-white pl-20 pr-20 mt-sm-20 font-weight-bold"
                             style="min-width:190px;"><i class="fas fa-search"></i> Buscar
                     </button>
-                    <a href="{{url('buscar-anulaciones')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20"><i class="fas fa-undo-alt"></i> Regresar</a>
+                    <a href="{{url('buscar-anulaciones')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20">Limpiar</a>
                 </div>
             </form>
             <!-- TABLA -->
@@ -59,7 +59,8 @@
                         <thead>
                         <tr class="bg-pri text-white">
                             <th>#</th>
-                            <th>Numero Ticket</th>
+                            <th>Numero Anulación</th>
+                            <th>Clínica</th>
                             <th>Centro médico</th>
                             <th>Nombre Doctor</th>
                             <th>Especialidad</th>
@@ -74,6 +75,7 @@
                         <tr>
                             <td>{{$anula->id}}</td>
                             <td>{{$anula->number_ticket}}</td>
+                            <td>{{$anula->clinicname}}</td>
                             <td>{{$anula->centername}}</td>
                             <td>{{$anula->profname}}</td>
                             <td>{{$anula->espname}}</td>
@@ -83,12 +85,12 @@
                             <td>
                                 <ul class="d-lg-flex">
 
-                                    <li><a href="/ver-anulacion/{{$anula->id}}"><i class="far fa-eye mr-12 font-16"></i></a></li>
+                                    <li><a href="/ver-anulacion/{{$anula->id}}" data-toggle="tooltip" data-placement="top" title="Ver detalle" class="opt-listado"><i class="far fa-eye mr-12 font-16"></i></a></li>
                                     @if(!Auth::user()->hasRole('administrador'))
-                                    <li><a href="/editar-anulacion/{{$anula->id}}"><i class="far fa-edit mr-12 font-16"></i></a></li>
+                                    <li><a href="/editar-anulacion/{{$anula->id}}" data-toggle="tooltip" data-placement="top" title="Editar" class="opt-listado"><i class="far fa-edit mr-12 font-16"></i></a></li>
 
-                                    <li><a href="/subir-excel/{{$anula->number_ticket}}"><i class="far fa-file-excel mr-12 font-16"></i></a></li>
-                                    <li><a href="/detalle-anulacion?n_ticket={{$anula->number_ticket}}"><i class="far fa-file-alt font-16"></i></a></li>
+                                    <li><a href="/subir-excel/{{$anula->number_ticket}}" data-toggle="tooltip" data-placement="top" title="Subir registros" class="opt-listado"><i class="far fa-file-excel mr-12 font-16"></i></a></li>
+                                    <li><a href="/detalle-anulacion?n_ticket={{$anula->number_ticket}}" data-toggle="tooltip" data-placement="top" title="Detalles de registros" class="opt-listado"><i class="far fa-file-alt font-16"></i></a></li>
                                     @endif
                                 </ul>
                             </td>
@@ -103,6 +105,9 @@
 @endsection
 @push('scripts')
     <script type="text/javascript">
+
+
+
         $(document).ready(function () {
             $('#table-anulaciones').DataTable({
                 "language": {
@@ -137,6 +142,10 @@
                 }
 
             });
+
+
+
+            $('.opt-listado').tooltip();
         });
     </script>
 @endpush

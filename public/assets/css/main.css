@@ -28,3 +28,65 @@
     font-weight: bold;
     font-size: 24px;
 }
+
+.list-sidebar li {
+    margin-top: 10px;
+}
+
+.list-sidebar li a{
+    font-weight: 600;
+    color:#556575;
+}
+
+
+.list-sidebar li a:hover{
+    font-weight: 600;
+    color:#003c71;
+}
+
+
+
+.list-sidebar li a i{
+    color:#a2adb8;
+}
+
+#sidebar h3{
+    font-size: 20px;
+}
+
+/* SWEET ALERT */
+
+.swal2-styled.swal2-confirm {
+    background-color: #003c71 !important;
+    border-color: #003c71 !important;
+}
+
+/* FORM LOGIN */
+
+#cnt-form-login{
+    animation: loginShow 0.7s ease-in forwards;
+}
+
+@keyframes loginShow{
+    from{
+        transform: scale(1.2);
+        opacity: 0;
+    }
+    to{
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.b-table td{
+    border:0px !important;
+    color:#9b9eb5;
+}
+
+.table-bordered td {
+    border: 0px solid #dee2e6 !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9fafe;
+}

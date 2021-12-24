@@ -4,6 +4,17 @@
     <div class="main-content p-48 p-sm-16 bg-white mt-sm-16">
         <div class="text-left">
             <h2 class="text-pri">Detalles de Anulaciones</h2>
+            <?php
+
+            if(isset($_GET['n_ticket'])){
+                $anulacion = "Anulación " . $_GET['n_ticket'];
+            }else{
+                $anulacion = "";
+            }
+
+
+            ?>
+            <h3 class="text-light font-20"><?php echo $anulacion; ?></h3>
         </div>
         <div class="row mt-48 mb-36">
             <div class="col-lg-8">
@@ -24,7 +35,8 @@
                                     class="btn bg-sec border-sec text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
                                     style="min-width:190px;"><i class="fas fa-search"></i> Buscar
                             </button>
-                            <a href="{{url('detalle-anulacion')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20"><i class="fas fa-undo-alt"></i> Regresar</a>
+                            <a href="{{url('detalle-anulacion')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20"> Limpiar</a>
+                            <a href="{{url('buscar-anulaciones')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20"><i class="fas fa-arrow-left"></i> Regresar</a>
                         </div>
                     </div>
                 </form>
@@ -42,7 +54,7 @@
                         <thead>
                         <tr class="bg-pri text-white">
                             <th>#</th>
-                            <th>Numero Ticket</th>
+                            <th>Número Anulación</th>
                             <th>Fecha Anulación</th>
                             <th>Hora</th>
                             <th>Paciente</th>
@@ -76,15 +88,15 @@
                                 <td>
                                     <ul class="d-lg-flex">
                                         <li><a href="/ver-detalle-anulacion/{{$detail->id}}"><i
-                                                    class="far fa-eye mr-12 font-16"></i></a></li>
+                                                    class="far fa-eye mr-12 font-16 opt-listado" data-toggle="tooltip" data-placement="top" title="Ver detalle"></i></a></li>
                                         @if(!Auth::user()->hasRole('administrador'))
-                                            <li><a href="/editar-detalle-anulacion/{{$detail->id}}"><i
+                                            <li><a href="/editar-detalle-anulacion/{{$detail->id}}" data-toggle="tooltip" data-placement="top" title="Editar" class="opt-listado"><i
                                                         class="far fa-edit mr-12"></i></a></li>
                                         @endif
                                         <li>
                                             <form method="POST" action="{{route('app.anulation.delete.detailanulation',['id'=>$detail->id])}}">
                                             @csrf
-                                            <button type="submit" style="border: none;background: transparent;color: #1463a5;cursor: pointer;">
+                                            <button type="submit" data-toggle="tooltip" data-placement="top" title="Eliminar" class="opt-listado"  style="border: none;background: transparent;color: #1463a5;cursor: pointer;">
                                                 <i class="far fa-trash-alt mr-12 font-16"></i>
                                             </button>
                                             </form>
@@ -103,7 +115,11 @@
 
 @push('scripts')
     <script type="text/javascript">
+
         $(document).ready(function () {
+
+            $('.opt-listado').tooltip();
+
             $('#table-detalle-anulaciones').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json"
@@ -112,7 +128,7 @@
                 buttons: [{
                     extend: 'excelHtml5',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5]
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
                     }
                 },
                     {
@@ -120,7 +136,7 @@
                         orientation: 'landscape',
                         pageSize: 'LEGAL',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
                         }
                     },
                     'print'
@@ -133,7 +149,7 @@
                         page: 'all', // 'all', 'current'
                         search: 'none' // 'none', 'applied', 'removed'
                     },
-                    columns: [0, 1, 2, 3, 4, 5]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
                 }
 
             });

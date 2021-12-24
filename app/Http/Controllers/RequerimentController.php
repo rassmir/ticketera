@@ -113,6 +113,29 @@ class RequerimentController extends Controller
     public function create()
     {
         $clinics = Clinic::orderBy('name')->get();
+        if (Auth::user()->hasRole('usuario')) {
+            $requeriments = [];
+            $clinics = ClinicUser::join('clinics', 'clinics.id', '=', 'clinic_user.clinic_id')
+                ->select(['clinics.name', 'clinic_id'])
+                ->where('user_id', '=', Auth::user()->id)
+                ->get();
+            foreach ($clinics as $clinic) {
+                array_push($requeriments, Requeriment::join('clinics', 'clinics.id', '=', 'requeriments.clinic_id')
+                    ->join('branches', 'branches.id', '=', 'requeriments.branch_id')
+                    ->join('units', 'units.id', '=', 'requeriments.unit_id')
+                    ->join('center_medicals', 'center_medicals.id', '=', 'requeriments.center_medical_id')
+                    ->join('professionals', 'professionals.id', '=', 'requeriments.professional_id')
+                    ->join('especialities', 'especialities.id', '=', 'requeriments.especiality_id')
+                    ->select(['requeriments.*', 'clinics.name as clinicname', 'branches.name as branchname', 'units.name as unitname', 'center_medicals.name as centername', 'professionals.name as profname', 'especialities.name as spename'])
+                    ->where('requeriments.clinic_id', '=', $clinic->clinic_id)
+                    ->get());
+            }
+//            dd($requeriments);
+        } else {
+            $clinics = Clinic::orderBy('name')->get();
+        }
+
+        //$clinics = Clinic::orderBy('name')->get();
         return view('requeriment.create',
             ['clinics' => $clinics]);
     }
@@ -223,6 +246,30 @@ class RequerimentController extends Controller
     public function edit($id)
     {
         $clinics = Clinic::orderBy('name')->get();
+
+        if (Auth::user()->hasRole('usuario')) {
+            $requeriments = [];
+            $clinics = ClinicUser::join('clinics', 'clinics.id', '=', 'clinic_user.clinic_id')
+                ->select(['clinics.name', 'clinic_id'])
+                ->where('user_id', '=', Auth::user()->id)
+                ->get();
+            foreach ($clinics as $clinic) {
+                array_push($requeriments, Requeriment::join('clinics', 'clinics.id', '=', 'requeriments.clinic_id')
+                    ->join('branches', 'branches.id', '=', 'requeriments.branch_id')
+                    ->join('units', 'units.id', '=', 'requeriments.unit_id')
+                    ->join('center_medicals', 'center_medicals.id', '=', 'requeriments.center_medical_id')
+                    ->join('professionals', 'professionals.id', '=', 'requeriments.professional_id')
+                    ->join('especialities', 'especialities.id', '=', 'requeriments.especiality_id')
+                    ->select(['requeriments.*', 'clinics.name as clinicname', 'branches.name as branchname', 'units.name as unitname', 'center_medicals.name as centername', 'professionals.name as profname', 'especialities.name as spename'])
+                    ->where('requeriments.clinic_id', '=', $clinic->clinic_id)
+                    ->get());
+            }
+//            dd($requeriments);
+        } else {
+            $clinics = Clinic::orderBy('name')->get();
+        }
+
+
 //        $requeriment = Requeriment::findOrFail($id);
         $requeriment = Requeriment::join('clinics', 'clinics.id', '=', 'requeriments.clinic_id')
             ->join('branches', 'branches.id', '=', 'requeriments.branch_id')
@@ -357,11 +404,13 @@ class RequerimentController extends Controller
         $exitoso = Requeriment::where('status_close', '=', 'exitoso')->count();
         $caducado = Requeriment::where('status_close', '=', 'caducado')->count();
         $proceso = Requeriment::where('status_close', '=', 'proceso')->count();
+
         $total = $proceso + $caducado + $exitoso;
         $total2 = ($exitoso / $total) * 100;
         $total3 = ($caducado + $proceso);
         $total4 = ($total3 / $total) * 100;
-        $data = [$total2, $total4];
+        $data = [number_format($total2, 2, '.', ' '), number_format($total4, 2, '.', ' ')];
+
         return \Response::json($data, 200);
     }
 

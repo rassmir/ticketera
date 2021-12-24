@@ -154,10 +154,11 @@
                                     <p class="mb-0">Estado</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select class="form-control" name="state" readonly>
+                                    <input type="text" class="form-control" value="Ingresado" name="state" readonly>
+                                    <!--<select class="form-control" name="state" readonly>
                                         <option selected>Seleccione un estado</option>
                                         <option value="Ingresado" selected>Ingresado</option>
-                                    </select>
+                                    </select>-->
                                 </div>
                             </div>
                         </div>
