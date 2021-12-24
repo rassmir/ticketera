@@ -131,7 +131,7 @@
                     </div>
                     <div class="col-lg-12 text-center">
                             <hr>
-                            <a href="{{url('detalle-anulacion')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20">Regresar</a>
+                            <a href="{{url('detalle-anulacion?n_ticket=')}}{{$detailanulation->number_ticket}}" class="btn btn-primary font-14 br-4 pl-20 pr-20"><i class="fas fa-arrow-left"></i> Regresar</a>
                         </div>
                 </div>
             </div>

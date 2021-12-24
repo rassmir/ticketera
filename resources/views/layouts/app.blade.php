@@ -73,8 +73,8 @@
         </h3>
         <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto">
-                <li><p class="text-white pr-16 font-20"> {{Auth::user()->name_complete}} <i
-                            class="far fa-user-circle ml-8"></i></p></li>
+                <li><p class="text-white pr-0 font-20"> {{Auth::user()->name_complete}} <i
+                            class="far fa-user-circle ml-"></i></p></li>
                 <li class="dropdown nav-item">
                     <a href="javascript:void(0)"
                        class="dropdown-toggle nav-link p-0 pl-12 pt-4 pb-4 font-16 br-4 pl-16 pr-16  text-white"
@@ -96,46 +96,41 @@
 <body class="bg-light">
 <div class="container-fluid" id="main">
     <div class="row">
-        <div class="col-lg-3 col-xl-2">
-            <div class="p-48 p-sm-16 bg-white font-16 d-none d-lg-block">
+    <div id="sidebar" class="col-lg-3 col-xl-2">
+            <div class="p-40 p-sm-16 bg-white font-16 d-none d-lg-block">
                 @if(Auth::user()->hasRole('administrador'))
                     <h3>Usuarios</h3>
-                    <ul class="pl-8">
-                        <li><a href="{{route('app.user.create')}}"><i class="fas fa-chevron-right mr-16"></i> Nuevo
+                    <ul class="pl-8 list-sidebar">
+                        <li><a href="{{route('app.user.create')}}"><i class="far fa-user mr-12"></i>Nuevo
                                 usuario</a>
                         </li>
-                        <li><a href="{{route('app.user.index')}}"><i class="fas fa-chevron-right mr-16"></i> Buscar
+                        <li><a href="{{route('app.user.index')}}"><i class="fas fa-list-ul mr-12"></i> Listado de
                                 usuarios</a>
                         </li>
                     </ul>
                 @endif
                 <h3>Requerimientos</h3>
-                <ul class="pl-8">
+                <ul class="pl-8 list-sidebar">
                     @if(Auth::user()->hasRole('administrador'))
-                        <li><a href="{{route('app.dashboard')}}"><i class="fas fa-chevron-right mr-16"></i> Dashboard
+                    <li><a href="{{route('app.dashboard')}}"><i class="fas fa-chart-bar mr-12"></i> Dashboard
                                 requerimiento</a>
                         </li>
                     @endif
                     @if(!Auth::user()->hasRole('administrador'))
-                        <li><a href="{{route('app.requeriment.create')}}"><i class="fas fa-chevron-right mr-16"></i>
-                                Nuevo
+                        <li><a href="{{route('app.requeriment.create')}}"><i class="fas fa-plus mr-12"></i> Nuevo
                                 requerimiento</a>
                         </li>
                     @endif
-                    <li><a href="{{route('app.requeriment.index')}}"><i class="fas fa-chevron-right mr-16"></i> Listado
-                            de
-                            Requerimiento</a>
+                    <li><a href="{{route('app.requeriment.index')}}"><i class="fas fa-list-ol mr-12"></i> Listado de Requerimiento</a>
                     </li>
                 </ul>
                 <h3>Anulaciones</h3>
-                <ul class="pl-8">
+                <ul class="pl-8 list-sidebar" >
                     @if(!Auth::user()->hasRole('administrador'))
-                        <li><a href="{{route('app.anulation.create')}}"><i class="fas fa-chevron-right mr-16"></i> Nueva
-                                anulación</a></li>
+                    <li><a href="{{route('app.anulation.create')}}"><i class="fas fa-chevron-right mr-12"></i> Nueva anulación</a></li>
                     @endif
-                    <li><a href="{{route('app.anulation.index')}}"><i class="fas fa-chevron-right mr-16"></i> Listado de
-                            anulación</a></li>
-                    <li><a href="{{route('app.anulation.detailanulation')}}"><i class="fas fa-chevron-right mr-16"></i>
+                    <li><a href="{{route('app.anulation.index')}}"><i class="far fa-file-alt mr-12"></i> Listado de anulación</a></li>
+                    <li><a href="{{route('app.anulation.detailanulation')}}"><i class="fas fa-book mr-12"></i>
                             Detalle
                             anulación</a>
                     </li>
@@ -164,6 +159,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 @stack('scripts')
 @include('partials.flash-message')
 </body>

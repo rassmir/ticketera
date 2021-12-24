@@ -201,8 +201,8 @@ $(document).ready(function () {
     }
 });
 
-// let uri = 'http://localhost:8000/';
-let uri ='https://banmedica.herokuapp.com/';
+ let uri = 'http://localhost:8000/';
+//let uri ='https://banmedica.herokuapp.com/';
 
 const selectBranches = () => {
     let clinic_id = $("#clinics").val();
@@ -297,6 +297,39 @@ const selectEspecialities = () => {
                 especialities.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
             }
             especialities.selectpicker();
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+}
+
+const selectEspecialitiesSLA = (idProfesional) => {
+    let professionals = $("#professionals").val();
+
+    /*
+    $.ajax({
+        type: "GET",
+        url: uri + "especialidades/" + professionals,
+        success: function (response) {
+            let especialities = $('#especialities');
+            especialities.empty();
+            especialities.append('<option selected disabled>Seleccione Especialidad</option>');
+            for (let i = 0; i < response.length; i++) {
+                especialities.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
+            }
+            especialities.selectpicker();
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    }); */
+
+    $.ajax({
+        type: "GET",
+        url: uri + "sla/" + idProfesional,
+        success: function (response) {
+            console.log(response);
         },
         error: function (error) {
             console.log(error);

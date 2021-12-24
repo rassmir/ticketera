@@ -362,7 +362,7 @@
                         </div>
                         <div class="col-lg-12 text-center">
                             <hr>
-                            <a href="{{url('buscar-requerimientos')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20">Regresar</a>
+                            <a href="{{url('buscar-requerimientos')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20"><i class="fas fa-arrow-left"></i> Regresar</a>
                         </div>
                     </div>
                 </div>

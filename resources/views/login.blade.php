@@ -9,7 +9,7 @@
                     <img src="{{asset('assets/img/logo-blanco.png')}}" width="300" alt="">
                 </div>
                 <div class="col-lg-6 d-flex align-items-center justify-content-center">
-                    <div class="container p-36 pt-64 pb-64 main-content mt-48 bg-white" style="max-width:550px">
+                    <div id="cnt-form-login" class="container p-36 pt-64 pb-64 main-content mt-48 bg-white" style="max-width:550px">
                         <h1 class="font-36 text-light font-weight-300">Bienvenido(a)</h1>
                         <h2 class="font-16 text-pri">Por favor, inicie sesión para continuar</h2>
                         <input type="text" class="form-control mt-20 ob" data-type="text" data-msj="Ingrese un correo electrónico" placeholder="Correo" name="email">
@@ -35,13 +35,14 @@
 
     $('#iniciar-sesion').on('click', function(e){
         e.preventDefault();
-        console.log("inicio-sesion");
+        $(this).html("Ingresando...");
 
         var validacion_datos = ValidadorAuto('.ob');
 
         if(validacion_datos == "true"){
             $('#form_login').submit();
         }else{
+            $(this).html('Iniciar Sesión <i class="fas fa-arrow-right ml-20"></i>');
             return false;
         }
 

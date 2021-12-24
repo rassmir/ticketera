@@ -62,7 +62,7 @@
                                     <p class="mb-0">Estado</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select class="form-control" name="state" disabled>
+                                    <select class="form-control" name="state" readonly>
                                         <option value="Ingresado">Ingresado</option>
                                     </select>
                                 </div>
@@ -230,8 +230,7 @@
                                     <p class="mb-0">Profesionales</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select id="professionals" class="form-control ob" data-live-search="true" data-type="select" data-msj="Seleccione un profesional" name="professional_id"
-                                            onchange="selectEspecialities()">
+                                    <select id="professionals" class="form-control ob" data-live-search="true" data-type="select" data-msj="Seleccione un profesional" name="professional_id">
                                         <option value="0" selected disabled>Seleccione Profesional</option>
                                     </select>
                                 </div>
@@ -278,7 +277,7 @@
                                     <p class="mb-0">Fecha Probable respuesta</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="date" class="form-control" name="date_response">
+                                    <input id="date_response" type="date" class="form-control" name="date_response" value="<?php echo date("Y-m-d");?>">
                                 </div>
                             </div>
                         </div>
@@ -326,7 +325,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12 mt-16" style="">
+                        <div class="col-lg-12 mt-16 d-none" style="">
                             <div class="row align-items-center">
                                 <div class="col-lg-12 text-left font-weight-bold">
                                     <p class="mb-0">Respuesta del centro médico</p>
@@ -337,7 +336,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 mt-16">
+                        <div class="col-lg-4 mt-16 d-none">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
                                     <p class="mb-0">Fecha y hora del ticket solucionado</p>
@@ -347,7 +346,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 mt-8">
+                        <div class="col-lg-4 mt-8 d-none">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
                                     <p class="mb-0">Usuario que crea la solicitud</p>
@@ -358,7 +357,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 mt-8">
+                        <div class="col-lg-4 mt-8 d-none">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
                                     <p class="mb-0">Fecha de cierre de la solicitud</p>
@@ -369,7 +368,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-4 mt-8">
+                        <div class="col-lg-4 mt-8 d-none">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left font-weight-bold">
                                     <p class="mb-0">Usuario que cierra la solicitud</p>
@@ -401,6 +400,44 @@
 @push('scripts')
     <script type="text/javascript">
         $(document).ready(function () {
+
+            $('#professionals').on('change', function(e){
+                e.preventDefault();
+
+                var idProf = $('option:selected', this).val();
+                console.log(idProf);
+
+                $.ajax({
+                    type: "GET",
+                    url: uri + "sla/" + idProf,
+                    success: function (response) {
+
+                        var someDate = new Date();
+                        var dias = response['sla'];
+                        var numberOfDaysToAdd = parseInt(dias);
+                        someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+                        var dd = someDate.getDate();
+                        var mm = someDate.getMonth() + 1;
+                        var y = someDate.getFullYear();
+                        var someFormattedDate = y + '-'+ mm + '-'+ dd;
+
+                        console.log(someFormattedDate);
+                        $('#date_response').val (someFormattedDate);
+
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+
+                selectEspecialitiesSLA(idProf);
+                selectEspecialities();
+            });
+
+
+
+
+
             let now = new Date();
             now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
             $('#date-time').val(now.toISOString().slice(0, 16))

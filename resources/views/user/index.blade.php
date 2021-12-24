@@ -44,7 +44,7 @@
                         <i class="fas fa-search"></i>
                         Buscar usuario
                     </button>
-                    <a href="{{url('buscar-usuarios')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20"><i class="fas fa-undo-alt"></i> Regresar</a>
+                    <a href="{{url('buscar-usuarios')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20">Limpiar</a>
                 </div>
             </form>
             <div class="col-lg-12 mt-20">
@@ -66,7 +66,7 @@
                             <tr>
                                 <td>{{++$key}}</td>
                                 <td>{{$user->rolname}}</td>
-                                <td>{{$user->name_complete}}</td>
+                                <td class="font-weight-bold">{{$user->name_complete}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->rut}}</td>
                                 <td>

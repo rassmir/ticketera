@@ -10,7 +10,7 @@
         <form id="frm-nuevo-requerimiento" method="POST"
               action="{{route('app.requeriment.update',['id'=>$requeriment->id])}}">
             @csrf
-            <input type="hidden" value="{{$requeriment->status_close}}">
+            <input id="status_close" name="status_close" type="hidden" value="{{$requeriment->status_close}}">
             <div class="row mb-36">
                 <div class="col-lg-12">
                     <div class="row">
@@ -324,7 +324,7 @@
                                     <p class="mb-0">Fecha Probable respuesta</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input type="date" class="form-control" name="date_response"
+                                    <input id="fecha_sla" type="date" class="form-control" name="date_response"
                                            value="{{$requeriment->date_response}}">
                                 </div>
                             </div>
@@ -444,6 +444,7 @@
                             <div class="row align-items-center">
                                 <div class="col-lg-12 text-left text-lg-center font-weight-bold">
                                     <hr>
+                                    <a href="{{url('buscar-requerimientos')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20"><i class="fas fa-arrow-left"></i> Regresar</a>
                                     <button id="btn-registrar-requerimiento" type="submit"
                                             class="btn bg-pri border-pri text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
                                             style="min-width:190px;"> Guardar cambios
@@ -468,7 +469,7 @@ $(document).ready(function(){
     RecuperarDatos("especialidades", '{{$requeriment->profid}}', "#especialities", '{{$requeriment->espid}}');
     setTimeout(function(){
         $('.loader').fadeOut();
-    }, 3000);
+    }, 2000);
 });
 
 const RecuperarDatos = (urlBase, valor, idSelect, valorActual) => {
@@ -613,15 +614,30 @@ const RecuperarDatos = (urlBase, valor, idSelect, valorActual) => {
         // }
 
         // GUARDAR REQUERIMIENTO
+        var fecha_sla = $('#fecha_sla').val();
+        var fechaActual = new Date();
+
+
 
         $('#btn-registrar-requerimiento').on('click', function (e) {
             e.preventDefault();
-            console.log("inicio-sesion");
+            var estado_req = $('#state option:selected').val();
 
             var validacion_datos = ValidadorAuto('.ob');
 
             if (validacion_datos == "true") {
+
+                if(estado_req == "Cerrado"){
+                if(new Date().getTime() > new Date(fecha_sla).getTime()){
+                    console.log("Fecha caducada");
+                    $('#status_close').val("caducado");
+                }else{
+                    $('#status_close').val("exitoso");
+                }
                 $('#frm-nuevo-requerimiento').submit();
+            }else{
+                $('#frm-nuevo-requerimiento').submit();
+            }
             } else {
                 return false;
             }
