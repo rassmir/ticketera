@@ -8,19 +8,19 @@
         <div class="row">
         <div class="col-lg-3 p-48 border-right">
             <h2 class="text-pri"><span class="font-18">Requerimientos registrados en</span><br> TOTAL</h2>
-            <h2 class="font-48">520</h2>
+            <h2 class="font-48">{{$total}}</h2>
         </div>
         <div class="col-lg-3 p-48 border-right">
             <h2 class="text-pri"><span class="font-18">Requerimientos</span><br> CADUCADOS</h2>
-            <h2 class="font-48">60</h2>
+            <h2 class="font-48">{{$caducado}}</h2>
         </div>
         <div class="col-lg-3 p-48 border-right">
             <h2 class="text-pri"><span class="font-18">Requerimientos</span><br> CERRADOS</h2>
-            <h2 class="font-48">100</h2>
+            <h2 class="font-48">{{$exitoso}}</h2>
         </div>
         <div class="col-lg-3 p-48">
             <h2 class="text-pri"><span class="font-18">Requerimientos en</span><br> PROCESO</h2>
-            <h2 class="font-48">360</h2>
+            <h2 class="font-48">{{$proceso}}</h2>
         </div>
         <div class="col-lg-4 p-48">
             <canvas id="grafico1" width="400" height="400"></canvas>

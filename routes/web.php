@@ -56,6 +56,15 @@ Route::group(['middleware' => ['auth']], function () {
     //Especialidades
     Route::get('/especialidades/{idprofessional}', [RequerimentController::class, 'especialities'])->name('app.especialities');
 
+    //Sla profesional
+    Route::get('/sla/{id}', [RequerimentController::class, 'getSlaByProffesional'])->name('app.sla');
+
+    //Graficos
+    Route::get('/grafico1', [RequerimentController::class, 'grafic1'])->name('app.grafic1');
+    Route::get('/grafico2', [RequerimentController::class, 'grafic2'])->name('app.grafic2');
+    Route::get('/grafico3', [RequerimentController::class, 'grafic3'])->name('app.grafic3');
+    Route::get('/grafico4', [RequerimentController::class, 'grafic4'])->name('app.grafic4');
+
     Route::get('/dashboard-requerimientos', [RequerimentController::class, 'dashboard'])->name('app.dashboard');
     Route::get('/buscar-requerimientos', [RequerimentController::class, 'index'])->name('app.requeriment.index');
     Route::get('/nuevo-requerimiento', [RequerimentController::class, 'create'])->name('app.requeriment.create');

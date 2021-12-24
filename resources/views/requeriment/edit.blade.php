@@ -10,6 +10,7 @@
         <form id="frm-nuevo-requerimiento" method="POST"
               action="{{route('app.requeriment.update',['id'=>$requeriment->id])}}">
             @csrf
+            <input type="hidden" value="{{$requeriment->status_close}}">
             <div class="row mb-36">
                 <div class="col-lg-12">
                     <div class="row">

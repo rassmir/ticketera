@@ -14,6 +14,7 @@ use App\Models\Unit;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
@@ -116,6 +117,13 @@ class RequerimentController extends Controller
             ['clinics' => $clinics]);
     }
 
+    public function getSlaByProffesional($id)
+    {
+        $sla = Professional::select('sla')
+            ->where('id', '=', $id)->first();
+        return \Response::json($sla, 200);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -155,6 +163,7 @@ class RequerimentController extends Controller
             $requeriments->user_create = $request->input('user_create');
             $requeriments->date_close = $request->input('date_close');
             $requeriments->user_close = $request->input('user_close');
+            $requeriments->status_close = 'proceso';
             $requeriments->save();
             try {
                 $email_professional = Requeriment::join('professionals', 'professionals.id', '=', 'requeriments.professional_id')
@@ -274,6 +283,7 @@ class RequerimentController extends Controller
             $requeriment->user_create = $request->input('user_create');
             $requeriment->date_close = $request->input('date_close');
             $requeriment->user_close = $request->input('user_close');
+            $requeriment->status_close = $request->input('status_close');
             $requeriment->update();
             return Redirect::back()->with(array(
                 'success' => 'Actualizado Correctamente !!'
@@ -303,6 +313,64 @@ class RequerimentController extends Controller
 
     public function dashboard()
     {
-        return view('requeriment.dashboard');
+        $caducado = Requeriment::where('status_close', '=', 'caducado')->count();
+        $proceso = Requeriment::where('status_close', '=', 'proceso')->count();
+        $exitoso = Requeriment::where('status_close', '=', 'exitoso')->count();
+        $total = $proceso + $exitoso + $caducado;
+        return view('requeriment.dashboard', [
+            'caducado' => $caducado,
+            'proceso' => $proceso,
+            'exitoso' => $exitoso,
+            'total' => $total
+        ]);
+    }
+
+    public function grafic1()
+    {
+        $data = [];
+        $caducado = Requeriment::where('status_close', '=', 'caducado')->count();
+        $proceso = Requeriment::where('status_close', '=', 'proceso')->count();
+        $exitoso = Requeriment::where('status_close', '=', 'exitoso')->count();
+        $total = $proceso + $exitoso;
+        $data = array($caducado, $total);
+        return \Response::json($data, 200);
+    }
+
+    public function grafic2()
+    {
+        $clinic = Clinic::select('name')->get();
+        $total = Requeriment::groupBy('clinic_id')->select(DB::raw('count(*) as total'))->where('status_close', '=', 'caducado')->get();
+        $data = [];
+        $data2 = [];
+        foreach ($clinic as $cli) {
+            array_push($data, $cli->name);
+        }
+        foreach ($total as $tot) {
+            array_push($data2, $tot->total);
+        }
+        $data3 = [$data, $data2];
+        return \Response::json($data3, 200);
+    }
+
+    public function grafic3()
+    {
+        $exitoso = Requeriment::where('status_close', '=', 'exitoso')->count();
+        $caducado = Requeriment::where('status_close', '=', 'caducado')->count();
+        $proceso = Requeriment::where('status_close', '=', 'proceso')->count();
+        $total = $proceso + $caducado + $exitoso;
+        $total2 = ($exitoso / $total) * 100;
+        $total3 = ($caducado + $proceso);
+        $total4 = ($total3 / $total) * 100;
+        $data = [$total2, $total4];
+        return \Response::json($data, 200);
+    }
+
+    public function grafic4()
+    {
+        $clinic = Requeriment::join('clinics', 'clinics.id', '=', 'requeriments.clinic_id')
+            ->groupBy('requeriments.clinic_id')
+            ->select('clinic_id')
+            ->get();
+        return \Response::json($clinic, 200);
     }
 }
