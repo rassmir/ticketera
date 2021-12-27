@@ -371,7 +371,8 @@
 @endsection
 @push('scripts')
     <script type="text/javascript">
-        let route = 'http://localhost:8000/';
+        //let route = 'http://localhost:8000/';
+        let uri ='https://banmedica.herokuapp.com/';
         const selectBranches = () => {
             let clinic_id = $("#clinics").val();
             $.ajax({
