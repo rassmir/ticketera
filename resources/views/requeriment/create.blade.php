@@ -458,6 +458,9 @@
 
         $('#btn-registrar-requerimiento').on('click', function(e){
         e.preventDefault();
+        $(this).prop('disabled', true);
+        $(this).html("Registrando...");
+
         console.log("inicio-sesion");
 
         var validacion_datos = ValidadorAuto('.ob');
@@ -465,6 +468,8 @@
         if(validacion_datos == "true"){
             $('#frm-nuevo-requerimiento').submit();
         }else{
+            $(this).prop('disabled', false);
+            $(this).html("Registrar");
             return false;
         }
 

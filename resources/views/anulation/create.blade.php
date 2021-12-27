@@ -6,7 +6,7 @@
             <h2 class="text-pri">REGISTRO DE ANULACIÓN</h2>
         </div>
         <div class="row mt-48 mb-36">
-            <form method="POST" action="{{route('app.anulation.store')}}">
+            <form id="frm-nueva-anulacion" method="POST" action="{{route('app.anulation.store')}}">
                 <div class="col-lg-12">
                     @csrf
                     <div class="row">
@@ -120,8 +120,8 @@
                                     <p class="mb-0">Motivo Anulación (*)</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <select class="form-control" name="anulation">
-                                        <option selected disabled>Seleccione un motivo</option>
+                                    <select class="form-control ob" data-type="select" data-msj="Seleccione un Motivo" name="anulation">
+                                        <option value="0" selected disabled>Seleccione un motivo</option>
                                         <option value="reagendamiento">Reagendamiento</option>
                                         <option value="peticion_paciente">Petición del paciente</option>
                                         <option value="motivos_medico">Motivos de médico</option>
@@ -142,7 +142,7 @@
                                     <p class="mb-0">Mensaje secretaria (*)</p>
                                 </div>
                                 <div class="col-lg-12 mt-8">
-                                    <textarea name="message" class="form-control" placeholder="Ingrese una observación"
+                                    <textarea name="message" class="form-control ob" data-type="text" data-msj="Ingrese un mensaje" placeholder="Ingrese una observación"
                                               rows="5"></textarea>
                                 </div>
                             </div>
@@ -166,7 +166,7 @@
                             <div class="row align-items-center">
                                 <div class="col-lg-12 text-left text-lg-center font-weight-bold">
                                     <hr>
-                                    <button type="submit"
+                                    <button id="btn-registrar-anulacion" type="submit"
                                             class="btn bg-pri border-pri text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
                                             style="min-width:190px;"> Registrar Anulación
                                     </button>
@@ -179,3 +179,22 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+<script>
+$('#btn-registrar-anulacion').on('click', function(e){
+        e.preventDefault();
+        $(this).prop('disabled', true);
+        $(this).html("Registrando...");
+        var validacion_datos = ValidadorAuto('.ob');
+
+        if(validacion_datos == "true"){
+            $('#frm-nueva-anulacion').submit();
+        }else{
+            $(this).prop('disabled', false);
+            $(this).html("Registrar");
+            return false;
+        }
+
+});
+</script>
+@endpush

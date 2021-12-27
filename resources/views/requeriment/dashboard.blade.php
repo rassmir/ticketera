@@ -168,13 +168,13 @@ Chart.register(ChartDataLabels);
                         data: response1,
                         backgroundColor: [
                             'rgba(75, 192, 192, 0.5)',
-                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(212, 212, 212, 0.5)',
                             'rgba(153, 102, 255, 0.5)',
                             'rgba(255, 159, 64, 0.5)'
                         ],
                         borderColor: [
                             'rgba(75, 192, 192, 1)',
-                            'rgba(255, 206, 86, 1)',
+                            'rgba(212, 212, 212, 0.5)',
                             'rgba(153, 102, 255, 1)',
                             'rgba(255, 159, 64, 1)'
                         ],

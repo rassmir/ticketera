@@ -50,7 +50,7 @@
             <div class="col-lg-12 mt-20">
                 <hr>
                 <div class="table-responsive">
-                    <table id="table-usuarios" class="table table-striped table-bordered b-table mt-24">
+                    <table id="table-usuarios" class="table table-striped b-table mt-24">
                         <thead>
                         <tr class="bg-pri text-white">
                             <th>#</th>
@@ -66,20 +66,20 @@
                             <tr>
                                 <td>{{++$key}}</td>
                                 <td>{{$user->rolname}}</td>
-                                <td class="font-weight-bold">{{$user->name_complete}}</td>
+                                <td class="font-weight-bold"><a href="ver-usuario/{{$user->id}}" style="color:#5d5f72;">{{$user->name_complete}}</a></td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->rut}}</td>
                                 <td>
                                     <ul class="d-lg-flex">
-                                        <li><a href="ver-usuario/{{$user->id}}" class="btn mr-12 text-black"><i
+                                        <li><a href="ver-usuario/{{$user->id}}" data-toggle="tooltip" data-placement="top" title="Subir registros" class="btn btn-ban mr-12 text-black opt-listado"><i
                                                     class="far fa-eye"></i></a>
                                         </li>
-                                        <li><a href="editar-usuario/{{$user->id}}"
-                                               class="btn mr-12 text-black"><i class="far fa-edit"></i></a>
+                                        <li><a href="editar-usuario/{{$user->id}}" data-toggle="tooltip" data-placement="top" title="Subir registros"
+                                               class="btn btn-ban mr-12 text-black opt-listado"><i class="far fa-edit"></i></a>
                                         </li>
                                         <li>
-                                            <button onclick="confirmDelete({{$user->id}})"
-                                                    class="btn mr-12 text-black"><i class="fas fa-trash"></i>
+                                            <button onclick="confirmDelete({{$user->id}})" data-toggle="tooltip" data-placement="top" title="Subir registros"
+                                                    class="btn btn-ban mr-12 text-black opt-listado"><i class="fas fa-trash"></i>
                                             </button>
                                         </li>
                                     </ul>
@@ -95,6 +95,10 @@
 @endsection
 @push('scripts')
     <script type="text/javascript">
+        $(document).ready(function(){
+            $('.opt-listado').tooltip();
+        });
+
         const confirmDelete = (id) => {
             deleteRegister(id, 'eliminar-usuario', '{{csrf_token()}}');
         }

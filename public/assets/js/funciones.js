@@ -305,25 +305,6 @@ const selectEspecialities = () => {
 }
 
 const selectEspecialitiesSLA = (idProfesional) => {
-    let professionals = $("#professionals").val();
-
-    /*
-    $.ajax({
-        type: "GET",
-        url: uri + "especialidades/" + professionals,
-        success: function (response) {
-            let especialities = $('#especialities');
-            especialities.empty();
-            especialities.append('<option selected disabled>Seleccione Especialidad</option>');
-            for (let i = 0; i < response.length; i++) {
-                especialities.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
-            }
-            especialities.selectpicker();
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    }); */
 
     $.ajax({
         type: "GET",

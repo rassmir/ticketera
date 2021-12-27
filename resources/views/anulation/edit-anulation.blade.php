@@ -173,7 +173,7 @@
                                     <p class="mb-0">Mensaje secretaria*</p>
                                 </div>
                                 <div class="col-lg-12 mt-8">
-                                    <textarea name="message" class="form-control" placeholder="Ingrese una observación"
+                                    <textarea name="message" class="form-control  ob" data-type="text" data-msj="Ingrese un mensaje" placeholder="Ingrese una observación"
                                               rows="5">{{$anulation->message}}</textarea>
                                 </div>
                             </div>
@@ -233,7 +233,7 @@ $(document).ready(function(){
     RecuperarDatos("especialidades", '{{$anulation->profid}}', "#especialities", '{{$anulation->espid}}');
     setTimeout(function(){
         $('.loader').fadeOut();
-    }, 3000);
+    }, 2000);
 });
 
 const RecuperarDatos = (urlBase, valor, idSelect, valorActual) => {
@@ -259,10 +259,17 @@ const RecuperarDatos = (urlBase, valor, idSelect, valorActual) => {
 
         $('#edit-anulacion').on('click', function(e){
             e.preventDefault();
+
+            $(this).prop('disabled', true);
+            $(this).html("Registrando...");
+
             let estado = $('#estado_anulacion option:selected').val();
             let idticket = $('#nro_ticket').val();
+            var validacion_datos = ValidadorAuto('.ob');
 
-            if(estado == "Cerrado"){
+            if(validacion_datos == "true"){
+
+                if(estado == "Cerrado"){
                 $.ajax({
                 type: "GET",
                 url: uri + "consultar-ticket/" + idticket,
@@ -298,6 +305,11 @@ const RecuperarDatos = (urlBase, valor, idSelect, valorActual) => {
             }
 
 
+            }else{
+                $(this).prop('disabled', false);
+                $(this).html("Registrar");
+                return false;
+            }
 
             //consultingAnulation('A-20122133810');
         });

@@ -2,6 +2,17 @@
 @import url('../css/all.css');
 @import url('../css/fontawesome.min.css');
 
+.btn-ban{
+    background-color: white;
+    box-shadow: #e3e3e3 0px 3px 0px;
+    transition: all 0.2s;
+}
+
+.btn-ban:hover{
+    background-color: #e2e6ee;
+    box-shadow: #a89eb5 0px 0px 0px;
+}
+
 .dt-buttons button{
     border: 0;
     padding: 4px 16px;

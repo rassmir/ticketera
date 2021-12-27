@@ -140,16 +140,16 @@
                                         <ul class="d-lg-flex">
 
                                             <li><a href="ver-requerimiento/{{$req->id}}"
-                                                   class="btn mr-12 text-black opt-listado" data-toggle="tooltip" data-placement="top" title="Ver detalle"><i class="far fa-eye"></i></a>
+                                                   class="btn btn-ban mr-12 text-black opt-listado" data-toggle="tooltip" data-placement="top" title="Ver detalle"><i class="far fa-eye"></i></a>
                                             </li>
                                             @if(!Auth::user()->hasRole('administrador'))
                                                 <li><a href="editar-requerimiento/{{$req->id}}"
-                                                       class="btn mr-12 text-black opt-listado" data-toggle="tooltip" data-placement="top" title="Editar"><i
+                                                       class="btn btn-ban mr-12 text-black opt-listado" data-toggle="tooltip" data-placement="top" title="Editar"><i
                                                             class="far fa-edit"></i></a></li>
                                             @endif
                                             {{--                                                <li>--}}
                                             {{--                                                    <button onclick="confirmDelete({{$req->id}})"--}}
-                                            {{--                                                            class="btn bg-tri mr-12 text-black"><i--}}
+                                            {{--                                                            class="btn btn-ban mr-12 text-black"><i--}}
                                             {{--                                                            class="fas fa-trash"></i></button>--}}
                                             {{--                                                </li>--}}
                                         </ul>

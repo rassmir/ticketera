@@ -85,12 +85,12 @@
                             <td>
                                 <ul class="d-lg-flex">
 
-                                    <li><a href="/ver-anulacion/{{$anula->id}}" data-toggle="tooltip" data-placement="top" title="Ver detalle" class="opt-listado"><i class="far fa-eye mr-12 font-16"></i></a></li>
+                                    <li><a href="/ver-anulacion/{{$anula->id}}" data-toggle="tooltip" data-placement="top" title="Ver detalle" class="btn btn-ban opt-listado mr-8"><i class="far fa-eye font-16"></i></a></li>
                                     @if(!Auth::user()->hasRole('administrador'))
-                                    <li><a href="/editar-anulacion/{{$anula->id}}" data-toggle="tooltip" data-placement="top" title="Editar" class="opt-listado"><i class="far fa-edit mr-12 font-16"></i></a></li>
+                                    <li><a href="/editar-anulacion/{{$anula->id}}" data-toggle="tooltip" data-placement="top" title="Editar" class="btn btn-ban opt-listado mr-8" ><i class="far fa-edit font-16"></i></a></li>
 
-                                    <li><a href="/subir-excel/{{$anula->number_ticket}}" data-toggle="tooltip" data-placement="top" title="Subir registros" class="opt-listado"><i class="far fa-file-excel mr-12 font-16"></i></a></li>
-                                    <li><a href="/detalle-anulacion?n_ticket={{$anula->number_ticket}}" data-toggle="tooltip" data-placement="top" title="Detalles de registros" class="opt-listado"><i class="far fa-file-alt font-16"></i></a></li>
+                                    <li><a href="/subir-excel/{{$anula->number_ticket}}" data-toggle="tooltip" data-placement="top" title="Subir registros" class="btn btn-ban opt-listado mr-8"><i class="far fa-file-excel font-16"></i></a></li>
+                                    <li><a href="/detalle-anulacion?n_ticket={{$anula->number_ticket}}" data-toggle="tooltip" data-placement="top" title="Detalles de registros" class="btn btn-ban opt-listado"><i class="far fa-file-alt font-16"></i></a></li>
                                     @endif
                                 </ul>
                             </td>
