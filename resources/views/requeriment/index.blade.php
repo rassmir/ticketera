@@ -63,8 +63,7 @@
                     <button class="btn bg-sec border-sec text-white pl-24 pr-24 mt-sm-20 font-weight-bold"
                             style="min-width:190px;" type="submit"><i class="fas fa-search"></i> Buscar
                     </button>
-                    <a href="{{url('buscar-requerimientos')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20"><i
-                            class="fas fa-undo-alt"></i> Regresar</a>
+                    <a href="{{url('buscar-requerimientos')}}" class="btn btn-primary font-14 br-4 pl-20 pr-20">Limpiar</a>
                 </div>
             </form>
             <!-- TABLA -->
