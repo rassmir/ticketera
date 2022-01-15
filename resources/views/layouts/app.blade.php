@@ -116,19 +116,19 @@
                                 requerimiento</a>
                         </li>
                     @endif
-                    @if(!Auth::user()->hasRole('administrador'))
+                    {{-- @if(!Auth::user()->hasRole('administrador')) --}}
                         <li><a href="{{route('app.requeriment.create')}}"><i class="fas fa-plus mr-12"></i> Nuevo
                                 requerimiento</a>
                         </li>
-                    @endif
+                    {{-- @endif --}}
                     <li><a href="{{route('app.requeriment.index')}}"><i class="fas fa-list-ol mr-12"></i> Listado de Requerimiento</a>
                     </li>
                 </ul>
                 <h3>Anulaciones</h3>
                 <ul class="pl-8 list-sidebar" >
-                    @if(!Auth::user()->hasRole('administrador'))
+                    {{-- @if(!Auth::user()->hasRole('administrador')) --}}
                     <li><a href="{{route('app.anulation.create')}}"><i class="fas fa-chevron-right mr-12"></i> Nueva anulación</a></li>
-                    @endif
+                    {{-- @endif --}}
                     <li><a href="{{route('app.anulation.index')}}"><i class="far fa-file-alt mr-12"></i> Listado de anulación</a></li>
                     <li><a href="{{route('app.anulation.detailanulation')}}"><i class="fas fa-book mr-12"></i>
                             Detalle
@@ -158,7 +158,8 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 @stack('scripts')
 @include('partials.flash-message')

@@ -277,7 +277,7 @@
                                     <p class="mb-0">Fecha Probable respuesta</p>
                                 </div>
                                 <div class="col-lg-7">
-                                    <input id="date_response" type="date" class="form-control" name="date_response" value="<?php echo date("Y-m-d");?>">
+                                    <input id="date_response" type="date" class="form-control" name="date_response" value="<?php echo date("Y-m-d");?>" readonly>
                                 </div>
                             </div>
                         </div>
@@ -400,6 +400,9 @@
 @push('scripts')
     <script type="text/javascript">
         $(document).ready(function () {
+            
+            
+
 
             $('#professionals').on('change', function(e){
                 e.preventDefault();
@@ -416,13 +419,14 @@
                         var dias = response['sla'];
                         var numberOfDaysToAdd = parseInt(dias);
                         someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-                        var dd = someDate.getDate();
+                        /*var dd = someDate.getDate();
                         var mm = someDate.getMonth() + 1;
                         var y = someDate.getFullYear();
                         var someFormattedDate = y + '-'+ mm + '-'+ dd;
 
-                        console.log(someFormattedDate);
-                        $('#date_response').val (someFormattedDate);
+                        console.log(someFormattedDate);*/
+                        
+                        $('#date_response').val (someDate.toISOString().split('T')[0]);
 
                     },
                     error: function (error) {

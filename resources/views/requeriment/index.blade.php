@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 mt-8">
+                        <!--<div class="col-lg-6 mt-8">
                             <div class="row align-items-center">
                                 <div class="col-lg-5 text-left">
                                     <p class="mb-0">Desde</p>
@@ -56,7 +56,7 @@
                                     <input type="date" class="form-control" placeholder="Hasta">
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="col-lg-3 text-center mt-8">
@@ -107,11 +107,11 @@
                                                 <li><a href="ver-requerimiento/{{$req->id}}"
                                                        class="btn mr-12 text-black opt-listado" data-toggle="tooltip" data-placement="top" title="Ver detalle"><i class="far fa-eye"></i></a>
                                                 </li>
-                                                @if(!Auth::user()->hasRole('administrador'))
+                                                {{-- @if(!Auth::user()->hasRole('administrador')) --}}
                                                     <li><a href="editar-requerimiento/{{$req->id}}"
                                                            class="btn mr-12 text-black opt-listado" data-toggle="tooltip" data-placement="top" title="Editar"><i
                                                                 class="far fa-edit"></i></a></li>
-                                                @endif
+                                                {{-- endif --}}
                                                 {{--                                                <li>--}}
                                                 {{--                                                    <button onclick="confirmDelete({{$req->id}})"--}}
                                                 {{--                                                            class="btn mr-12 text-black"><i--}}
@@ -141,11 +141,11 @@
                                             <li><a href="ver-requerimiento/{{$req->id}}"
                                                    class="btn btn-ban mr-12 text-black opt-listado" data-toggle="tooltip" data-placement="top" title="Ver detalle"><i class="far fa-eye"></i></a>
                                             </li>
-                                            @if(!Auth::user()->hasRole('administrador'))
+                                            {{-- @if(!Auth::user()->hasRole('administrador')) --}}
                                                 <li><a href="editar-requerimiento/{{$req->id}}"
                                                        class="btn btn-ban mr-12 text-black opt-listado" data-toggle="tooltip" data-placement="top" title="Editar"><i
                                                             class="far fa-edit"></i></a></li>
-                                            @endif
+                                            {{-- @endif --}}
                                             {{--                                                <li>--}}
                                             {{--                                                    <button onclick="confirmDelete({{$req->id}})"--}}
                                             {{--                                                            class="btn btn-ban mr-12 text-black"><i--}}

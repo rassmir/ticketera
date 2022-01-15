@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="col-lg-7">
                                     <select class="form-control" name="state" disabled>
-                                        <option selected>{{$anulation->message}}</option>
+                                        <option selected>{{$anulation->state}}</option>
                                     </select>
                                 </div>
                             </div>

@@ -32,10 +32,53 @@ class RequerimentController extends Controller
         $requeriments = '';
         $rq_name = trim($request->get('rq_name'));
         $clinic_name = trim($request->get('clinic_name'));
-        $params = [
-            ['requeriments.number_solicity', 'LIKE', '%' . $rq_name . '%'],
-            ['clinics.name', 'LIKE', '%' . $clinic_name . '%']
-        ];
+        
+        $origen = trim($request->get('or'));
+        
+        if($origen == "dash"){
+            $acc = trim($request->get('acc'));
+            
+            if($acc == "cad"){
+                $params = [
+                    ['requeriments.status_close', '=', 'caducado']
+                ];
+            }else if($acc == "pro"){
+                $params = [
+                    ['requeriments.status_close', '=', 'proceso']
+                ];
+            }else if($acc == "clism"){
+                $params = [
+                    ['requeriments.status_close', '=', 'caducado'],
+                    ['requeriments.clinic_id', '=', '2']
+                ];
+            }else if($acc == "clivs"){
+                $params = [
+                    ['requeriments.status_close', '=', 'caducado'],
+                    ['requeriments.clinic_id', '=', '4']
+                ];
+            }else if($acc == "in"){
+                $params = [
+                    ['requeriments.state', '=', 'Ingresado']
+                ];
+            }else if($acc == "ce"){
+                $params = [
+                    ['requeriments.state', '=', 'Cerrado']
+                ];
+            }else if($acc == "pr"){
+                $params = [
+                    ['requeriments.state', '=', 'Proceso']
+                ];
+            }
+            
+            
+        }else{
+            $params = [
+                ['requeriments.number_solicity', 'LIKE', '%' . $rq_name . '%'],
+                ['clinics.name', 'LIKE', '%' . $clinic_name . '%']
+            ];
+        }
+        
+        
 
         $requeriments = Requeriment::join('clinics', 'clinics.id', '=', 'requeriments.clinic_id')
             ->join('branches', 'branches.id', '=', 'requeriments.branch_id')
@@ -116,7 +159,7 @@ class RequerimentController extends Controller
         if (Auth::user()->hasRole('usuario')) {
             $requeriments = [];
             $clinics = ClinicUser::join('clinics', 'clinics.id', '=', 'clinic_user.clinic_id')
-                ->select(['clinics.name', 'clinic_id'])
+                ->select(['clinics.name', 'clinic_id as id'])
                 ->where('user_id', '=', Auth::user()->id)
                 ->get();
             foreach ($clinics as $clinic) {
@@ -188,15 +231,55 @@ class RequerimentController extends Controller
             $requeriments->user_close = $request->input('user_close');
             $requeriments->status_close = 'proceso';
             $requeriments->save();
-            try {
+            
+            if(!$requeriments){
+                App::abort(500, 'Error');
+            }else{
+                
+                $nombre_clinica =  Clinic::select('name')->where('id', '=', $request->input('clinic_id'))->first();
+                $nombre_centro_medico =  CenterMedical::select('name')->where('id', '=', $request->input('center_medical_id'))->first();
+                
+                $headers = 'MIME-Version: 1.0' . "\r\n";
+                $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                $headers .= 'From: banmedica.test@codishark.com'."\r\n".'X-Mailer: PHP/' . phpversion();
+                
+                $mensaje = '<body style="font-family: arial;">
+		        <br><br>
+            	<div style="max-width: 700px; font-family: arial; margin: auto; border: 1px solid #DDD; border-radius: 32px 0px 32px 0px; padding: 40px; ">
+            	<img src="https://banmedica.codishark.com/assets/img/logo-color.png" width="130"><br>
+            	<h1 style="font-size:24px;">Estimado ejecutivo</h1>
+            	<h2 style="color:#274877; font-size:20px;">Por favor tomar conciencia que nuestro paciente está a la espera de una pronta respuesta, recordar que tenemos 72 horas para responder.</h2><br>
+            
+                <p style="margin-bottom: 6px; margin-top: 6px;"><b>Código de requerimiento: </b> '.$request->input('number_solicity').'</p> 
+            	<p style="margin-bottom: 6px; margin-top: 6px;"><b>Tipo de requerimiento: </b> '.$request->input('type').'</p> 
+            	<p style="margin-bottom: 6px; margin-top: 6px;"><b>Fecha de registro: </b> '.$request->input('datetime_local').'</p> 
+            	<p style="margin-bottom: 6px; margin-top: 6px;"><b>Nombre de prestador: </b> '.$nombre_clinica->name.'</p> 
+            	<p style="margin-bottom: 6px; margin-top: 6px;"><b>Nombre de centro médico: </b> '.$nombre_centro_medico->name.'</p> 
+            	<br>
+            	<p>por favor reasignar ticket en el caso que no le corresponda a su unidad.</p>
+            	<br>
+            	<a href="https://banmedica.codishark.com/" target="_blank" style="margin-top:20px; text-decoration: none; background-color: #274877; padding: 12px; color:white; border-radius: 8px; font-weight: bold;"> Atender Requerimiento</a>
+            	
+                </div>
+                </body>';
+                
+                @mail("vquintero@clinicasantamaria.cl, daniel.delafuente@clinicasantamaria.cl, mduran@clinicasantamaria.cl, csagardia@grupokonecta.com, carol.morales@grupokonecta.com", "Nuevo requerimiento - Banmedica", $mensaje, $headers);
+                //@mail("dei.guiribalde@gmail.com", "Nuevo requerimiento paciente", $mensaje, $headers);
+            }
+            
+            //METODO TRADICIONAL
+
+            
+            /*try {
                 $email_professional = Requeriment::join('professionals', 'professionals.id', '=', 'requeriments.professional_id')
                     ->select(['professionals.email as correo'])
                     ->where('professionals.id', '=', $requeriments->professional_id)
                     ->first();
                 Mail::to($email_professional->correo)->queue(new ProfeRequeriment($requeriments));
+                
             } catch (Exception $ex) {
                 Log::error($ex);
-            }
+            }*/
 
             return Redirect::back()->with(array(
                 'success' => 'Guardado Correctamente !!'
@@ -250,7 +333,7 @@ class RequerimentController extends Controller
         if (Auth::user()->hasRole('usuario')) {
             $requeriments = [];
             $clinics = ClinicUser::join('clinics', 'clinics.id', '=', 'clinic_user.clinic_id')
-                ->select(['clinics.name', 'clinic_id'])
+                ->select(['clinics.name', 'clinic_id as id'])
                 ->where('user_id', '=', Auth::user()->id)
                 ->get();
             foreach ($clinics as $clinic) {
@@ -360,9 +443,9 @@ class RequerimentController extends Controller
 
     public function dashboard()
     {
-        $caducado = Requeriment::where('status_close', '=', 'caducado')->count();
-        $proceso = Requeriment::where('status_close', '=', 'proceso')->count();
-        $exitoso = Requeriment::where('status_close', '=', 'exitoso')->count();
+        $caducado = Requeriment::where('state', '=', 'Ingresado')->count();
+        $proceso = Requeriment::where('state', '=', 'Proceso')->count();
+        $exitoso = Requeriment::where('state', '=', 'Cerrado')->count();
         $total = $proceso + $exitoso + $caducado;
         return view('requeriment.dashboard', [
             'caducado' => $caducado,
@@ -416,10 +499,40 @@ class RequerimentController extends Controller
 
     public function grafic4()
     {
+        
         $clinic = Requeriment::join('clinics', 'clinics.id', '=', 'requeriments.clinic_id')
             ->groupBy('requeriments.clinic_id')
             ->select('clinic_id')
             ->get();
-        return \Response::json($clinic, 200);
+            
+            //Buscamos las clinicas
+        $clinicas = Clinic::select()->get();
+        
+        //return $clinicas;
+        
+        $data_general = Array();
+        
+        foreach($clinicas as $clave => $valor){
+            $exitoso = Requeriment::where('status_close', '=', 'exitoso')->where('clinic_id', '=', $valor['id'])->count();
+            $caducado = Requeriment::where('status_close', '=', 'caducado')->where('clinic_id', '=', $valor['id'])->count();
+            $proceso = Requeriment::where('status_close', '=', 'proceso')->where('clinic_id', '=', $valor['id'])->count();
+    
+            $total = $proceso + $caducado + $exitoso;
+            $total2 = ($exitoso / $total) * 100;
+            $total3 = ($caducado + $proceso);
+            $total4 = ($total3 / $total) * 100;
+            $data = [number_format($total2, 2, '.', ' '), number_format($total4, 2, '.', ' ')];
+            
+            //return \Response::json($data, 200);
+            $data_general[$valor['name']]['data'] = $data;
+            
+        }
+        return \Response::json($data_general, 200);
+        //return $data_general;
+        
+        //dd($clinicas);
+            
+        //return $clinicas;
+        //return \Response::json($clinic, 200);
     }
 }

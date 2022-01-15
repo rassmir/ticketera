@@ -31,7 +31,7 @@
                                             Extra
                                         </option>
                                         <option value="Recado Medico"
-                                                @if($requeriment->type==="Recado Médico") selected='selected' @endif>
+                                                @if($requeriment->type==="Recado Medico") selected='selected' @endif>
                                             Recado Médico
                                         </option>
                                         <option value="Certificado Medico"
@@ -325,7 +325,7 @@
                                 </div>
                                 <div class="col-lg-7">
                                     <input id="fecha_sla" type="date" class="form-control" name="date_response"
-                                           value="{{$requeriment->date_response}}">
+                                           value="{{$requeriment->date_response}}" readonly>
                                 </div>
                             </div>
                         </div>
@@ -645,7 +645,7 @@ const RecuperarDatos = (urlBase, valor, idSelect, valorActual) => {
         });
 
 
-        $('.RUT').on('keyup', function () {
+        /*$('.RUT').on('keyup', function () {
             let valor = $(this).val();
             let longitud = $(this).val().length;
             console.log(longitud);
@@ -659,6 +659,6 @@ const RecuperarDatos = (urlBase, valor, idSelect, valorActual) => {
             } else {
                 $(this).val(valor);
             }
-        });
+        }); */
     </script>
 @endpush

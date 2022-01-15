@@ -202,26 +202,34 @@ $(document).ready(function () {
 });
 
  //let uri = 'http://localhost:8000/';
-let uri ='https://banmedica.herokuapp.com/';
+let uri ='https://banmedica.codishark.com/';
 
 const selectBranches = () => {
-    let clinic_id = $("#clinics").val();
+    let clinic_id = $("#clinics option:selected").val();
+    console.log(clinic_id);
+
     $.ajax({
         type: "GET",
         url: uri + "sucursales/" + clinic_id,
         success: function (response) {
+            console.log(response);
             let branches = $('#branches');
             branches.empty();
-            branches.append('<option selected disabled>Seleccione Sucursal</option>');
+            branches.append('<option selected disabled>Seleccione una Sucursal</option>');
             for (let i = 0; i < response.length; i++) {
                 branches.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
             }
-            branches.selectpicker();
+            branches.selectpicker({
+                noneSelectedText : 'Seleccione una sucursal'
+            });
+            branches.selectpicker("refresh");
+
         },
         error: function (error) {
             console.log(error);
         }
     });
+    return false;
 }
 
 const selectCenterMedic = () => {
@@ -232,16 +240,20 @@ const selectCenterMedic = () => {
         success: function (response) {
             let centers = $('#center_medics');
             centers.empty();
-            centers.append('<option selected disabled>Seleccione Centro Médico</option>');
+            centers.append('<option selected disabled>Seleccione un Centro Médico</option>');
             for (let i = 0; i < response.length; i++) {
                 centers.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
             }
-            centers.selectpicker();
+            centers.selectpicker({
+                noneSelectedText : 'Seleccione un Centro Médico'
+            });
+            centers.selectpicker("refresh");
         },
         error: function (error) {
             console.log(error);
         }
     });
+    return false;
 }
 
 const selectUnits = () => {
@@ -252,11 +264,15 @@ const selectUnits = () => {
         success: function (response) {
             let units = $('#units');
             units.empty();
-            units.append('<option selected disabled>Seleccione Unidad</option>');
+            units.append('<option selected disabled>Seleccione una Unidad</option>');
             for (let i = 0; i < response.length; i++) {
                 units.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
             }
-            units.selectpicker();
+            units.selectpicker({
+                noneSelectedText : 'Seleccione una Unidad'
+            });
+            units.selectpicker("refresh");
+
         },
         error: function (error) {
             console.log(error);
@@ -272,11 +288,14 @@ const selectProfessionals = () => {
         success: function (response) {
             let professionals = $('#professionals');
             professionals.empty();
-            professionals.append('<option selected disabled>Seleccione Profesional</option>');
+            professionals.append('<option selected disabled>Seleccione un Profesional</option>');
             for (let i = 0; i < response.length; i++) {
                 professionals.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
             }
-            professionals.selectpicker();
+            professionals.selectpicker({
+                noneSelectedText : 'Seleccione un Profesional'
+            });
+            professionals.selectpicker("refresh");
         },
         error: function (error) {
             console.log(error);
@@ -292,11 +311,14 @@ const selectEspecialities = () => {
         success: function (response) {
             let especialities = $('#especialities');
             especialities.empty();
-            especialities.append('<option selected disabled>Seleccione Especialidad</option>');
+            especialities.append('<option selected disabled>Seleccione una Especialidad</option>');
             for (let i = 0; i < response.length; i++) {
                 especialities.append('<option value="' + response[i].id + '">' + response[i].name + '</option>');
             }
-            especialities.selectpicker();
+            especialities.selectpicker({
+                noneSelectedText : 'Seleccione una Especialidad'
+            });
+            especialities.selectpicker("refresh");
         },
         error: function (error) {
             console.log(error);

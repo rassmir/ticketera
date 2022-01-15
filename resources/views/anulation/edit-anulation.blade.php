@@ -291,7 +291,19 @@ const RecuperarDatos = (urlBase, valor, idSelect, valorActual) => {
                         if (result.isConfirmed) {
                             $('#form_editar_anulacion').submit();
                         } else if (result.isDenied) {
-                            console.log("Notificar a pacientes del ticket " + idticket);
+                             $(this).html("Notificando pacientes...");
+                            
+                            $.ajax({
+                                type: "GET",
+                                url: uri + "enviar-correos/" + idticket,
+                                success: function (response) {
+                                    console.log(response);
+                                    $('#form_editar_anulacion').submit();
+                                },
+                                error: function (error) {
+                                    console.log(error);
+                                }
+                            });
                         }
                     })
                    console.log(response)

@@ -161,7 +161,33 @@ class AnulationController extends Controller
         $ticket = DetailAnulation::where('number_ticket', '=', $idticket)
             ->Where('email', '<>', '')
             ->get();
+            
+            
+        $headers = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+        $headers .= 'From: banmedica.test@codishark.com'."\r\n".'X-Mailer: PHP/' . phpversion();
+                
         // Enviamos los correos
+        foreach ($ticket as $tick) {
+            $mensaje = '<body style="font-family: arial;">
+		<br><br>
+    	<div style="max-width: 700px; margin: auto; border: 1px solid #DDD; border-radius: 32px 0px 32px 0px; padding: 40px; ">
+    	<img src="https://banmedica.codishark.com/assets/img/logo-color.png" width="130"><br><br>
+    	<h1 style="font-size:20px;">Estimado(a) '.$tick-> patient .'</h1>
+    	<h2 style="color:#274877; font-size:20px;">Estimado paciente, hemos intentado contactarlo telefónicamente para reasignar su hora, se ha generado una anulación por su especialista del día '.$tick->date_load.' a las '.$tick->hour.', lamentamos las molestias. Muchas gracias</h2> <br>
+    	<div style="color:#444;">
+    	<p style="margin-bottom: 6px; margin-top: 6px;"><b>Nombre del paciente: </b> '.$tick-> patient.'</p> 
+    	<p style="margin-bottom: 6px; margin-top: 6px;"><b>Nombre del médico: </b> '.$tick->name_doctor.'</p>
+    	</div>
+    	<br>
+    	
+        </div>
+        </body>';
+        
+            @mail($tick-> email, "Anulación de reserva de hora", $mensaje, $headers);
+        
+        }
+            
         return \Response::json($ticket, 200);
     }
 
@@ -177,7 +203,7 @@ class AnulationController extends Controller
         if (Auth::user()->hasRole('usuario')) {
             $requeriments = [];
             $clinics = ClinicUser::join('clinics', 'clinics.id', '=', 'clinic_user.clinic_id')
-                ->select(['clinics.name', 'clinic_id'])
+                ->select(['clinics.name', 'clinic_id as id'])
                 ->where('user_id', '=', Auth::user()->id)
                 ->get();
             foreach ($clinics as $clinic) {
@@ -240,7 +266,40 @@ class AnulationController extends Controller
                     ->first();
 
                 $beta = [$anulationsJoin->number_ticket,$anulationsJoin->created_at,$anulationsJoin->clinic,$anulationsJoin->brname,$anulationsJoin->centername,$anulationsJoin->uname,$anulationsJoin->profname,$anulationsJoin->espname,$anulationsJoin->anulation];
-                Mail::to('rassmirflores@gmail.com')->queue(new AnulationMail($beta));
+                //Mail::to('rassmirflores@gmail.com')->queue(new AnulationMail($beta));
+                
+                $headers = 'MIME-Version: 1.0' . "\r\n";
+                $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                $headers .= 'From: banmedica.test@codishark.com'."\r\n".'X-Mailer: PHP/' . phpversion();
+                
+                $mensaje = '<body style="font-family: arial;">
+            		<br><br>
+            	<div style="max-width: 700px; font-family: arial; margin: auto; border: 1px solid #DDD; border-radius: 32px 0px 32px 0px; padding: 40px; ">
+            	<img src="https://banmedica.codishark.com/assets/img/logo-color.png" width="130"><br><br>
+            	<h1 style="font-size:24px;">Estimado(a)</h1>
+            	<h2 style="color:#274877; font-size:20px;">Se le ha asignado el requerimiento y es importante informar correctamente la anulación y verificar posibilidad de reagendamiento. Muchas gracias.</h2> <br>
+            	<div style="color:#444;">
+            	<p style="margin-bottom: 6px; margin-top: 6px;"><b>Número de Anulación: </b> '.$anulationsJoin->number_ticket.'</p>
+            	<p style="margin-bottom: 6px; margin-top: 6px;"><b>Fecha de registro: </b> '.$anulationsJoin->created_at.'</p> 
+            	<p style="margin-bottom: 6px; margin-top: 6px;"><b>Clinica: </b> '.$anulationsJoin->clinic.'</p> 
+            	<p style="margin-bottom: 6px; margin-top: 6px;"><b>Sucursal: </b> '.$anulationsJoin->brname.'</p> 
+            	<p style="margin-bottom: 6px; margin-top: 6px;"><b>Centro Médico: </b> '.$anulationsJoin->centername.'</p> 
+            	<p style="margin-bottom: 6px; margin-top: 6px;"><b>Unidades: </b> '.$anulationsJoin->uname.'</p> 
+            	<p style="margin-bottom: 6px; margin-top: 6px;"><b>Profesionales: </b> '.$anulationsJoin->profname.'</p> 
+            	<p style="margin-bottom: 6px; margin-top: 6px;"><b>Especialidad: </b> '.$anulationsJoin->espname.'</p> 
+            	<p style="margin-bottom: 6px; margin-top: 6px;"><b>Motivo Anulación: </b> '.$anulationsJoin->anulation.'</p> 
+            	</div>
+            	<br><br>
+            	<a href="https://banmedica.codishark.com/" style="margin-top:20px; text-decoration: none; background-color: #274877; padding: 12px; color:white; border-radius: 8px; font-weight: bold;"> Atender Anulación</a>
+            	
+                </div>
+                </body>';
+    
+                @mail("vquintero@clinicasantamaria.cl, daniel.delafuente@clinicasantamaria.cl, mduran@clinicasantamaria.cl, carol.morales@grupokonecta.com", "Nueva anulación Clínica Santa María", $mensaje, $headers);
+                
+                
+                
+                
             } catch (Exception $ex) {
                 Log::error($ex);
             }
@@ -293,7 +352,7 @@ class AnulationController extends Controller
         if (Auth::user()->hasRole('usuario')) {
             $requeriments = [];
             $clinics = ClinicUser::join('clinics', 'clinics.id', '=', 'clinic_user.clinic_id')
-                ->select(['clinics.name', 'clinic_id'])
+                ->select(['clinics.name', 'clinic_id as id'])
                 ->where('user_id', '=', Auth::user()->id)
                 ->get();
             foreach ($clinics as $clinic) {
